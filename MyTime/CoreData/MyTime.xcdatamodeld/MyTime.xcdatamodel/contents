@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Timer" representedClassName="Timer" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="timerInterval" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TimerInterval" inverseName="intervalOfTimer" inverseEntity="TimerInterval"/>
+    </entity>
+    <entity name="TimerInterval" representedClassName="TimerInterval" syncable="YES">
+        <attribute name="duration" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="startingPoint" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="intervalOfTimer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Timer" inverseName="timerInterval" inverseEntity="Timer"/>
+    </entity>
+    <elements>
+        <element name="Timer" positionX="-228.19140625" positionY="-13.33984375" width="128" height="103"/>
+        <element name="TimerInterval" positionX="-54" positionY="18" width="128" height="88"/>
+    </elements>
+</model>

@@ -16,6 +16,13 @@
 		D4C7340623C0E39800A746B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4C7340423C0E39800A746B5 /* LaunchScreen.storyboard */; };
 		D4C7341123C0E39800A746B5 /* MyTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7341023C0E39800A746B5 /* MyTimeTests.swift */; };
 		D4C7341C23C0E39800A746B5 /* MyTimeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7341B23C0E39800A746B5 /* MyTimeUITests.swift */; };
+		D4C7342B23C0E4AD00A746B5 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7342A23C0E4AD00A746B5 /* Timer.swift */; };
+		D4C7342D23C0F20100A746B5 /* TimerInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7342C23C0F20100A746B5 /* TimerInterval.swift */; };
+		D4C7343123C0FD0F00A746B5 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4C7343023C0FD0F00A746B5 /* CloudKit.framework */; };
+		D4C7343B23C3A96E00A746B5 /* TimerInterval+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7343723C3A96E00A746B5 /* TimerInterval+CoreDataClass.swift */; };
+		D4C7343C23C3A96E00A746B5 /* TimerInterval+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7343823C3A96E00A746B5 /* TimerInterval+CoreDataProperties.swift */; };
+		D4C7343D23C3A96E00A746B5 /* Timer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7343923C3A96E00A746B5 /* Timer+CoreDataClass.swift */; };
+		D4C7343E23C3A96E00A746B5 /* Timer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7343A23C3A96E00A746B5 /* Timer+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +58,14 @@
 		D4C7341723C0E39800A746B5 /* MyTimeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyTimeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4C7341B23C0E39800A746B5 /* MyTimeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTimeUITests.swift; sourceTree = "<group>"; };
 		D4C7341D23C0E39800A746B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4C7342A23C0E4AD00A746B5 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		D4C7342C23C0F20100A746B5 /* TimerInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerInterval.swift; sourceTree = "<group>"; };
+		D4C7342E23C0FCF300A746B5 /* MyTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyTime.entitlements; sourceTree = "<group>"; };
+		D4C7343023C0FD0F00A746B5 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		D4C7343723C3A96E00A746B5 /* TimerInterval+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerInterval+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D4C7343823C3A96E00A746B5 /* TimerInterval+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerInterval+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D4C7343923C3A96E00A746B5 /* Timer+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timer+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D4C7343A23C3A96E00A746B5 /* Timer+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timer+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4C7343123C0FD0F00A746B5 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +101,7 @@
 				D4C7340F23C0E39800A746B5 /* MyTimeTests */,
 				D4C7341A23C0E39800A746B5 /* MyTimeUITests */,
 				D4C733F423C0E39400A746B5 /* Products */,
+				D4C7342F23C0FD0F00A746B5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,14 +118,17 @@
 		D4C733F523C0E39400A746B5 /* MyTime */ = {
 			isa = PBXGroup;
 			children = (
+				D4C7342E23C0FCF300A746B5 /* MyTime.entitlements */,
+				D4C7342923C0E3D300A746B5 /* Models */,
+				D4C7343623C3A43C00A746B5 /* CoreData */,
+				D4C7343223C381D000A746B5 /* Extensions */,
+				D4C7343523C3A42700A746B5 /* ViewControllers */,
 				D4C733F623C0E39400A746B5 /* AppDelegate.swift */,
 				D4C733F823C0E39400A746B5 /* SceneDelegate.swift */,
-				D4C733FA23C0E39400A746B5 /* ViewController.swift */,
 				D4C733FC23C0E39400A746B5 /* Main.storyboard */,
 				D4C7340223C0E39800A746B5 /* Assets.xcassets */,
 				D4C7340423C0E39800A746B5 /* LaunchScreen.storyboard */,
 				D4C7340723C0E39800A746B5 /* Info.plist */,
-				D4C733FF23C0E39400A746B5 /* MyTime.xcdatamodeld */,
 			);
 			path = MyTime;
 			sourceTree = "<group>";
@@ -129,6 +149,50 @@
 				D4C7341D23C0E39800A746B5 /* Info.plist */,
 			);
 			path = MyTimeUITests;
+			sourceTree = "<group>";
+		};
+		D4C7342923C0E3D300A746B5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D4C7342A23C0E4AD00A746B5 /* Timer.swift */,
+				D4C7342C23C0F20100A746B5 /* TimerInterval.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D4C7342F23C0FD0F00A746B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4C7343023C0FD0F00A746B5 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D4C7343223C381D000A746B5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D4C7343523C3A42700A746B5 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D4C733FA23C0E39400A746B5 /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D4C7343623C3A43C00A746B5 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				D4C7343723C3A96E00A746B5 /* TimerInterval+CoreDataClass.swift */,
+				D4C7343823C3A96E00A746B5 /* TimerInterval+CoreDataProperties.swift */,
+				D4C7343923C3A96E00A746B5 /* Timer+CoreDataClass.swift */,
+				D4C7343A23C3A96E00A746B5 /* Timer+CoreDataProperties.swift */,
+				D4C733FF23C0E39400A746B5 /* MyTime.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,8 +328,14 @@
 			files = (
 				D4C7340123C0E39400A746B5 /* MyTime.xcdatamodeld in Sources */,
 				D4C733FB23C0E39400A746B5 /* ViewController.swift in Sources */,
+				D4C7343D23C3A96E00A746B5 /* Timer+CoreDataClass.swift in Sources */,
+				D4C7343C23C3A96E00A746B5 /* TimerInterval+CoreDataProperties.swift in Sources */,
+				D4C7342D23C0F20100A746B5 /* TimerInterval.swift in Sources */,
 				D4C733F723C0E39400A746B5 /* AppDelegate.swift in Sources */,
+				D4C7342B23C0E4AD00A746B5 /* Timer.swift in Sources */,
+				D4C7343B23C3A96E00A746B5 /* TimerInterval+CoreDataClass.swift in Sources */,
 				D4C733F923C0E39400A746B5 /* SceneDelegate.swift in Sources */,
+				D4C7343E23C3A96E00A746B5 /* Timer+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,9 +508,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MyTime/MyTime.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G92J9Q6485;
 				INFOPLIST_FILE = MyTime/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -456,9 +528,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MyTime/MyTime.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G92J9Q6485;
 				INFOPLIST_FILE = MyTime/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
