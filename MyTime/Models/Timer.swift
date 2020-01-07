@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct TimerStruct {
+class Timer: Object {
     
-    var name: String
-    var color: String
-    var timerIntervals: [TimerIntervalStruct]
+    var name: String = ""
+    var color: String = ""
+    var timerIntervals: [TimerInterval] = []
     
 }

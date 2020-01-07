@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B9E1BD47DE2D126B034CC5E /* Pods_MyTime_MyTimeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5A36DDCB489EA06E907862 /* Pods_MyTime_MyTimeUITests.framework */; };
+		451CB9CFE7E4E49BBE74A0E6 /* Pods_MyTimeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1D645C2513CA67E4F4606C /* Pods_MyTimeTests.framework */; };
+		AD11025F0BA4B010F74BB8DD /* Pods_MyTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1282D6B1379E7C012411C2EC /* Pods_MyTime.framework */; };
 		D4C733F723C0E39400A746B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C733F623C0E39400A746B5 /* AppDelegate.swift */; };
 		D4C733F923C0E39400A746B5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C733F823C0E39400A746B5 /* SceneDelegate.swift */; };
 		D4C733FB23C0E39400A746B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C733FA23C0E39400A746B5 /* ViewController.swift */; };
 		D4C733FE23C0E39400A746B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4C733FC23C0E39400A746B5 /* Main.storyboard */; };
-		D4C7340123C0E39400A746B5 /* MyTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D4C733FF23C0E39400A746B5 /* MyTime.xcdatamodeld */; };
 		D4C7340323C0E39800A746B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4C7340223C0E39800A746B5 /* Assets.xcassets */; };
 		D4C7340623C0E39800A746B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4C7340423C0E39800A746B5 /* LaunchScreen.storyboard */; };
 		D4C7341123C0E39800A746B5 /* MyTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7341023C0E39800A746B5 /* MyTimeTests.swift */; };
@@ -19,10 +21,6 @@
 		D4C7342B23C0E4AD00A746B5 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7342A23C0E4AD00A746B5 /* Timer.swift */; };
 		D4C7342D23C0F20100A746B5 /* TimerInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7342C23C0F20100A746B5 /* TimerInterval.swift */; };
 		D4C7343123C0FD0F00A746B5 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4C7343023C0FD0F00A746B5 /* CloudKit.framework */; };
-		D4C7343B23C3A96E00A746B5 /* TimerInterval+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7343723C3A96E00A746B5 /* TimerInterval+CoreDataClass.swift */; };
-		D4C7343C23C3A96E00A746B5 /* TimerInterval+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7343823C3A96E00A746B5 /* TimerInterval+CoreDataProperties.swift */; };
-		D4C7343D23C3A96E00A746B5 /* Timer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7343923C3A96E00A746B5 /* Timer+CoreDataClass.swift */; };
-		D4C7343E23C3A96E00A746B5 /* Timer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7343A23C3A96E00A746B5 /* Timer+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,12 +41,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F1D645C2513CA67E4F4606C /* Pods_MyTimeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTimeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1282D6B1379E7C012411C2EC /* Pods_MyTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E2E68E676E915669AD943B4 /* Pods-MyTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime.debug.xcconfig"; path = "Target Support Files/Pods-MyTime/Pods-MyTime.debug.xcconfig"; sourceTree = "<group>"; };
+		5465FEB96FED5D120A6E5B3F /* Pods-MyTimeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTimeTests.debug.xcconfig"; path = "Target Support Files/Pods-MyTimeTests/Pods-MyTimeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6A5A36DDCB489EA06E907862 /* Pods_MyTime_MyTimeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTime_MyTimeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		967CA6C20BA817C7C58F48FC /* Pods-MyTime-MyTimeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime-MyTimeUITests.release.xcconfig"; path = "Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9B743D9D1856CE176B991D0B /* Pods-MyTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime.release.xcconfig"; path = "Target Support Files/Pods-MyTime/Pods-MyTime.release.xcconfig"; sourceTree = "<group>"; };
 		D4C733F323C0E39400A746B5 /* MyTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4C733F623C0E39400A746B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4C733F823C0E39400A746B5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D4C733FA23C0E39400A746B5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D4C733FD23C0E39400A746B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D4C7340023C0E39400A746B5 /* MyTime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyTime.xcdatamodel; sourceTree = "<group>"; };
 		D4C7340223C0E39800A746B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4C7340523C0E39800A746B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D4C7340723C0E39800A746B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,10 +66,8 @@
 		D4C7342C23C0F20100A746B5 /* TimerInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerInterval.swift; sourceTree = "<group>"; };
 		D4C7342E23C0FCF300A746B5 /* MyTime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyTime.entitlements; sourceTree = "<group>"; };
 		D4C7343023C0FD0F00A746B5 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		D4C7343723C3A96E00A746B5 /* TimerInterval+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerInterval+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D4C7343823C3A96E00A746B5 /* TimerInterval+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerInterval+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D4C7343923C3A96E00A746B5 /* Timer+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timer+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D4C7343A23C3A96E00A746B5 /* Timer+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timer+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F009DFF110FD296FE02E941C /* Pods-MyTimeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTimeTests.release.xcconfig"; path = "Target Support Files/Pods-MyTimeTests/Pods-MyTimeTests.release.xcconfig"; sourceTree = "<group>"; };
+		FBFF517F14F51EB73055CD68 /* Pods-MyTime-MyTimeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime-MyTimeUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4C7343123C0FD0F00A746B5 /* CloudKit.framework in Frameworks */,
+				AD11025F0BA4B010F74BB8DD /* Pods_MyTime.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				451CB9CFE7E4E49BBE74A0E6 /* Pods_MyTimeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,12 +92,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B9E1BD47DE2D126B034CC5E /* Pods_MyTime_MyTimeUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C75C5E3D69442251E2A8E35E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1E2E68E676E915669AD943B4 /* Pods-MyTime.debug.xcconfig */,
+				9B743D9D1856CE176B991D0B /* Pods-MyTime.release.xcconfig */,
+				FBFF517F14F51EB73055CD68 /* Pods-MyTime-MyTimeUITests.debug.xcconfig */,
+				967CA6C20BA817C7C58F48FC /* Pods-MyTime-MyTimeUITests.release.xcconfig */,
+				5465FEB96FED5D120A6E5B3F /* Pods-MyTimeTests.debug.xcconfig */,
+				F009DFF110FD296FE02E941C /* Pods-MyTimeTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		D4C733EA23C0E39400A746B5 = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +121,7 @@
 				D4C7341A23C0E39800A746B5 /* MyTimeUITests */,
 				D4C733F423C0E39400A746B5 /* Products */,
 				D4C7342F23C0FD0F00A746B5 /* Frameworks */,
+				C75C5E3D69442251E2A8E35E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -120,7 +140,6 @@
 			children = (
 				D4C7342E23C0FCF300A746B5 /* MyTime.entitlements */,
 				D4C7342923C0E3D300A746B5 /* Models */,
-				D4C7343623C3A43C00A746B5 /* CoreData */,
 				D4C7343223C381D000A746B5 /* Extensions */,
 				D4C7343523C3A42700A746B5 /* ViewControllers */,
 				D4C733F623C0E39400A746B5 /* AppDelegate.swift */,
@@ -164,6 +183,9 @@
 			isa = PBXGroup;
 			children = (
 				D4C7343023C0FD0F00A746B5 /* CloudKit.framework */,
+				1282D6B1379E7C012411C2EC /* Pods_MyTime.framework */,
+				6A5A36DDCB489EA06E907862 /* Pods_MyTime_MyTimeUITests.framework */,
+				0F1D645C2513CA67E4F4606C /* Pods_MyTimeTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -183,18 +205,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		D4C7343623C3A43C00A746B5 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				D4C7343723C3A96E00A746B5 /* TimerInterval+CoreDataClass.swift */,
-				D4C7343823C3A96E00A746B5 /* TimerInterval+CoreDataProperties.swift */,
-				D4C7343923C3A96E00A746B5 /* Timer+CoreDataClass.swift */,
-				D4C7343A23C3A96E00A746B5 /* Timer+CoreDataProperties.swift */,
-				D4C733FF23C0E39400A746B5 /* MyTime.xcdatamodeld */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -202,9 +212,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4C7342023C0E39800A746B5 /* Build configuration list for PBXNativeTarget "MyTime" */;
 			buildPhases = (
+				D928A501E45D8B5D98F3F20A /* [CP] Check Pods Manifest.lock */,
 				D4C733EF23C0E39400A746B5 /* Sources */,
 				D4C733F023C0E39400A746B5 /* Frameworks */,
 				D4C733F123C0E39400A746B5 /* Resources */,
+				034CC98CAD562F5ACA4B5CB6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -219,6 +231,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4C7342323C0E39800A746B5 /* Build configuration list for PBXNativeTarget "MyTimeTests" */;
 			buildPhases = (
+				2A1789CC6771FA79032A0578 /* [CP] Check Pods Manifest.lock */,
 				D4C7340823C0E39800A746B5 /* Sources */,
 				D4C7340923C0E39800A746B5 /* Frameworks */,
 				D4C7340A23C0E39800A746B5 /* Resources */,
@@ -237,9 +250,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4C7342623C0E39800A746B5 /* Build configuration list for PBXNativeTarget "MyTimeUITests" */;
 			buildPhases = (
+				2ECDF070B287F564E24F8742 /* [CP] Check Pods Manifest.lock */,
 				D4C7341323C0E39800A746B5 /* Sources */,
 				D4C7341423C0E39800A746B5 /* Frameworks */,
 				D4C7341523C0E39800A746B5 /* Resources */,
+				0B0928C606C3F481DCEA95AC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -321,21 +336,119 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		034CC98CAD562F5ACA4B5CB6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyTime/Pods-MyTime-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyTime/Pods-MyTime-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyTime/Pods-MyTime-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0B0928C606C3F481DCEA95AC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2A1789CC6771FA79032A0578 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyTimeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2ECDF070B287F564E24F8742 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyTime-MyTimeUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D928A501E45D8B5D98F3F20A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyTime-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D4C733EF23C0E39400A746B5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4C7340123C0E39400A746B5 /* MyTime.xcdatamodeld in Sources */,
 				D4C733FB23C0E39400A746B5 /* ViewController.swift in Sources */,
-				D4C7343D23C3A96E00A746B5 /* Timer+CoreDataClass.swift in Sources */,
-				D4C7343C23C3A96E00A746B5 /* TimerInterval+CoreDataProperties.swift in Sources */,
 				D4C7342D23C0F20100A746B5 /* TimerInterval.swift in Sources */,
 				D4C733F723C0E39400A746B5 /* AppDelegate.swift in Sources */,
 				D4C7342B23C0E4AD00A746B5 /* Timer.swift in Sources */,
-				D4C7343B23C3A96E00A746B5 /* TimerInterval+CoreDataClass.swift in Sources */,
 				D4C733F923C0E39400A746B5 /* SceneDelegate.swift in Sources */,
-				D4C7343E23C3A96E00A746B5 /* Timer+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +619,7 @@
 		};
 		D4C7342123C0E39800A746B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E2E68E676E915669AD943B4 /* Pods-MyTime.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MyTime/MyTime.entitlements;
@@ -526,6 +640,7 @@
 		};
 		D4C7342223C0E39800A746B5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B743D9D1856CE176B991D0B /* Pods-MyTime.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MyTime/MyTime.entitlements;
@@ -546,6 +661,7 @@
 		};
 		D4C7342423C0E39800A746B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5465FEB96FED5D120A6E5B3F /* Pods-MyTimeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -568,6 +684,7 @@
 		};
 		D4C7342523C0E39800A746B5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F009DFF110FD296FE02E941C /* Pods-MyTimeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -590,6 +707,7 @@
 		};
 		D4C7342723C0E39800A746B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBFF517F14F51EB73055CD68 /* Pods-MyTime-MyTimeUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -610,6 +728,7 @@
 		};
 		D4C7342823C0E39800A746B5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 967CA6C20BA817C7C58F48FC /* Pods-MyTime-MyTimeUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -668,19 +787,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		D4C733FF23C0E39400A746B5 /* MyTime.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				D4C7340023C0E39400A746B5 /* MyTime.xcdatamodel */,
-			);
-			currentVersion = D4C7340023C0E39400A746B5 /* MyTime.xcdatamodel */;
-			path = MyTime.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = D4C733EB23C0E39400A746B5 /* Project object */;
 }

@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct TimerIntervalStruct {
+class TimerInterval: Object {
     
-    var startingPoint: Date
-    var duration: TimeInterval
+    var startingPoint: Date? = nil
+    var duration: TimeInterval = 0.0
     
 }
