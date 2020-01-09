@@ -9,9 +9,9 @@
 import Foundation
 import RealmSwift
 
-class TimerInterval: Object {
+class TimerIntervalRealm: Object {
     
-    var startingPoint: Date? = nil
-    var duration: TimeInterval = 0.0
+    @objc dynamic var startingPoint: Date = Date()
+    @objc dynamic var duration: TimeInterval = 0.0
     
 }
