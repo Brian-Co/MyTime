@@ -29,6 +29,9 @@
 		D4C7344F23C5038200A746B5 /* TimersDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7344E23C5038200A746B5 /* TimersDataSource.swift */; };
 		D4D844B423C79F4A00533701 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4D844B323C79F4A00533701 /* Main.storyboard */; };
 		D4D844B823C7A91700533701 /* TimersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D844B723C7A91700533701 /* TimersTableViewCell.swift */; };
+		D4EC98BA23C899F8003EC3C0 /* TimerColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC98B923C899F8003EC3C0 /* TimerColor.swift */; };
+		D4EC98BE23C8A715003EC3C0 /* TimerHandlerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC98BD23C8A715003EC3C0 /* TimerHandlerDelegate.swift */; };
+		D4EC98C023C8A723003EC3C0 /* TimerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC98BF23C8A723003EC3C0 /* TimerHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +85,9 @@
 		D4C7344E23C5038200A746B5 /* TimersDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersDataSource.swift; sourceTree = "<group>"; };
 		D4D844B323C79F4A00533701 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D4D844B723C7A91700533701 /* TimersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersTableViewCell.swift; sourceTree = "<group>"; };
+		D4EC98B923C899F8003EC3C0 /* TimerColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerColor.swift; sourceTree = "<group>"; };
+		D4EC98BD23C8A715003EC3C0 /* TimerHandlerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHandlerDelegate.swift; sourceTree = "<group>"; };
+		D4EC98BF23C8A723003EC3C0 /* TimerHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHandler.swift; sourceTree = "<group>"; };
 		F009DFF110FD296FE02E941C /* Pods-MyTimeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTimeTests.release.xcconfig"; path = "Target Support Files/Pods-MyTimeTests/Pods-MyTimeTests.release.xcconfig"; sourceTree = "<group>"; };
 		FBFF517F14F51EB73055CD68 /* Pods-MyTime-MyTimeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime-MyTimeUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,6 +192,7 @@
 			children = (
 				D4C7344823C501A400A746B5 /* Timer.swift */,
 				D4C7344A23C501B400A746B5 /* TimerInterval.swift */,
+				D4EC98B923C899F8003EC3C0 /* TimerColor.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -237,6 +244,7 @@
 		D4C7344223C4FFF300A746B5 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				D4EC98BC23C8A6F7003EC3C0 /* Handler */,
 				D4C7344723C5007C00A746B5 /* DataSource */,
 			);
 			path = Modules;
@@ -245,6 +253,7 @@
 		D4C7344323C5001400A746B5 /* ModuleInterfaces */ = {
 			isa = PBXGroup;
 			children = (
+				D4EC98BB23C8A6EE003EC3C0 /* Handler */,
 				D4C7344423C5003200A746B5 /* DataSource */,
 				D4C7344523C5003B00A746B5 /* Model */,
 			);
@@ -274,6 +283,22 @@
 				D4C7344C23C502EB00A746B5 /* APITimersDataSource.swift */,
 			);
 			path = DataSource;
+			sourceTree = "<group>";
+		};
+		D4EC98BB23C8A6EE003EC3C0 /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				D4EC98BD23C8A715003EC3C0 /* TimerHandlerDelegate.swift */,
+			);
+			path = Handler;
+			sourceTree = "<group>";
+		};
+		D4EC98BC23C8A6F7003EC3C0 /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				D4EC98BF23C8A723003EC3C0 /* TimerHandler.swift */,
+			);
+			path = Handler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -524,7 +549,10 @@
 				D4304F9F23C71F330096018E /* Coordinator.swift in Sources */,
 				D4D844B823C7A91700533701 /* TimersTableViewCell.swift in Sources */,
 				D4C7342B23C0E4AD00A746B5 /* TimerRealm.swift in Sources */,
+				D4EC98BA23C899F8003EC3C0 /* TimerColor.swift in Sources */,
+				D4EC98BE23C8A715003EC3C0 /* TimerHandlerDelegate.swift in Sources */,
 				D4C7344D23C502EB00A746B5 /* APITimersDataSource.swift in Sources */,
+				D4EC98C023C8A723003EC3C0 /* TimerHandler.swift in Sources */,
 				D4C733F923C0E39400A746B5 /* SceneDelegate.swift in Sources */,
 				D4304FA123C74A680096018E /* TimersNavigationCoordinator.swift in Sources */,
 				D4C7344B23C501B400A746B5 /* TimerInterval.swift in Sources */,

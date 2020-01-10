@@ -78,10 +78,14 @@ extension TimersViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TimersTableViewCell
         
-        cell.timerName.text = dataSource!.content[indexPath.row].name
-        
+        cell.timer = dataSource!.content[indexPath.row]
+        cell.configure()
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
