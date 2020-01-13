@@ -10,11 +10,12 @@ import Foundation
 
 protocol TimersDataSource {
     
-    var content: [Timer] { get set }
+    var content: [TimerX] { get set }
     var contentDidChange: (() -> ())? { get set }
     var stateDidChange: ((_ state: DataSourceState) -> ())? { get set }
     
     func fetchData()
+    func updateTimer(_ timer: TimerX)
     
 }
 

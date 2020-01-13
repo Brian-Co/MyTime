@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Timer {
+struct TimerX {
     
     var name: String
     var color: String

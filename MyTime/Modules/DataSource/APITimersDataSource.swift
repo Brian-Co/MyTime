@@ -13,20 +13,21 @@ import RealmSwift
 class APITimersDataSource: TimersDataSource {
     
     
-    var content: [Timer] = []
+    var content: [TimerX] = []
     
     var contentDidChange: (() -> ())?
     
     var stateDidChange: ((DataSourceState) -> ())?
     
+    let realm = try! Realm()
+    
     func fetchData() {
         
-        let realm = try! Realm()
         let timers = realm.objects(TimerRealm.self)
         
         if timers.count > 0 {
             
-            content = timers.map { Timer(name: $0.name, color: $0.color, category: $0.category, timerIntervals: $0.timerIntervals.map { TimerInterval(startingPoint: $0.startingPoint, duration: $0.duration) }) }
+            content = timers.map { TimerX(name: $0.name, color: $0.color, category: $0.category, timerIntervals: $0.timerIntervals.map { TimerInterval(startingPoint: $0.startingPoint, duration: $0.duration) }) }
             
             print(content)
             
@@ -49,6 +50,27 @@ class APITimersDataSource: TimersDataSource {
         
     }
     
+    func updateTimer(_ timer: TimerX) {
+        
+        let timerToUpdate = realm.objects(TimerRealm.self).filter("name = '\(timer.name)'").first
+        let timerInterval = timer.timerIntervals.last!
+        let timerIntervalRealm = TimerIntervalRealm(value: [timerInterval.startingPoint, timerInterval.duration])
+        
+        try! realm.write {
+            timerToUpdate?.timerIntervals.append(timerIntervalRealm)
+        }
+        
+        updateContent()
+    }
+    
+    func updateContent() {
+        
+        let timers = realm.objects(TimerRealm.self)
+        content = timers.map { TimerX(name: $0.name, color: $0.color, category: $0.category, timerIntervals: $0.timerIntervals.map { TimerInterval(startingPoint: $0.startingPoint, duration: $0.duration) }) }
+        
+        self.contentDidChange?()
+    }
+        
     
 }
 

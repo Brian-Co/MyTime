@@ -33,13 +33,20 @@ final class TimersNavigationCoordinator: Coordinator {
 //        addChild(coordinator: homeCoordinator)
         
         let timersViewControllerDataSource = APITimersDataSource()
-        let timersViewController = TimersViewController.controller(dataSource: timersViewControllerDataSource)
+        let timersViewController = TimersViewController.controller(dataSource: timersViewControllerDataSource, coordinator: self)
         
         let navigationController = UINavigationController(rootViewController: timersViewController)
         self.navigationController = navigationController
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+        
+    }
+    
+    func instantiateEditTimerVC(dataSource: TimersDataSource, timerIndex: Int) {
+        
+        let editTimerVC = EditTimerVC.controller(dataSource: dataSource, coordinator: self, timerIndex: timerIndex)
+        self.navigationController?.present(editTimerVC, animated: true, completion: nil)
         
     }
     

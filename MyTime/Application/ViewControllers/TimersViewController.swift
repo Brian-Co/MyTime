@@ -13,16 +13,19 @@ class TimersViewController: UIViewController {
     @IBOutlet weak var timersTableView: UITableView!
     
     private var dataSource: TimersDataSource!
+    private var coordinator: TimersNavigationCoordinator!
+    private var timerHandlers: [TimerHandler] = []
     
     convenience init(dataSource: TimersDataSource) {
         self.init()
         self.dataSource = dataSource
     }
     
-    class func controller(dataSource: TimersDataSource) -> UIViewController {
+    class func controller(dataSource: TimersDataSource, coordinator: TimersNavigationCoordinator) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "TimersViewController") as! TimersViewController
         controller.dataSource = dataSource
+        controller.coordinator = coordinator
         return controller
     }
     
@@ -47,6 +50,15 @@ class TimersViewController: UIViewController {
     
     
     func updateUI() {
+        
+        if timerHandlers.count != dataSource.content.count {
+            timerHandlers = []
+            for timer in dataSource.content {
+                let timerHandler = TimerHandler(dataSource: dataSource, timer: timer)
+                timerHandlers.append(timerHandler)
+            }
+        }
+        
         timersTableView.reloadData()
     }
     
@@ -71,21 +83,26 @@ extension TimersViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource!.content.count
+        return dataSource!.content.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TimersTableViewCell
         
-        cell.timer = dataSource!.content[indexPath.row]
-        cell.configure()
+        if indexPath.row != dataSource.content.count {
+            cell.configure(timerHandler: timerHandlers[indexPath.row])
+        } else {
+            cell.setAddTimerCell()
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        coordinator.instantiateEditTimerVC(dataSource: dataSource, timerIndex: indexPath.row)
+        print("didSelectRowAt \(indexPath.row)")
     }
     
     

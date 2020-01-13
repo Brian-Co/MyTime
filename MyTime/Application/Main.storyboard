@@ -55,15 +55,17 @@
                                                         <constraint firstAttribute="trailing" secondItem="Xrf-RQ-oX8" secondAttribute="trailing" constant="6" id="nJC-Qz-cOn"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ob-wE-o4j">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ob-wE-o4j">
                                                     <rect key="frame" x="334" y="27" width="60" height="60"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="DEX-YB-dWz"/>
                                                         <constraint firstAttribute="height" constant="60" id="QNZ-9l-aUd"/>
                                                     </constraints>
-                                                    <state key="normal">
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <state key="normal" image="timer" catalog="system">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="timerButtonPressed:" destination="iuF-tm-6Al" eventType="touchUpInside" id="mRo-Te-rWH"/>
@@ -115,5 +117,35 @@
             </objects>
             <point key="canvasLocation" x="-162.31884057971016" y="-2.0089285714285712"/>
         </scene>
+        <!--Edit TimerVC-->
+        <scene sceneID="m0v-8m-O53">
+            <objects>
+                <viewController storyboardIdentifier="EditTimerVC" id="4dV-b2-okw" customClass="EditTimerVC" customModule="MyTime" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aM4-0Z-q0K">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aj4-Tb-nqO">
+                                <rect key="frame" x="43" y="141" width="327" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="BvL-6f-0Tw"/>
+                    </view>
+                    <connections>
+                        <outlet property="timerName" destination="aj4-Tb-nqO" id="lyn-Om-NC8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dhw-Mx-GjM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="792.75362318840587" y="-2.0089285714285712"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="timer" catalog="system" width="64" height="60"/>
+    </resources>
 </document>
