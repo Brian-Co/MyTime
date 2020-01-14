@@ -31,7 +31,14 @@ class TimersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "fr_FR")
+        self.navigationItem.title = dateFormatter.string(from: date)
+        
         timersTableView.delegate = self
         timersTableView.dataSource = self
         

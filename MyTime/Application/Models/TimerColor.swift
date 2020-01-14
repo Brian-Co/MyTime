@@ -10,21 +10,33 @@ import Foundation
 import UIKit
 
 enum TimerColor: String {
+    case orange
+    case teal
+    case purple
+    case brown
+    case green
+    case yellow
     case red
     case blue
-    case green
-    case orange
     
     var create: UIColor {
         switch self {
-        case .red:
-            return UIColor.red
-        case .blue:
-            return UIColor.blue
-        case .green:
-            return UIColor.green
         case .orange:
-            return UIColor.orange
+            return UIColor.systemOrange
+        case .teal:
+            return UIColor.systemTeal
+        case .purple:
+            return UIColor.systemPurple
+        case .brown:
+            return UIColor.brown
+        case .green:
+            return UIColor.systemGreen
+        case .yellow:
+            return UIColor.systemYellow
+        case .red:
+            return UIColor.systemRed
+        case .blue:
+            return UIColor.systemBlue
         }
     }
 }

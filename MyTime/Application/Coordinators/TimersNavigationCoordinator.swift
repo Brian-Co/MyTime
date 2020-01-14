@@ -46,8 +46,7 @@ final class TimersNavigationCoordinator: Coordinator {
     func instantiateEditTimerVC(dataSource: TimersDataSource, timerIndex: Int) {
         
         let editTimerVC = EditTimerVC.controller(dataSource: dataSource, coordinator: self, timerIndex: timerIndex)
-        self.navigationController?.present(editTimerVC, animated: true, completion: nil)
-        
+        self.navigationController?.pushViewController(editTimerVC, animated: true)
     }
     
     func addChild(coordinator: Coordinator) {
