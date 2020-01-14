@@ -16,6 +16,9 @@ protocol TimersDataSource {
     
     func fetchData()
     func updateTimer(_ timer: TimerX)
+    func editTimer(_ timer: TimerX, name: String, color: String)
+    func createTimer(name: String, color: String)
+    func deleteTimer(_ timer: TimerX)
     
 }
 

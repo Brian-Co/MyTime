@@ -20,12 +20,14 @@ class EditTimerVC: UIViewController {
     @IBOutlet weak var yellowButton: UIButton!
     @IBOutlet weak var redButton: UIButton!
     @IBOutlet weak var blueButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     
     var timerColor: TimerColor?
     
     private var dataSource: TimersDataSource!
     private var coordinator: Coordinator!
     private var timerIndex: Int = 0
+    private var editTimerHandler: EditTimerHandler?
     
     class func controller(dataSource: TimersDataSource, coordinator: Coordinator, timerIndex: Int) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -40,25 +42,33 @@ class EditTimerVC: UIViewController {
         super.viewDidLoad()
         
         timerName.delegate = self
-        configureNavigationBar()
-        configureButtonsUI()
+        configureUI()
         
     }
     
-    func configureNavigationBar() {
+    @objc func isDoneEditing() {
+        let color = timerColor?.rawValue
+        editTimerHandler?.isDoneEditingTimer(timerName: timerName.text!, timerColor: color)
+    }
+    
+    func configureUI() {
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(isDoneEditing))
         self.navigationItem.rightBarButtonItem  = doneButton
         
         if timerIndex != dataSource.content.count {
+            self.editTimerHandler = EditTimerHandler(dataSource: dataSource, delegate: self, timer: dataSource.content[timerIndex])
             self.navigationItem.title = "Edit Timer"
             timerName.text = dataSource.content[timerIndex].name
-            timerColor = TimerColor(rawValue: "orange")
+            timerColor = TimerColor(rawValue: dataSource.content[timerIndex].color)
             switchTimerColor()
         } else {
+            self.editTimerHandler = EditTimerHandler(dataSource: dataSource, delegate: self, timer: nil)
             self.navigationItem.title = "New Timer"
+            self.deleteButton.isHidden = true
         }
         
+        configureButtonsUI()
     }
     
     func configureButtonsUI() {
@@ -81,11 +91,22 @@ class EditTimerVC: UIViewController {
         redButton.layer.borderColor = UIColor.gray.cgColor
         blueButton.layer.borderColor = UIColor.gray.cgColor
         
+        deleteButton.layer.borderColor = UIColor.systemRed.cgColor
+        deleteButton.layer.borderWidth = 1
+        deleteButton.layer.cornerRadius = 10
+        
     }
     
-    
-    @objc func dismissVC() {
-        self.navigationController?.popViewController(animated: true)
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Are you sure?", message: "All data associated with this timer will be lost.", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { alert in
+            self.dataSource.deleteTimer(self.dataSource.content[self.timerIndex])
+            self.navigationController?.popViewController(animated: true)
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -174,6 +195,21 @@ extension EditTimerVC: UITextFieldDelegate {
             return false
         }
         return true
+    }
+    
+}
+
+extension EditTimerVC: EditTimerHandlerDelegate {
+        
+    func showAlert(title: String?, message: String?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func dismissVC() {
+        self.navigationController?.popViewController(animated: true)
     }
     
 }

@@ -18,6 +18,7 @@ class TimersTableViewCell: UITableViewCell {
     @IBOutlet weak var timerButton: UIButton!
     
     private var timerHandler: TimerHandler!
+    var totalDuration = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,9 +38,10 @@ class TimersTableViewCell: UITableViewCell {
         
         self.timerHandler = timerHandler
         self.timerHandler.delegate = self
+        self.totalDuration = 0
         
         timerName.text = timerHandler.timerX.name
-        timerColorView.backgroundColor = TimerColor(rawValue: "orange")?.create
+        timerColorView.backgroundColor = TimerColor(rawValue: timerHandler.timerX.color)?.create
         timerDuration.text = ""
         timerDuration.alpha = 0
         timerButton.backgroundColor = .lightGray
@@ -47,11 +49,10 @@ class TimersTableViewCell: UITableViewCell {
         
         timerTotalDuration.text = ""
         if !timerHandler.timerX.timerIntervals.isEmpty {
-            var totalDuration = 0
             for timerInterval in timerHandler.timerX.timerIntervals {
                 totalDuration += Int(timerInterval.duration)
             }
-            timerTotalDuration.text = totalDuration.timeString()
+            timerTotalDuration.text = totalDuration.timeString(format: 1)
         }
         
     }
@@ -59,6 +60,7 @@ class TimersTableViewCell: UITableViewCell {
     func setAddTimerCell() {
         
         self.timerHandler = nil
+        self.totalDuration = 0
         timerName.text = "Add Timer"
         timerColorView.backgroundColor = .white
         timerDuration.text = ""
@@ -86,9 +88,10 @@ class TimersTableViewCell: UITableViewCell {
 
 extension TimersTableViewCell: TimerHandlerDelegate {
     
-    func updateTimer(with time: String) {
+    func updateTimer(with time: Int) {
         
-        timerDuration.text = time
+        timerDuration.text = time.timeString()
+        timerTotalDuration.text = (totalDuration + time).timeString(format: 1)
         if timerDuration.alpha == 0 {
             UIView.animate(withDuration: 0.3, animations: {
                 self.timerDuration.alpha = 1

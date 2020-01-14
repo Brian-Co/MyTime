@@ -58,12 +58,10 @@ class TimersViewController: UIViewController {
     
     func updateUI() {
         
-        if timerHandlers.count != dataSource.content.count {
-            timerHandlers = []
-            for timer in dataSource.content {
-                let timerHandler = TimerHandler(dataSource: dataSource, timer: timer)
-                timerHandlers.append(timerHandler)
-            }
+        timerHandlers = []
+        for timer in dataSource.content {
+            let timerHandler = TimerHandler(dataSource: dataSource, timer: timer)
+            timerHandlers.append(timerHandler)
         }
         
         timersTableView.reloadData()
@@ -74,12 +72,9 @@ class TimersViewController: UIViewController {
         switch state {
         case .noData:
             break
-            
         default:
             break
-            
         }
-        
     }
     
     
@@ -90,14 +85,14 @@ extension TimersViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource!.content.count + 1
+        return timerHandlers.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TimersTableViewCell
         
-        if indexPath.row != dataSource.content.count {
+        if indexPath.row != timerHandlers.count {
             cell.configure(timerHandler: timerHandlers[indexPath.row])
         } else {
             cell.setAddTimerCell()
@@ -109,9 +104,19 @@ extension TimersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         coordinator.instantiateEditTimerVC(dataSource: dataSource, timerIndex: indexPath.row)
-        print("didSelectRowAt \(indexPath.row)")
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            timerHandlers.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            dataSource.deleteTimer(dataSource.content[indexPath.row])
+        }
+    }
     
     
 }

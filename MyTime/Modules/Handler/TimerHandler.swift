@@ -48,7 +48,7 @@ class TimerHandler {
         
         timerInterval = TimerInterval(startingPoint: Date(), duration: TimeInterval(seconds))
         
-        delegate?.updateTimer(with: seconds.timeString())
+        delegate?.updateTimer(with: seconds)
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
             
@@ -62,7 +62,7 @@ class TimerHandler {
     
     func updateTimer() {
         seconds += 1
-        delegate?.updateTimer(with: seconds.timeString())
+        delegate?.updateTimer(with: seconds)
     }
     
     func stopTimer() {

@@ -10,11 +10,16 @@ import Foundation
 
 extension Int {
     
-    func timeString() -> String {
-    let hours = self / 3600
-    let minutes = self / 60 % 60
-    let seconds = self % 60
-        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+    func timeString(format: Int? = 0) -> String {
+        let hours = self / 3600
+        let minutes = self / 60 % 60
+        let seconds = self % 60
+        
+        if format == 1 {
+            return String(format:"%02i:%02i", hours, minutes)
+        } else {
+            return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+        }
     }
     
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TimerHandlerDelegate: class {
-    func updateTimer(with time: String)
+    func updateTimer(with time: Int)
 }
 
 

@@ -24,30 +24,25 @@ class APITimersDataSource: TimersDataSource {
     func fetchData() {
         
         let timers = realm.objects(TimerRealm.self)
-        
         if timers.count > 0 {
             
             content = timers.map { TimerX(name: $0.name, color: $0.color, category: $0.category, timerIntervals: $0.timerIntervals.map { TimerInterval(startingPoint: $0.startingPoint, duration: $0.duration) }) }
-            
-            print(content)
-            
         } else {
             
             let timer = TimerRealm()
             timer.name = "First Timer"
-            timer.timerIntervals.append(TimerIntervalRealm())
+            timer.color = "orange"
             
             try! realm.write {
                 realm.add(timer)
-                print("creating realm objects")
             }
             
+            let timerX = TimerX(name: timer.name, color: timer.color, category: "", timerIntervals: [])
+            content.append(timerX)
         }
         
         self.contentDidChange?()
-        self.stateDidChange?(DataSourceState.data)
-        
-        
+//        self.stateDidChange?(DataSourceState.data)
     }
     
     func updateTimer(_ timer: TimerX) {
@@ -60,15 +55,43 @@ class APITimersDataSource: TimersDataSource {
             timerToUpdate?.timerIntervals.append(timerIntervalRealm)
         }
         
-        updateContent()
+        fetchData()
     }
     
-    func updateContent() {
+    func editTimer(_ timer: TimerX, name: String, color: String) {
         
-        let timers = realm.objects(TimerRealm.self)
-        content = timers.map { TimerX(name: $0.name, color: $0.color, category: $0.category, timerIntervals: $0.timerIntervals.map { TimerInterval(startingPoint: $0.startingPoint, duration: $0.duration) }) }
+        let timerToEdit = realm.objects(TimerRealm.self).filter("name = '\(timer.name)'").first
         
-        self.contentDidChange?()
+        try! realm.write {
+            timerToEdit?.name = name
+            timerToEdit?.color = color
+        }
+        
+        fetchData()
+    }
+    
+    func createTimer(name: String, color: String) {
+        
+        let timer = TimerRealm()
+        timer.name = name
+        timer.color = color
+        
+        try! realm.write {
+            realm.add(timer)
+        }
+        
+        fetchData()
+    }
+    
+    func deleteTimer(_ timer: TimerX) {
+        
+        guard let timerToDelete = realm.objects(TimerRealm.self).filter("name = '\(timer.name)'").first else { return }
+        
+        try! realm.write {
+            realm.delete(timerToDelete)
+        }
+        
+        fetchData()
     }
         
     
