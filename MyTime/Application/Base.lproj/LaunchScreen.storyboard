@@ -15,12 +15,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MyTimeIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ebs-2G-yac">
-                                <rect key="frame" x="42" y="174" width="330" height="330"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MyTimeIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ebs-2G-yac">
+                                <rect key="frame" x="53" y="186" width="308" height="308"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ebs-2G-yac" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="142" id="BCR-gN-yPX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ebs-2G-yac" secondAttribute="trailing" constant="53" id="BpO-3J-CKy"/>
+                            <constraint firstItem="ebs-2G-yac" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="53" id="jJj-Wo-OrA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ebs-2G-yac" secondAttribute="bottom" constant="368" id="wcG-mU-jQj"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -30,6 +36,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="MyTimeIcon" width="512" height="512"/>
+        <image name="MyTimeIcon" width="256" height="256"/>
     </resources>
 </document>

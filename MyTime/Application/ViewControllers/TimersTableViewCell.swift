@@ -62,7 +62,7 @@ class TimersTableViewCell: UITableViewCell {
         self.timerHandler = nil
         self.totalDuration = 0
         timerName.text = "Add Timer"
-        timerColorView.backgroundColor = .white
+        timerColorView.backgroundColor = .systemBackground
         timerDuration.text = ""
         timerTotalDuration.text = ""
         timerButton.backgroundColor = .green
