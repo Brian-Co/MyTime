@@ -28,6 +28,7 @@ class EditTimerVC: UIViewController {
     private var coordinator: Coordinator!
     private var timerIndex: Int = 0
     private var editTimerHandler: EditTimerHandler?
+    private var dismissBlock: (() -> ())?
     
     class func controller(dataSource: TimersDataSource, coordinator: Coordinator, timerIndex: Int) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

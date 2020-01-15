@@ -251,8 +251,8 @@
 		D4C7344023C4FFB100A746B5 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				D4304F9C23C64B530096018E /* RootCoordinator.swift */,
 				D4304F9E23C71F330096018E /* Coordinator.swift */,
+				D4304F9C23C64B530096018E /* RootCoordinator.swift */,
 				D4304FA023C74A680096018E /* TimersNavigationCoordinator.swift */,
 			);
 			path = Coordinators;

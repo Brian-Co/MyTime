@@ -10,22 +10,24 @@ import UIKit
 
 class TimersViewController: UIViewController {
     
+    typealias DidSelectTimerBlock = ((_ timer: TimerX) -> ())
+    
     @IBOutlet weak var timersTableView: UITableView!
     
     private var dataSource: TimersDataSource!
-    private var coordinator: TimersNavigationCoordinator!
     private var timerHandlers: [TimerHandler] = []
+    private var didSelectTimer: DidSelectTimerBlock?
     
     convenience init(dataSource: TimersDataSource) {
         self.init()
         self.dataSource = dataSource
     }
     
-    class func controller(dataSource: TimersDataSource, coordinator: TimersNavigationCoordinator) -> UIViewController {
+    class func controller(dataSource: TimersDataSource, didSelectTimer: DidSelectTimerBlock?) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "TimersViewController") as! TimersViewController
         controller.dataSource = dataSource
-        controller.coordinator = coordinator
+        controller.didSelectTimer = didSelectTimer
         return controller
     }
     
@@ -92,6 +94,7 @@ extension TimersViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TimersTableViewCell
         
+        let timer = dataSource.content[indexPath.row]
         if indexPath.row != timerHandlers.count {
             cell.configure(timerHandler: timerHandlers[indexPath.row])
         } else {
@@ -103,7 +106,7 @@ extension TimersViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        coordinator.instantiateEditTimerVC(dataSource: dataSource, timerIndex: indexPath.row)
+        didSelectTimer?(indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

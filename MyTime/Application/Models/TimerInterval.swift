@@ -11,6 +11,8 @@ import Foundation
 struct TimerInterval {
     
     var startingPoint: Date
-    var duration: TimeInterval
+    var endingPoint: Date?
+    
+    var isOn: Bool { return endingPoint == nil }
     
 }

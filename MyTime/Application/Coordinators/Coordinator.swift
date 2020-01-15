@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Coordinator {
+protocol Coordinator: class {
     
     var parent: Coordinator? { get set }
     var childCoordinators: [Coordinator] { get set }
@@ -17,4 +17,16 @@ protocol Coordinator {
     func addChild(coordinator: Coordinator)
     func removeChild(coordinator: Coordinator)
     
+}
+
+extension Coordinator {
+    
+    func addChild(coordinator: Coordinator) {
+        childCoordinators.append(coordinator)
+    }
+    
+    func removeChild(coordinator: Coordinator) {
+        childCoordinators = childCoordinators.filter { $0 !== coordinator }
+    }
+
 }

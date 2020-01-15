@@ -15,4 +15,6 @@ struct TimerX {
     var category: String
     var timerIntervals: [TimerInterval]
     
+    var isOn: Bool { return timerIntervals.last?.isOn == true }
+    
 }

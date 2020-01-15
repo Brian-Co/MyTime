@@ -23,43 +23,27 @@ final class TimersNavigationCoordinator: Coordinator {
     }
         
     func start() {
-        
-//        let mainTabBarController: MainTabBarController = MainTabBarController(didSelectItemIndex: didSelectItemIndex, deinitBlock: { [weak self] in
-//            guard let strongSelf = self else { return }
-//            strongSelf.parent?.removeChild(coordinator: strongSelf)
-//        })
-//        self.tabBarController = mainTabBarController
-//        let homeCoordinator: HomeCoordinator = HomeCoordinator(in: mainTabBarController, parent: self)
-//        addChild(coordinator: homeCoordinator)
-        
-        let timersViewControllerDataSource = APITimersDataSource()
-        let timersViewController = TimersViewController.controller(dataSource: timersViewControllerDataSource, coordinator: self)
+        let timersViewController = TimersViewController.controller(dataSource: APITimersDataSource(), didSelectTimer: { [weak self] selectedTimer in
+            self?.didSelect(timer: selectedTimer)
+        })
         
         let navigationController = UINavigationController(rootViewController: timersViewController)
         self.navigationController = navigationController
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        
     }
     
-    func instantiateEditTimerVC(dataSource: TimersDataSource, timerIndex: Int) {
-        
-        let editTimerVC = EditTimerVC.controller(dataSource: dataSource, coordinator: self, timerIndex: timerIndex)
-        self.navigationController?.pushViewController(editTimerVC, animated: true)
+    func didSelect(timer: TimerX) {
+        // Create a datasource protocol and instance for a timer object.
+//        let editTimerVC = EditTimerVC.controller(dataSource: APITimersDataSource(), dismissBlock: {
+//            self?.editTimerVCDidDimsiss()
+//        })
+//        self.navigationController?.pushViewController(editTimerVC, animated: true)
     }
     
-    func addChild(coordinator: Coordinator) {
-        childCoordinators.append(coordinator)
-    //        logTree()
-        }
-    
-    func removeChild(coordinator: Coordinator) {
-//        childCoordinators = childCoordinators.filter { $0 !== coordinator }
-    //        logTree()
-        }
-    
-    
-    
-    
+    func editTimerVCDidDimsiss() {
+        self.navigationController?.popViewController(animated: true)
+    }
+
 }
