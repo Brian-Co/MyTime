@@ -11,6 +11,8 @@ import UIKit
 
 class EditTimerVC: UIViewController {
     
+    typealias DismissBlock = (() -> ())
+    
     @IBOutlet weak var timerName: UITextField!
     @IBOutlet weak var orangeButton: UIButton!
     @IBOutlet weak var tealButton: UIButton!
@@ -21,21 +23,15 @@ class EditTimerVC: UIViewController {
     @IBOutlet weak var redButton: UIButton!
     @IBOutlet weak var blueButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+        
+    private var dataSource: EditTimerDataSource!
+    private var dismiss: DismissBlock?
     
-    var timerColor: TimerColor?
-    
-    private var dataSource: TimersDataSource!
-    private var coordinator: Coordinator!
-    private var timerIndex: Int = 0
-    private var editTimerHandler: EditTimerHandler?
-    private var dismissBlock: (() -> ())?
-    
-    class func controller(dataSource: TimersDataSource, coordinator: Coordinator, timerIndex: Int) -> UIViewController {
+    class func controller(dataSource: EditTimerDataSource, dismiss: DismissBlock?) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "EditTimerVC") as! EditTimerVC
         controller.dataSource = dataSource
-        controller.coordinator = coordinator
-        controller.timerIndex = timerIndex
+        controller.dismiss = dismiss
         return controller
     }
     
@@ -43,28 +39,42 @@ class EditTimerVC: UIViewController {
         super.viewDidLoad()
         
         timerName.delegate = self
+        initDataSource()
         configureUI()
-        
     }
     
-    @objc func isDoneEditing() {
-        let color = timerColor?.rawValue
-        editTimerHandler?.isDoneEditingTimer(timerName: timerName.text!, timerColor: color)
+    func initDataSource() {
+        
+        dataSource.showAlert = { [weak self] title, message in self?.showAlert(title: title, message: message) }
+        dataSource.dismissVC = { [weak self] in self?.dismissVC() }
+    }
+    
+    func showAlert(title: String?, message: String?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func dismissVC() {
+        dismiss?()
+    }
+    
+    @objc func save() {
+        dataSource.timer.name = timerName.text!
+        dataSource.save()
     }
     
     func configureUI() {
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(isDoneEditing))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(save))
         self.navigationItem.rightBarButtonItem  = doneButton
         
-        if timerIndex != dataSource.content.count {
-            self.editTimerHandler = EditTimerHandler(dataSource: dataSource, delegate: self, timer: dataSource.content[timerIndex])
+        if dataSource.timer.name != "" {
             self.navigationItem.title = "Edit Timer"
-            timerName.text = dataSource.content[timerIndex].name
-            timerColor = TimerColor(rawValue: dataSource.content[timerIndex].color)
+            timerName.text = dataSource.timer.name
             switchTimerColor()
         } else {
-            self.editTimerHandler = EditTimerHandler(dataSource: dataSource, delegate: self, timer: nil)
             self.navigationItem.title = "New Timer"
             self.deleteButton.isHidden = true
         }
@@ -102,8 +112,7 @@ class EditTimerVC: UIViewController {
         let alert = UIAlertController(title: "Are you sure?", message: "All data associated with this timer will be lost.", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { alert in
-            self.dataSource.deleteTimer(self.dataSource.content[self.timerIndex])
-            self.navigationController?.popViewController(animated: true)
+            self.dataSource.delete()
         })
         alert.addAction(cancelAction)
         alert.addAction(deleteAction)
@@ -112,42 +121,42 @@ class EditTimerVC: UIViewController {
     
     
     @IBAction func orangeButtonPressed(_ sender: Any) {
-        timerColor = .orange
+        dataSource.timer.color = "orange"
         switchTimerColor()
     }
     
     @IBAction func tealButtonPressed(_ sender: Any) {
-        timerColor = .teal
+        dataSource.timer.color = "teal"
         switchTimerColor()
     }
     
     @IBAction func purpleButtonPressed(_ sender: Any) {
-        timerColor = .purple
+        dataSource.timer.color = "purple"
         switchTimerColor()
     }
     
     @IBAction func brownButtonPressed(_ sender: Any) {
-        timerColor = .brown
+        dataSource.timer.color = "brown"
         switchTimerColor()
     }
     
     @IBAction func greenButtonPressed(_ sender: Any) {
-        timerColor = .green
+        dataSource.timer.color = "green"
         switchTimerColor()
     }
     
     @IBAction func yellowButtonPressed(_ sender: Any) {
-        timerColor = .yellow
+        dataSource.timer.color = "yellow"
         switchTimerColor()
     }
     
     @IBAction func redButtonPressed(_ sender: Any) {
-        timerColor = .red
+        dataSource.timer.color = "red"
         switchTimerColor()
     }
     
     @IBAction func blueButtonPressed(_ sender: Any) {
-        timerColor = .blue
+        dataSource.timer.color = "blue"
         switchTimerColor()
     }
     
@@ -162,7 +171,7 @@ class EditTimerVC: UIViewController {
         redButton.layer.borderWidth = 0
         blueButton.layer.borderWidth = 0
         
-        switch timerColor {
+        switch TimerColor(rawValue: dataSource.timer.color) {
         case .orange:
             orangeButton.layer.borderWidth = 3
         case .teal:
@@ -185,7 +194,6 @@ class EditTimerVC: UIViewController {
         
     }
     
-    
 }
 
 extension EditTimerVC: UITextFieldDelegate {
@@ -196,21 +204,6 @@ extension EditTimerVC: UITextFieldDelegate {
             return false
         }
         return true
-    }
-    
-}
-
-extension EditTimerVC: EditTimerHandlerDelegate {
-        
-    func showAlert(title: String?, message: String?) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    func dismissVC() {
-        self.navigationController?.popViewController(animated: true)
     }
     
 }

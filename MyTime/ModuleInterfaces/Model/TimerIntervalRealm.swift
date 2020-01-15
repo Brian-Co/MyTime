@@ -12,6 +12,6 @@ import RealmSwift
 class TimerIntervalRealm: Object {
     
     @objc dynamic var startingPoint: Date = Date()
-    @objc dynamic var duration: TimeInterval = 0.0
+    @objc dynamic var endingPoint: Date = Date()
     
 }

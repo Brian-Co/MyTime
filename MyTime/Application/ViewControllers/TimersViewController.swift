@@ -10,12 +10,11 @@ import UIKit
 
 class TimersViewController: UIViewController {
     
-    typealias DidSelectTimerBlock = ((_ timer: TimerX) -> ())
+    typealias DidSelectTimerBlock = ((_ timer: TimerX?) -> ())
     
     @IBOutlet weak var timersTableView: UITableView!
     
     private var dataSource: TimersDataSource!
-    private var timerHandlers: [TimerHandler] = []
     private var didSelectTimer: DidSelectTimerBlock?
     
     convenience init(dataSource: TimersDataSource) {
@@ -45,26 +44,16 @@ class TimersViewController: UIViewController {
         timersTableView.dataSource = self
         
         initDataSource()
-        
     }
-    
     
     func initDataSource() {
         
         dataSource.contentDidChange = { [weak self] in self?.updateUI() }
         dataSource.stateDidChange = { [weak self] state in self?.dataSourceStateChanged(state) }
         dataSource.fetchData()
-        
     }
     
-    
     func updateUI() {
-        
-        timerHandlers = []
-        for timer in dataSource.content {
-            let timerHandler = TimerHandler(dataSource: dataSource, timer: timer)
-            timerHandlers.append(timerHandler)
-        }
         
         timersTableView.reloadData()
     }
@@ -79,7 +68,6 @@ class TimersViewController: UIViewController {
         }
     }
     
-    
 }
 
 
@@ -87,16 +75,15 @@ extension TimersViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return timerHandlers.count + 1
+        return dataSource.content.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TimersTableViewCell
         
-        let timer = dataSource.content[indexPath.row]
-        if indexPath.row != timerHandlers.count {
-            cell.configure(timerHandler: timerHandlers[indexPath.row])
+        if indexPath.row != dataSource.content.count {
+            cell.configure(timer: dataSource.content[indexPath.row])
         } else {
             cell.setAddTimerCell()
         }
@@ -106,7 +93,11 @@ extension TimersViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        didSelectTimer?(indexPath.row)
+        if indexPath.row != dataSource.content.count {
+            didSelectTimer?(dataSource.content[indexPath.row])
+        } else {
+            didSelectTimer?(nil)
+        }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -115,10 +106,23 @@ extension TimersViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            timerHandlers.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            dataSource.deleteTimer(dataSource.content[indexPath.row])
+            deleteTimer(at: indexPath)
         }
+    }
+    
+    func deleteTimer(at indexPath: IndexPath) {
+        
+        let alert = UIAlertController(title: "Are you sure?", message: "All data associated with this timer will be lost.", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { alert in
+            let timerName = self.dataSource.content[indexPath.row].name
+            self.dataSource.content.remove(at: indexPath.row)
+            self.timersTableView.deleteRows(at: [indexPath], with: .left)
+            self.dataSource.deleteTimer(timerName)
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     

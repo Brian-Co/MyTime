@@ -10,22 +10,26 @@ import UIKit
 
 class TimersTableViewCell: UITableViewCell {
 
-    
     @IBOutlet weak var timerName: UILabel!
     @IBOutlet weak var timerColorView: UIView!
     @IBOutlet weak var timerTotalDuration: UILabel!
     @IBOutlet weak var timerDuration: UILabel!
     @IBOutlet weak var timerButton: UIButton!
     
-    private var timerHandler: TimerHandler!
-    var totalDuration = 0
+    private var dataSource: TimersCellDataSource!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        dataSource = APITimersCellDataSource()
+        initDataSource()
         timerColorView.layer.cornerRadius = 10
         timerButton.layer.cornerRadius = timerButton.frame.width / 2
-
+    }
+    
+    func initDataSource() {
+        
+        dataSource.updateTimer = { [weak self] time in self?.updateTimer(with: time) }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -34,45 +38,46 @@ class TimersTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(timerHandler: TimerHandler) {
+    func configure(timer: TimerX) {
         
-        self.timerHandler = timerHandler
-        self.timerHandler.delegate = self
-        self.totalDuration = 0
+        dataSource.timer = timer
         
-        timerName.text = timerHandler.timerX.name
-        timerColorView.backgroundColor = TimerColor(rawValue: timerHandler.timerX.color)?.create
+        timerName.text = timer.name
+        timerColorView.backgroundColor = TimerColor(rawValue: timer.color)?.create
         timerDuration.text = ""
         timerDuration.alpha = 0
         timerButton.backgroundColor = .lightGray
         timerButton.setImage(UIImage(systemName: "timer"), for: .normal)
         
-        timerTotalDuration.text = ""
-        if !timerHandler.timerX.timerIntervals.isEmpty {
-            for timerInterval in timerHandler.timerX.timerIntervals {
-                totalDuration += Int(timerInterval.duration)
-            }
-            timerTotalDuration.text = totalDuration.timeString(format: 1)
-        }
-        
+        let totalDuration = dataSource.getTimerTotalDuration()
+        timerTotalDuration.text = totalDuration.timeString(format: 1)
     }
     
     func setAddTimerCell() {
         
-        self.timerHandler = nil
-        self.totalDuration = 0
+        dataSource.timer = nil
         timerName.text = "Add Timer"
         timerColorView.backgroundColor = .systemBackground
         timerDuration.text = ""
         timerTotalDuration.text = ""
         timerButton.backgroundColor = .green
         timerButton.setImage(UIImage(systemName: "plus"), for: .normal)
+    }
+    
+    func updateTimer(with time: Int) {
         
+        timerDuration.text = time.timeString()
+        timerTotalDuration.text = (dataSource.timerTotalDuration + time).timeString(format: 1)
+        if timerDuration.alpha == 0 {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.timerDuration.alpha = 1
+            })
+        }
     }
     
     @IBAction func timerButtonPressed(_ sender: Any) {
-        if let timerHandler = self.timerHandler {
-            timerHandler.timerButtonPressed()
+        if dataSource.timer != nil {
+            dataSource.timerButtonPressed()
         } else {
             let tableView = self.superview as! UITableView
             let lastSectionIndex = tableView.numberOfSections - 1
@@ -83,20 +88,5 @@ class TimersTableViewCell: UITableViewCell {
         }
     }
     
-
 }
 
-extension TimersTableViewCell: TimerHandlerDelegate {
-    
-    func updateTimer(with time: Int) {
-        
-        timerDuration.text = time.timeString()
-        timerTotalDuration.text = (totalDuration + time).timeString(format: 1)
-        if timerDuration.alpha == 0 {
-            UIView.animate(withDuration: 0.3, animations: {
-                self.timerDuration.alpha = 1
-            })
-        }
-    }
-    
-}

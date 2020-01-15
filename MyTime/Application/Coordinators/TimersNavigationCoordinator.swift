@@ -34,12 +34,11 @@ final class TimersNavigationCoordinator: Coordinator {
         window?.makeKeyAndVisible()
     }
     
-    func didSelect(timer: TimerX) {
-        // Create a datasource protocol and instance for a timer object.
-//        let editTimerVC = EditTimerVC.controller(dataSource: APITimersDataSource(), dismissBlock: {
-//            self?.editTimerVCDidDimsiss()
-//        })
-//        self.navigationController?.pushViewController(editTimerVC, animated: true)
+    func didSelect(timer: TimerX?) {
+        let editTimerVC = EditTimerVC.controller(dataSource: APIEditTimerDataSource(timer: timer), dismiss: { [weak self] in
+            self?.editTimerVCDidDimsiss()
+        })
+        self.navigationController?.pushViewController(editTimerVC, animated: true)
     }
     
     func editTimerVCDidDimsiss() {
