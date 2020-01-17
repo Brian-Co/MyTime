@@ -17,14 +17,32 @@ class DayCircleView: UIView {
     private lazy var backgroundLayer: CAShapeLayer = {
         let backgroundLayer = CAShapeLayer()
         backgroundLayer.lineWidth = 50
-        backgroundLayer.strokeColor = UIColor.secondarySystemBackground.cgColor
+        backgroundLayer.strokeColor = UIColor.quaternarySystemFill.cgColor
         backgroundLayer.fillColor = UIColor.clear.cgColor
         backgroundLayer.frame = bounds
         backgroundLayer.path = circularPath
         
         return backgroundLayer
     }()
+    
+    private var hoursLabels: CATextLayer {
+        let hours = CATextLayer()
+        hours.fontSize = 17
+        hours.alignmentMode = .center
+        hours.foregroundColor = UIColor.label.cgColor
+        return hours
+    }
+    
+    private var hoursLines: CAShapeLayer {
+        let hoursLines = CAShapeLayer()
+        hoursLines.lineWidth = 20
+        hoursLines.strokeColor = UIColor.systemGray4.cgColor
+        hoursLines.fillColor = UIColor.clear.cgColor
+        hoursLines.frame = bounds
         
+        return hoursLines
+    }
+    
     private var circularPath: CGPath {
         let centerPoint = CGPoint(x: frame.width/2 , y: frame.height/2)
         let circularPath = UIBezierPath(arcCenter: centerPoint, radius: bounds.width / 2 - 20, startAngle: -CGFloat.pi/2,
@@ -52,6 +70,9 @@ class DayCircleView: UIView {
         
         layer.sublayers = nil
         layer.addSublayer(backgroundLayer)
+        
+        addHoursTextLayers()
+        addHoursLines()
     }
     
     private func createTimerIntervalLayer(startAngle: Double, endAngle: Double, color: String) {
@@ -73,6 +94,55 @@ class DayCircleView: UIView {
         timerIntervalLayer.path = circularPath.cgPath
         
         layer.addSublayer(timerIntervalLayer)
+    }
+    
+    private func addHoursTextLayers() {
+        
+        let hours24 = hoursLabels
+        hours24.frame = CGRect(x: bounds.width / 2 - 10, y: 60, width: 20, height: 60)
+        hours24.string = "24"
+        layer.addSublayer(hours24)
+        
+        let hours6 = hoursLabels
+        hours6.frame = CGRect(x: bounds.width - 100, y: bounds.height / 2 - 10, width: 60, height: 20)
+        hours6.string = "6"
+        layer.addSublayer(hours6)
+        
+        let hours12 = hoursLabels
+        hours12.frame = CGRect(x: bounds.width / 2 - 10, y: bounds.height - 80, width: 20, height: 60)
+        hours12.string = "12"
+        layer.addSublayer(hours12)
+        
+        let hours18 = hoursLabels
+        hours18.frame = CGRect(x: 40, y: bounds.height / 2 - 10, width: 60, height: 20)
+        hours18.string = "18"
+        layer.addSublayer(hours18)
+    }
+    
+    private func addHoursLines() {
+        
+        var dayMinutes: CGFloat = 0
+        let centerPoint = CGPoint(x: frame.width/2 , y: frame.height/2)
+        
+        while dayMinutes < 1440 {
+            
+            let hourLine = hoursLines
+            let start: CGFloat = dayMinutes / 1440
+            let end: CGFloat = (dayMinutes + 0.8) / 1440
+            let startAngle = (2 * CGFloat.pi * start) - CGFloat.pi/2
+            let endAngle = (2 * CGFloat.pi * end) - CGFloat.pi/2
+            
+            let circularPath = UIBezierPath(arcCenter: centerPoint, radius: bounds.width / 2 - 10, startAngle: startAngle,
+                                            endAngle: endAngle, clockwise: true)
+            hourLine.path = circularPath.cgPath
+            
+            if Int(dayMinutes) % 120 == 0 {
+                hourLine.strokeColor = UIColor.systemGray.cgColor
+            }
+            
+            layer.addSublayer(hourLine)
+            dayMinutes += 60
+        }
     }
     
 }

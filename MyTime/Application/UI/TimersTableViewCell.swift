@@ -73,6 +73,7 @@ class TimersTableViewCell: UITableViewCell {
                 self.timerDuration.alpha = 1
             })
         }
+        timerButton.backgroundColor = timerColorView.backgroundColor
     }
     
     @IBAction func timerButtonPressed(_ sender: Any) {
