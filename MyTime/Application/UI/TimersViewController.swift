@@ -13,6 +13,7 @@ class TimersViewController: UIViewController {
     typealias DidSelectTimerBlock = ((_ timer: TimerX?) -> ())
     
     @IBOutlet weak var timersTableView: UITableView!
+    @IBOutlet weak var dayCircleView: DayCircleView!
     
     private var dataSource: TimersDataSource!
     private var didSelectTimer: DidSelectTimerBlock?
@@ -56,6 +57,7 @@ class TimersViewController: UIViewController {
     func updateUI() {
         
         timersTableView.reloadData()
+        dayCircleView.updateDataSource(with: dataSource.content)
     }
     
     func dataSourceStateChanged(_ state: DataSourceState) {

@@ -15,6 +15,9 @@
 		D4304FA123C74A680096018E /* TimersNavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4304FA023C74A680096018E /* TimersNavigationCoordinator.swift */; };
 		D451930823CC75AE0074D08E /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451930723CC75AE0074D08E /* Int+Extensions.swift */; };
 		D451930A23CCBCB20074D08E /* EditTimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451930923CCBCB20074D08E /* EditTimerVC.swift */; };
+		D462FBD723D1B64700BC7138 /* DayCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462FBD623D1B64700BC7138 /* DayCircleView.swift */; };
+		D462FBD923D1EB9A00BC7138 /* APIDayCircleViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462FBD823D1EB9A00BC7138 /* APIDayCircleViewDataSource.swift */; };
+		D462FBDB23D1EBAC00BC7138 /* DayCircleViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462FBDA23D1EBAC00BC7138 /* DayCircleViewDataSource.swift */; };
 		D49A904223CF2B6D005384D3 /* EditTimerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49A904123CF2B6D005384D3 /* EditTimerDataSource.swift */; };
 		D49A904623CF2C00005384D3 /* APIEditTimerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49A904523CF2C00005384D3 /* APIEditTimerDataSource.swift */; };
 		D49A904823CF68C1005384D3 /* TimersCellDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49A904723CF68C1005384D3 /* TimersCellDataSource.swift */; };
@@ -68,6 +71,9 @@
 		D4304FA023C74A680096018E /* TimersNavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersNavigationCoordinator.swift; sourceTree = "<group>"; };
 		D451930723CC75AE0074D08E /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		D451930923CCBCB20074D08E /* EditTimerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimerVC.swift; sourceTree = "<group>"; };
+		D462FBD623D1B64700BC7138 /* DayCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCircleView.swift; sourceTree = "<group>"; };
+		D462FBD823D1EB9A00BC7138 /* APIDayCircleViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDayCircleViewDataSource.swift; sourceTree = "<group>"; };
+		D462FBDA23D1EBAC00BC7138 /* DayCircleViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCircleViewDataSource.swift; sourceTree = "<group>"; };
 		D49A904123CF2B6D005384D3 /* EditTimerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimerDataSource.swift; sourceTree = "<group>"; };
 		D49A904523CF2C00005384D3 /* APIEditTimerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEditTimerDataSource.swift; sourceTree = "<group>"; };
 		D49A904723CF68C1005384D3 /* TimersCellDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersCellDataSource.swift; sourceTree = "<group>"; };
@@ -224,14 +230,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D4C7343523C3A42700A746B5 /* ViewControllers */ = {
+		D4C7343523C3A42700A746B5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				D4C733FA23C0E39400A746B5 /* TimersViewController.swift */,
 				D4D844B723C7A91700533701 /* TimersTableViewCell.swift */,
+				D462FBD623D1B64700BC7138 /* DayCircleView.swift */,
 				D451930923CCBCB20074D08E /* EditTimerVC.swift */,
 			);
-			path = ViewControllers;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		D4C7343F23C4FE8700A746B5 /* Application */ = {
@@ -242,7 +249,7 @@
 				D4D844B323C79F4A00533701 /* Main.storyboard */,
 				D4C7340423C0E39800A746B5 /* LaunchScreen.storyboard */,
 				D4C7344023C4FFB100A746B5 /* Coordinators */,
-				D4C7343523C3A42700A746B5 /* ViewControllers */,
+				D4C7343523C3A42700A746B5 /* UI */,
 				D4C7342923C0E3D300A746B5 /* Models */,
 			);
 			path = Application;
@@ -281,6 +288,7 @@
 			children = (
 				D4C7344E23C5038200A746B5 /* TimersDataSource.swift */,
 				D49A904723CF68C1005384D3 /* TimersCellDataSource.swift */,
+				D462FBDA23D1EBAC00BC7138 /* DayCircleViewDataSource.swift */,
 				D49A904123CF2B6D005384D3 /* EditTimerDataSource.swift */,
 			);
 			path = DataSource;
@@ -300,6 +308,7 @@
 			children = (
 				D4C7344C23C502EB00A746B5 /* APITimersDataSource.swift */,
 				D49A904923CF68D4005384D3 /* APITimersCellDataSource.swift */,
+				D462FBD823D1EB9A00BC7138 /* APIDayCircleViewDataSource.swift */,
 				D49A904523CF2C00005384D3 /* APIEditTimerDataSource.swift */,
 			);
 			path = DataSource;
@@ -551,10 +560,13 @@
 				D4C7342D23C0F20100A746B5 /* TimerIntervalRealm.swift in Sources */,
 				D4C733F723C0E39400A746B5 /* AppDelegate.swift in Sources */,
 				D49A904823CF68C1005384D3 /* TimersCellDataSource.swift in Sources */,
+				D462FBD723D1B64700BC7138 /* DayCircleView.swift in Sources */,
+				D462FBD923D1EB9A00BC7138 /* APIDayCircleViewDataSource.swift in Sources */,
 				D4C7344923C501A400A746B5 /* Timer.swift in Sources */,
 				D4304F9F23C71F330096018E /* Coordinator.swift in Sources */,
 				D4D844B823C7A91700533701 /* TimersTableViewCell.swift in Sources */,
 				D49A904223CF2B6D005384D3 /* EditTimerDataSource.swift in Sources */,
+				D462FBDB23D1EBAC00BC7138 /* DayCircleViewDataSource.swift in Sources */,
 				D4C7342B23C0E4AD00A746B5 /* TimerRealm.swift in Sources */,
 				D4EC98BA23C899F8003EC3C0 /* TimerColor.swift in Sources */,
 				D4C7344D23C502EB00A746B5 /* APITimersDataSource.swift in Sources */,

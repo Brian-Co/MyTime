@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VZc-53-xBN">
-                                <rect key="frame" x="0.0" y="124" width="414" height="772"/>
+                                <rect key="frame" x="0.0" y="354" width="414" height="542"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="115" id="iuF-tm-6Al" customClass="TimersTableViewCell" customModule="MyTime" customModuleProvider="target">
@@ -105,17 +105,28 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jyA-mU-M3v" customClass="DayCircleView" customModule="MyTime" customModuleProvider="target">
+                                <rect key="frame" x="67" y="64" width="280" height="280"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="jyA-mU-M3v" secondAttribute="height" multiplier="320:320" id="nVy-eG-3aD"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="VZc-53-xBN" firstAttribute="bottom" secondItem="Pvh-cG-JmY" secondAttribute="bottom" constant="34" id="5nf-2U-JtX"/>
                             <constraint firstItem="Pvh-cG-JmY" firstAttribute="trailing" secondItem="VZc-53-xBN" secondAttribute="trailing" id="68m-ZS-vO6"/>
-                            <constraint firstItem="VZc-53-xBN" firstAttribute="top" secondItem="Pvh-cG-JmY" secondAttribute="top" constant="80" id="OWg-qt-pkC"/>
+                            <constraint firstItem="jyA-mU-M3v" firstAttribute="leading" secondItem="Pvh-cG-JmY" secondAttribute="leading" constant="67" id="7E1-WB-aZ4"/>
+                            <constraint firstItem="Pvh-cG-JmY" firstAttribute="trailing" secondItem="jyA-mU-M3v" secondAttribute="trailing" constant="67" id="7b0-fS-Wcg"/>
+                            <constraint firstItem="VZc-53-xBN" firstAttribute="top" secondItem="jyA-mU-M3v" secondAttribute="bottom" constant="10" id="GC0-O1-UqB"/>
                             <constraint firstItem="VZc-53-xBN" firstAttribute="leading" secondItem="Pvh-cG-JmY" secondAttribute="leading" id="PAY-hH-g0B"/>
+                            <constraint firstItem="jyA-mU-M3v" firstAttribute="top" secondItem="Pvh-cG-JmY" secondAttribute="top" constant="20" id="U14-yO-e9j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Pvh-cG-JmY"/>
                     </view>
                     <connections>
+                        <outlet property="dayCircleView" destination="jyA-mU-M3v" id="l7b-H9-vSO"/>
                         <outlet property="timersTableView" destination="VZc-53-xBN" id="jSX-in-CiP"/>
                     </connections>
                 </viewController>
