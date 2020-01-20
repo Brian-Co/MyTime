@@ -10,6 +10,8 @@
 		2B9E1BD47DE2D126B034CC5E /* Pods_MyTime_MyTimeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5A36DDCB489EA06E907862 /* Pods_MyTime_MyTimeUITests.framework */; };
 		451CB9CFE7E4E49BBE74A0E6 /* Pods_MyTimeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1D645C2513CA67E4F4606C /* Pods_MyTimeTests.framework */; };
 		AD11025F0BA4B010F74BB8DD /* Pods_MyTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1282D6B1379E7C012411C2EC /* Pods_MyTime.framework */; };
+		D412391623D66123003C58F9 /* EditPopupDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D412391523D66123003C58F9 /* EditPopupDataSource.swift */; };
+		D412391823D6613A003C58F9 /* APIEditPopupDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D412391723D6613A003C58F9 /* APIEditPopupDataSource.swift */; };
 		D4304F9D23C64B530096018E /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4304F9C23C64B530096018E /* RootCoordinator.swift */; };
 		D4304F9F23C71F330096018E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4304F9E23C71F330096018E /* Coordinator.swift */; };
 		D4304FA123C74A680096018E /* TimersNavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4304FA023C74A680096018E /* TimersNavigationCoordinator.swift */; };
@@ -69,6 +71,8 @@
 		6A5A36DDCB489EA06E907862 /* Pods_MyTime_MyTimeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTime_MyTimeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		967CA6C20BA817C7C58F48FC /* Pods-MyTime-MyTimeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime-MyTimeUITests.release.xcconfig"; path = "Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9B743D9D1856CE176B991D0B /* Pods-MyTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime.release.xcconfig"; path = "Target Support Files/Pods-MyTime/Pods-MyTime.release.xcconfig"; sourceTree = "<group>"; };
+		D412391523D66123003C58F9 /* EditPopupDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopupDataSource.swift; sourceTree = "<group>"; };
+		D412391723D6613A003C58F9 /* APIEditPopupDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEditPopupDataSource.swift; sourceTree = "<group>"; };
 		D4304F9C23C64B530096018E /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 		D4304F9E23C71F330096018E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		D4304FA023C74A680096018E /* TimersNavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersNavigationCoordinator.swift; sourceTree = "<group>"; };
@@ -299,6 +303,7 @@
 				D49A904723CF68C1005384D3 /* TimersCellDataSource.swift */,
 				D462FBDA23D1EBAC00BC7138 /* DayCircleViewDataSource.swift */,
 				D49A904123CF2B6D005384D3 /* EditTimerDataSource.swift */,
+				D412391523D66123003C58F9 /* EditPopupDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 				D49A904923CF68D4005384D3 /* APITimersCellDataSource.swift */,
 				D462FBD823D1EB9A00BC7138 /* APIDayCircleViewDataSource.swift */,
 				D49A904523CF2C00005384D3 /* APIEditTimerDataSource.swift */,
+				D412391723D6613A003C58F9 /* APIEditPopupDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -584,8 +590,10 @@
 				D4C7344D23C502EB00A746B5 /* APITimersDataSource.swift in Sources */,
 				D49A904A23CF68D4005384D3 /* APITimersCellDataSource.swift in Sources */,
 				D451930A23CCBCB20074D08E /* EditTimerVC.swift in Sources */,
+				D412391823D6613A003C58F9 /* APIEditPopupDataSource.swift in Sources */,
 				D451930823CC75AE0074D08E /* Int+Extensions.swift in Sources */,
 				D4C733F923C0E39400A746B5 /* SceneDelegate.swift in Sources */,
+				D412391623D66123003C58F9 /* EditPopupDataSource.swift in Sources */,
 				D4304FA123C74A680096018E /* TimersNavigationCoordinator.swift in Sources */,
 				D4C7344B23C501B400A746B5 /* TimerInterval.swift in Sources */,
 			);

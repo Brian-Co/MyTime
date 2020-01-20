@@ -25,6 +25,8 @@ final class TimersNavigationCoordinator: Coordinator {
     func start() {
         let timersViewController = TimersViewController.controller(dataSource: APITimersDataSource(), didSelectTimer: { [weak self] selectedTimer in
             self?.didSelect(timer: selectedTimer)
+        }, didSelectInterval: { [weak self] timer, timerInterval in
+            self?.didSelectInterval(timer, timerInterval)
         })
         
         let navigationController = UINavigationController(rootViewController: timersViewController)
@@ -43,6 +45,14 @@ final class TimersNavigationCoordinator: Coordinator {
     
     func editTimerVCDidDimsiss() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func didSelectInterval(_ timer: TimerX, _ timerInterval: TimerInterval) {
+        let editPopup = EditPopup.controller(dataSource: APIEditPopupDataSource(timer: timer, timerInterval: timerInterval))
+        editPopup.modalPresentationStyle = .overCurrentContext
+        editPopup.modalTransitionStyle = .crossDissolve
+        
+        self.navigationController?.present(editPopup, animated: true, completion: nil)
     }
 
 }

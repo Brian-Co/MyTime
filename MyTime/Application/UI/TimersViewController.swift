@@ -11,23 +11,26 @@ import UIKit
 class TimersViewController: UIViewController {
     
     typealias DidSelectTimerBlock = ((_ timer: TimerX?) -> ())
+    typealias DidSelectIntervalBlock = ((_ timer: TimerX, _ timerInterval: TimerInterval) -> ())
     
     @IBOutlet weak var timersTableView: UITableView!
     @IBOutlet weak var dayCircleView: DayCircleView!
     
     private var dataSource: TimersDataSource!
     private var didSelectTimer: DidSelectTimerBlock?
+    private var didSelectInterval: DidSelectIntervalBlock?
     
     convenience init(dataSource: TimersDataSource) {
         self.init()
         self.dataSource = dataSource
     }
     
-    class func controller(dataSource: TimersDataSource, didSelectTimer: DidSelectTimerBlock?) -> UIViewController {
+    class func controller(dataSource: TimersDataSource, didSelectTimer: DidSelectTimerBlock?, didSelectInterval: DidSelectIntervalBlock?) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "TimersViewController") as! TimersViewController
         controller.dataSource = dataSource
         controller.didSelectTimer = didSelectTimer
+        controller.didSelectInterval = didSelectInterval
         return controller
     }
     
@@ -44,9 +47,7 @@ class TimersViewController: UIViewController {
         timersTableView.delegate = self
         timersTableView.dataSource = self
         
-        dayCircleView.configureDataSource(didSelectInterval: { [weak self] timer, timerInterval in
-            self?.showEditView(timer, timerInterval)
-        })
+        dayCircleView.configureDataSource(didSelectInterval: didSelectInterval)
         
         initDataSource()
     }
@@ -72,15 +73,6 @@ class TimersViewController: UIViewController {
         default:
             break
         }
-    }
-    
-    func showEditView(_ timer: TimerX, _ timerInterval: TimerInterval) {
-        
-        let editPopup = EditPopup.controller(timer: timer, timerInterval: timerInterval)
-        editPopup.modalPresentationStyle = .overCurrentContext
-        editPopup.modalTransitionStyle = .crossDissolve
-        
-        self.present(editPopup, animated: true, completion: nil)
     }
     
 }

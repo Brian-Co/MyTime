@@ -20,15 +20,12 @@ class EditPopup: UIViewController {
     @IBOutlet weak var totalTime: UILabel!
     @IBOutlet weak var popupHeaderView: UIView!
     
+    private var dataSource: EditPopupDataSource!
     
-    var timer: TimerX!
-    var timerInterval: TimerInterval!
-    
-    class func controller(timer: TimerX, timerInterval: TimerInterval) -> UIViewController {
+    class func controller(dataSource: EditPopupDataSource) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "EditPopup") as! EditPopup
-        controller.timer = timer
-        controller.timerInterval = timerInterval
+        controller.dataSource = dataSource
         return controller
     }
     
@@ -41,19 +38,18 @@ class EditPopup: UIViewController {
         
         popup.layer.cornerRadius = 10
         popupHeaderView.layer.cornerRadius = 10
-        popupHeaderView.backgroundColor = TimerColor(rawValue: timer.color)?.create
+        popupHeaderView.backgroundColor = TimerColor(rawValue: dataSource.timer.color)?.create
         
         self.definesPresentationContext = true
-        timerName.text = timer.name
+        timerName.text = dataSource.timer.name
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
-        startingPoint.text = dateFormatter.string(from: timerInterval.startingPoint)
-        endingPoint.text = dateFormatter.string(from: timerInterval.endingPoint!)
+        startingPoint.text = dateFormatter.string(from: dataSource.timerInterval.startingPoint)
+        endingPoint.text = dateFormatter.string(from: dataSource.timerInterval.endingPoint!)
         
-        let totalTime = timerInterval.endingPoint!.timeIntervalSince(timerInterval.startingPoint)
+        let totalTime = dataSource.timerInterval.endingPoint!.timeIntervalSince(dataSource.timerInterval.startingPoint)
         self.totalTime.text = Int(totalTime).timeString(format: 1)
-        
     }
     
     @IBAction func dismissPopup(_ sender: Any) {
