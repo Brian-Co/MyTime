@@ -18,6 +18,7 @@ class EditPopup: UIViewController {
     @IBOutlet weak var startingPoint: UILabel!
     @IBOutlet weak var endingPoint: UILabel!
     @IBOutlet weak var totalTime: UILabel!
+    @IBOutlet weak var popupHeaderView: UIView!
     
     
     var timer: TimerX!
@@ -39,6 +40,8 @@ class EditPopup: UIViewController {
         backgroundView.addGestureRecognizer(dismissAction)
         
         popup.layer.cornerRadius = 10
+        popupHeaderView.layer.cornerRadius = 10
+        popupHeaderView.backgroundColor = TimerColor(rawValue: timer.color)?.create
         
         self.definesPresentationContext = true
         timerName.text = timer.name
