@@ -44,6 +44,10 @@ class TimersViewController: UIViewController {
         timersTableView.delegate = self
         timersTableView.dataSource = self
         
+        dayCircleView.configureDataSource(didSelectInterval: { [weak self] timer, timerInterval in
+            self?.showEditView(timer, timerInterval)
+        })
+        
         initDataSource()
     }
     
@@ -68,6 +72,15 @@ class TimersViewController: UIViewController {
         default:
             break
         }
+    }
+    
+    func showEditView(_ timer: TimerX, _ timerInterval: TimerInterval) {
+        
+        let editPopup = EditPopup.controller(timer: timer, timerInterval: timerInterval)
+        editPopup.modalPresentationStyle = .overCurrentContext
+        editPopup.modalTransitionStyle = .crossDissolve
+        
+        self.present(editPopup, animated: true, completion: nil)
     }
     
 }

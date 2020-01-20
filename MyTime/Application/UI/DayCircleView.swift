@@ -12,6 +12,8 @@ import UIKit
 
 class DayCircleView: UIView {
     
+    typealias DidSelectIntervalBlock = ((_ timer: TimerX, _ timerInterval: TimerInterval) -> ())
+    
     private var dataSource: DayCircleViewDataSource!
     
     private lazy var backgroundLayer: CAShapeLayer = {
@@ -62,6 +64,10 @@ class DayCircleView: UIView {
         dataSource.createTimerIntervalLayer = { [weak self] startAngle, endAngle, color in self?.createTimerIntervalLayer(startAngle: startAngle, endAngle: endAngle, color: color) }
     }
     
+    func configureDataSource(didSelectInterval: DidSelectIntervalBlock?) {
+        dataSource.didSelectInterval = didSelectInterval
+    }
+    
     func updateDataSource(with timers: [TimerX]) {
         dataSource.timers = timers
     }
@@ -93,7 +99,31 @@ class DayCircleView: UIView {
         endAngle: endAngle, clockwise: true)
         timerIntervalLayer.path = circularPath.cgPath
         
+        timerIntervalLayer.setValue(startAngle + CGFloat.pi/2, forKey: "startAngle")
+        timerIntervalLayer.setValue(endAngle + CGFloat.pi/2, forKey: "endAngle")
+        
         layer.addSublayer(timerIntervalLayer)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let point = touches.first!.location(in: self)
+        let centerPoint = CGPoint(x: frame.width/2 , y: frame.height/2)
+        let pointAngle = point.angle(from: centerPoint)
+        let pointRadius = point.distance(from: centerPoint)
+        
+        let lowerRadius = (bounds.width / 2) - 50
+        let upperRadius = (bounds.width / 2) + 10
+        if (lowerRadius...upperRadius).contains(pointRadius) {
+            for sublayer in layer.sublayers! {
+                if let startAngle = sublayer.value(forKey: "startAngle") as? CGFloat, let endAngle = sublayer.value(forKey: "endAngle") as? CGFloat {
+                    if (startAngle...endAngle).contains(pointAngle) {
+                        let startAnglePercent = startAngle / (2 * CGFloat.pi)
+                        let endAnglePercent = endAngle / (2 * CGFloat.pi)
+                        dataSource.findTimerFrom(Double(startAnglePercent), Double(endAnglePercent))
+                    }
+                }
+            }
+        }
     }
     
     private func addHoursTextLayers() {

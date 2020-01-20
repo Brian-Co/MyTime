@@ -13,5 +13,7 @@ protocol DayCircleViewDataSource {
     var timers: [TimerX] { get set }
     var loadLayers: (() -> ())? { get set }
     var createTimerIntervalLayer: ((_ startAngle: Double, _ endAngle: Double, _ color: String) -> ())? { get set }
+    var didSelectInterval: ((_ timer: TimerX, _ timerInterval: TimerInterval) -> ())? { get set }
     
+    func findTimerFrom(_ startAngle: Double, _ endAngle: Double)
 }

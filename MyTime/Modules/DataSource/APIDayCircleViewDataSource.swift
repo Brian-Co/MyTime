@@ -19,28 +19,39 @@ class APIDayCircleViewDataSource: DayCircleViewDataSource {
     }
     var loadLayers: (() -> ())?
     var createTimerIntervalLayer: ((Double, Double, String) -> ())?
+    var didSelectInterval: ((_ timer: TimerX, _ timerInterval: TimerInterval) -> ())?
     
     func createTimerIntervalsLayers() {
         
         for timer in timers {
             for timerInterval in timer.timerIntervals {
                 if let endingPoint = timerInterval.endingPoint {
-                    let startAngle = getAngle(for: timerInterval.startingPoint)
-                    let endAngle = getAngle(for: endingPoint)
+                    let startAngle = timerInterval.startingPoint.minutesSinceMidnight() / 1440
+                    let endAngle = endingPoint.minutesSinceMidnight() / 1440
                     createTimerIntervalLayer?(startAngle, endAngle, timer.color)
                 }
             }
         }
     }
     
-    private func getAngle(for date: Date) -> Double {
+    func findTimerFrom(_ startAngle: Double, _ endAngle: Double) {
         
-        let calendar = Calendar(identifier: .gregorian)
-        let midnight = calendar.startOfDay(for: date)
-        let minutes = date.timeIntervalSince(midnight) / 60
-        let Angle = minutes / 1440
+        let startingPointMinutes = String(format: "%.6f", startAngle * 1440)
+        let endingPointMinutes = String(format: "%.6f", endAngle * 1440)
         
-        return Angle
+        for timer in timers {
+            for timerInterval in timer.timerIntervals {
+                if let endingPoint = timerInterval.endingPoint {
+                    
+                    let minutesStartingPoint = String(format: "%.6f", timerInterval.startingPoint.minutesSinceMidnight())
+                    let minutesEndingPoint = String(format: "%.6f", endingPoint.minutesSinceMidnight())
+                    
+                    if minutesStartingPoint == startingPointMinutes && minutesEndingPoint == endingPointMinutes {
+                        didSelectInterval?(timer, timerInterval)
+                    }
+                }
+            }
+        }
     }
     
 }
