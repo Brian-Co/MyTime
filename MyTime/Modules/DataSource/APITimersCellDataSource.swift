@@ -67,11 +67,19 @@ class APITimersCellDataSource: TimersCellDataSource {
     
     func stopTimer() {
         
-        let timerToUpdate = realm.objects(TimerRealm.self).filter("name = '\(timer!.name)'").first
-        let timerIntervalRealm = TimerIntervalRealm(value: [timer?.timerIntervals.last!.startingPoint, Date()])
-        
-        try! realm.write {
-            timerToUpdate?.timerIntervals.append(timerIntervalRealm)
+        let startingPoint = self.timer?.timerIntervals.last!.startingPoint
+        let elapsedTime = Date().timeIntervalSince(startingPoint!)
+        if elapsedTime > 60 {
+            
+            let timerToUpdate = realm.objects(TimerRealm.self).filter("name = '\(timer!.name)'").first
+            let timerIntervalRealm = TimerIntervalRealm(value: [timer?.timerIntervals.last!.startingPoint, Date()])
+            
+            try! realm.write {
+                timerToUpdate?.timerIntervals.append(timerIntervalRealm)
+            }
+        } else {
+            updateTimer?(-1)
+            timer?.timerIntervals.removeLast()
         }
     }
     

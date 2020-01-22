@@ -65,15 +65,21 @@ class TimersTableViewCell: UITableViewCell {
     }
     
     func updateTimer(with time: Int) {
-        
-        timerDuration.text = time.timeString()
-        timerTotalDuration.text = (dataSource.timerTotalDuration + time).timeString(format: 1)
-        if timerDuration.alpha == 0 {
-            UIView.animate(withDuration: 0.3, animations: {
-                self.timerDuration.alpha = 1
-            })
+        if time >= 0 {
+            timerDuration.text = time.timeString()
+            timerTotalDuration.text = (dataSource.timerTotalDuration + time).timeString(format: 1)
+            if timerDuration.alpha == 0 {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.timerDuration.alpha = 1
+                })
+            }
+            timerButton.backgroundColor = timerColorView.backgroundColor
+        } else {
+            timerDuration.text = ""
+            timerDuration.alpha = 0
+            timerButton.backgroundColor = .lightGray
+            timerTotalDuration.text = dataSource.timerTotalDuration.timeString(format: 1)
         }
-        timerButton.backgroundColor = timerColorView.backgroundColor
     }
     
     @IBAction func timerButtonPressed(_ sender: Any) {
