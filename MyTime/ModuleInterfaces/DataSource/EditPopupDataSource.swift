@@ -9,7 +9,7 @@
 import Foundation
 
 protocol EditPopupDataSource {
-    var timer: TimerX { get set }
+    var timer: TimerX? { get set }
     var timerInterval: TimerInterval { get set }
     var dismissVC: (() -> ())? { get set }
     

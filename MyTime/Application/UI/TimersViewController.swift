@@ -11,7 +11,7 @@ import UIKit
 class TimersViewController: UIViewController {
     
     typealias DidSelectTimerBlock = ((_ timer: TimerX?) -> ())
-    typealias DidSelectIntervalBlock = ((_ timer: TimerX, _ timerInterval: TimerInterval) -> ())
+    typealias DidSelectIntervalBlock = ((_ timer: TimerX?, _ timerInterval: TimerInterval) -> ())
     
     @IBOutlet weak var timersTableView: UITableView!
     @IBOutlet weak var dayCircleView: DayCircleView!

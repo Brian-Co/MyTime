@@ -44,18 +44,22 @@ class EditPopup: UIViewController {
         
         popup.layer.cornerRadius = 10
         popupHeaderView.layer.cornerRadius = 10
-        popupHeaderView.backgroundColor = TimerColor(rawValue: dataSource.timer.color)?.create
+        popupHeaderView.backgroundColor = TimerColor(rawValue: dataSource.timer?.color ?? "orange")?.create
         
         deleteButton.layer.borderColor = UIColor.systemRed.cgColor
         deleteButton.layer.borderWidth = 1
         deleteButton.layer.cornerRadius = 10
+        
+        if dataSource.timerInterval.endingPoint == nil {
+            deleteButton.isHidden = true
+        }
         
         saveButton.layer.borderColor = UIColor.systemBlue.cgColor
         saveButton.layer.borderWidth = 1
         saveButton.layer.cornerRadius = 10
         
         self.definesPresentationContext = true
-        timerName.text = dataSource.timer.name
+        timerName.text = dataSource.timer?.name ?? "New Timer Interval"
         
         dateFormatter.dateFormat = "HH:mm"
         updateUI()
@@ -81,7 +85,8 @@ class EditPopup: UIViewController {
     
     @IBAction func saveInterval(_ sender: Any) {
         let newStartingPointDate = dataSource.timerInterval.startingPoint.addingTimeInterval(startingPointStepper.value * 60)
-        let newEndingPointDate = dataSource.timerInterval.endingPoint!.addingTimeInterval(endingPointStepper.value * 60)
+        let endingPoint = dataSource.timerInterval.endingPoint ?? dataSource.timerInterval.startingPoint
+        let newEndingPointDate = endingPoint.addingTimeInterval(endingPointStepper.value * 60)
                 
         dataSource.timerInterval.startingPoint = newStartingPointDate
         dataSource.timerInterval.endingPoint = newEndingPointDate
@@ -101,12 +106,13 @@ class EditPopup: UIViewController {
     func updateUI() {
         
         let startingPointDate = dataSource.timerInterval.startingPoint.addingTimeInterval(startingPointStepper.value * 60)
-        let endingPointDate = dataSource.timerInterval.endingPoint!.addingTimeInterval(endingPointStepper.value * 60)
+        let endingPoint = dataSource.timerInterval.endingPoint ?? dataSource.timerInterval.startingPoint
+        let endingPointDate = endingPoint.addingTimeInterval(endingPointStepper.value * 60)
         
         if !endingPointDate.timeIntervalSince(startingPointDate).isLess(than: 0) {
             
-            startingPoint.text = dateFormatter.string(from: startingPointDate)
-            endingPoint.text = dateFormatter.string(from: endingPointDate)
+            self.startingPoint.text = dateFormatter.string(from: startingPointDate)
+            self.endingPoint.text = dateFormatter.string(from: endingPointDate)
             let totalTime = endingPointDate.timeIntervalSince(startingPointDate)
             self.totalTime.text = Int(totalTime).timeString(format: 1)
         } else {

@@ -12,7 +12,7 @@ import UIKit
 
 class DayCircleView: UIView {
     
-    typealias DidSelectIntervalBlock = ((_ timer: TimerX, _ timerInterval: TimerInterval) -> ())
+    typealias DidSelectIntervalBlock = ((_ timer: TimerX?, _ timerInterval: TimerInterval) -> ())
     
     private var dataSource: DayCircleViewDataSource!
     
@@ -114,14 +114,20 @@ class DayCircleView: UIView {
         let lowerRadius = (bounds.width / 2) - 50
         let upperRadius = (bounds.width / 2) + 10
         if (lowerRadius...upperRadius).contains(pointRadius) {
+            var didSelectInterval = false
             for sublayer in layer.sublayers! {
                 if let startAngle = sublayer.value(forKey: "startAngle") as? CGFloat, let endAngle = sublayer.value(forKey: "endAngle") as? CGFloat {
                     if (startAngle...endAngle).contains(pointAngle) {
                         let startAnglePercent = startAngle / (2 * CGFloat.pi)
                         let endAnglePercent = endAngle / (2 * CGFloat.pi)
+                        didSelectInterval = true
                         dataSource.findTimerFrom(Double(startAnglePercent), Double(endAnglePercent))
                     }
                 }
+            }
+            if !didSelectInterval {
+                let angle = pointAngle / (2 * CGFloat.pi)
+                dataSource.createTimerIntervalFrom(Double(angle))
             }
         }
     }

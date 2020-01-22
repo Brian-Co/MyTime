@@ -19,7 +19,7 @@ class APIDayCircleViewDataSource: DayCircleViewDataSource {
     }
     var loadLayers: (() -> ())?
     var createTimerIntervalLayer: ((Double, Double, String) -> ())?
-    var didSelectInterval: ((_ timer: TimerX, _ timerInterval: TimerInterval) -> ())?
+    var didSelectInterval: ((_ timer: TimerX?, _ timerInterval: TimerInterval) -> ())?
     
     func createTimerIntervalsLayers() {
         
@@ -52,6 +52,17 @@ class APIDayCircleViewDataSource: DayCircleViewDataSource {
                 }
             }
         }
+    }
+    
+    func createTimerIntervalFrom(_ angle: Double) {
+        
+        let startingPointMinutes = angle * 1440
+        let hours = Int(startingPointMinutes / 60)
+        let minutes = Int(startingPointMinutes) % 60
+        let date = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: Date())!
+        
+        let newInterval = TimerInterval(startingPoint: date, endingPoint: nil)
+        didSelectInterval?(nil, newInterval)
     }
     
 }

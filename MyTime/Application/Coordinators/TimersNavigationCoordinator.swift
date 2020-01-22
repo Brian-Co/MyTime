@@ -47,7 +47,7 @@ final class TimersNavigationCoordinator: Coordinator {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func didSelectInterval(_ timer: TimerX, _ timerInterval: TimerInterval) {
+    func didSelectInterval(_ timer: TimerX?, _ timerInterval: TimerInterval) {
         let editPopup = EditPopup.controller(dataSource: APIEditPopupDataSource(timer: timer, timerInterval: timerInterval))
         editPopup.modalPresentationStyle = .overCurrentContext
         editPopup.modalTransitionStyle = .crossDissolve
