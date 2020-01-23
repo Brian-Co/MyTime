@@ -26,7 +26,7 @@ class APITimersDataSource: TimersDataSource {
             
             if timers.count > 0 {
                 
-                self.content = timers.map { TimerX(name: $0.name, color: $0.color, category: $0.category, timerIntervals: $0.timerIntervals.map { TimerInterval(startingPoint: $0.startingPoint, endingPoint: $0.endingPoint) }) }
+                self.content = timers.compactMap { $0.toAppModel() }
             } else {
                 
                 let timer = TimerRealm()
@@ -37,12 +37,11 @@ class APITimersDataSource: TimersDataSource {
                     self.realm.add(timer)
                 }
                 
-                let timerX = TimerX(name: timer.name, color: timer.color, category: "", timerIntervals: [])
+                let timerX = timer.toAppModel()!
                 self.content.append(timerX)
             }
             
             self.contentDidChange?()
-//            self.stateDidChange?(DataSourceState.data)
         })
     }
     

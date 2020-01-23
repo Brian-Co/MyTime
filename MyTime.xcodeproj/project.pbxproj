@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B9E1BD47DE2D126B034CC5E /* Pods_MyTime_MyTimeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5A36DDCB489EA06E907862 /* Pods_MyTime_MyTimeUITests.framework */; };
+		37EFDE4423D9AF290028E214 /* CodableForAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFDE4223D9AEE50028E214 /* CodableForAppModel.swift */; };
 		451CB9CFE7E4E49BBE74A0E6 /* Pods_MyTimeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1D645C2513CA67E4F4606C /* Pods_MyTimeTests.framework */; };
 		AD11025F0BA4B010F74BB8DD /* Pods_MyTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1282D6B1379E7C012411C2EC /* Pods_MyTime.framework */; };
 		D412391623D66123003C58F9 /* EditPopupDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D412391523D66123003C58F9 /* EditPopupDataSource.swift */; };
@@ -67,6 +68,7 @@
 		0F1D645C2513CA67E4F4606C /* Pods_MyTimeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTimeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1282D6B1379E7C012411C2EC /* Pods_MyTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E2E68E676E915669AD943B4 /* Pods-MyTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime.debug.xcconfig"; path = "Target Support Files/Pods-MyTime/Pods-MyTime.debug.xcconfig"; sourceTree = "<group>"; };
+		37EFDE4223D9AEE50028E214 /* CodableForAppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableForAppModel.swift; sourceTree = "<group>"; };
 		5465FEB96FED5D120A6E5B3F /* Pods-MyTimeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTimeTests.debug.xcconfig"; path = "Target Support Files/Pods-MyTimeTests/Pods-MyTimeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6A5A36DDCB489EA06E907862 /* Pods_MyTime_MyTimeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTime_MyTimeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		967CA6C20BA817C7C58F48FC /* Pods-MyTime-MyTimeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime-MyTimeUITests.release.xcconfig"; path = "Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +147,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37EFDE3E23D9ADCD0028E214 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				D4C7344C23C502EB00A746B5 /* APITimersDataSource.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		37EFDE3F23D9AE060028E214 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D4C7344523C5003B00A746B5 /* Model */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		37EFDE4023D9AE110028E214 /* EditTimer */ = {
+			isa = PBXGroup;
+			children = (
+				D49A904523CF2C00005384D3 /* APIEditTimerDataSource.swift */,
+			);
+			path = EditTimer;
+			sourceTree = "<group>";
+		};
+		37EFDE4123D9AECF0028E214 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				37EFDE4223D9AEE50028E214 /* CodableForAppModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C75C5E3D69442251E2A8E35E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,7 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				D4C7344423C5003200A746B5 /* DataSource */,
-				D4C7344523C5003B00A746B5 /* Model */,
+				37EFDE4123D9AECF0028E214 /* Model */,
 			);
 			path = ModuleInterfaces;
 			sourceTree = "<group>";
@@ -320,10 +354,11 @@
 		D4C7344723C5007C00A746B5 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				D4C7344C23C502EB00A746B5 /* APITimersDataSource.swift */,
+				37EFDE3F23D9AE060028E214 /* Common */,
+				37EFDE3E23D9ADCD0028E214 /* Timer */,
+				37EFDE4023D9AE110028E214 /* EditTimer */,
 				D49A904923CF68D4005384D3 /* APITimersCellDataSource.swift */,
 				D462FBD823D1EB9A00BC7138 /* APIDayCircleViewDataSource.swift */,
-				D49A904523CF2C00005384D3 /* APIEditTimerDataSource.swift */,
 				D412391723D6613A003C58F9 /* APIEditPopupDataSource.swift */,
 			);
 			path = DataSource;
@@ -575,6 +610,7 @@
 				D4304F9D23C64B530096018E /* RootCoordinator.swift in Sources */,
 				D4C7342D23C0F20100A746B5 /* TimerIntervalRealm.swift in Sources */,
 				D4C733F723C0E39400A746B5 /* AppDelegate.swift in Sources */,
+				37EFDE4423D9AF290028E214 /* CodableForAppModel.swift in Sources */,
 				D49A904823CF68C1005384D3 /* TimersCellDataSource.swift in Sources */,
 				D462FBD723D1B64700BC7138 /* DayCircleView.swift in Sources */,
 				D462FBD923D1EB9A00BC7138 /* APIDayCircleViewDataSource.swift in Sources */,
