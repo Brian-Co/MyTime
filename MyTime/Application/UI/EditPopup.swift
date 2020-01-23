@@ -27,6 +27,7 @@ class EditPopup: UIViewController {
     private var dataSource: EditPopupDataSource!
     
     let dateFormatter = DateFormatter()
+    let tableView = UITableView()
     
     class func controller(dataSource: EditPopupDataSource) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -38,32 +39,35 @@ class EditPopup: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         backgroundView.alpha = 0.4
         let dismissAction = UITapGestureRecognizer(target: self, action: #selector(didTapBackground(_:)))
         backgroundView.addGestureRecognizer(dismissAction)
         
         popup.layer.cornerRadius = 10
         popupHeaderView.layer.cornerRadius = 10
-        popupHeaderView.backgroundColor = TimerColor(rawValue: dataSource.timer?.color ?? "orange")?.create
         
         deleteButton.layer.borderColor = UIColor.systemRed.cgColor
         deleteButton.layer.borderWidth = 1
         deleteButton.layer.cornerRadius = 10
-        
-        if dataSource.timerInterval.endingPoint == nil {
-            deleteButton.isHidden = true
-        }
         
         saveButton.layer.borderColor = UIColor.systemBlue.cgColor
         saveButton.layer.borderWidth = 1
         saveButton.layer.cornerRadius = 10
         
         self.definesPresentationContext = true
-        timerName.text = dataSource.timer?.name ?? "New Timer Interval"
         
         dateFormatter.dateFormat = "HH:mm"
+        configureUI()
         updateUI()
         initDataSource()
+        
+        if dataSource.timerInterval.endingPoint == nil {
+            deleteButton.isHidden = true
+            configureTableView()
+        }
     }
     
     func initDataSource() {
@@ -103,6 +107,12 @@ class EditPopup: UIViewController {
         updateUI()
     }
     
+    func configureUI() {
+        
+        timerName.text = dataSource.timer?.name ?? "New Timer Interval"
+        popupHeaderView.backgroundColor = TimerColor(rawValue: dataSource.timer?.color ?? "orange")?.create
+    }
+    
     func updateUI() {
         
         let startingPointDate = dataSource.timerInterval.startingPoint.addingTimeInterval(startingPointStepper.value * 60)
@@ -119,6 +129,43 @@ class EditPopup: UIViewController {
             startingPointStepper.value = 0
             endingPointStepper.value = 0
         }
+    }
+    
+    func configureTableView() {
+                
+        tableView.frame = popup.bounds
+        tableView.layer.cornerRadius = 10
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        popup.addSubview(tableView)
+    }
+    
+    
+}
+
+extension EditPopup: UITableViewDelegate, UITableViewDataSource {
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.timers.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        let timer = dataSource.timers[indexPath.row]
+        cell.textLabel?.text = timer.name
+        cell.textLabel?.textColor = .white
+        cell.backgroundColor = TimerColor(rawValue: timer.color)?.create
+        
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        dataSource.timer = dataSource.timers[indexPath.row]
+        configureUI()
+        tableView.isHidden = true
     }
     
     
