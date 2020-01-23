@@ -53,6 +53,30 @@ class APITimersDataSource: TimersDataSource {
             realm.delete(timerToDelete)
         }
     }
+    
+    func updateTimer(_ timer: TimerX) {
+        
+        let timerToUpdate = realm.objects(TimerRealm.self).filter("name = '\(timer.name)'").first
+        
+        if timer.isOn {
+            let timerIntervalRealm = TimerIntervalRealm(value: [timer.timerIntervals.last!.startingPoint, timer.timerIntervals.last!.endingPoint])
+            
+            try! realm.write {
+                timerToUpdate?.timerIntervals.append(timerIntervalRealm)
+            }
+        } else {
+            if timerToUpdate?.timerIntervals.last?.startingPoint != timer.timerIntervals.last?.startingPoint {
+                let timerIntervalToDelete = timerToUpdate?.timerIntervals.last
+                try! realm.write {
+                    realm.delete(timerIntervalToDelete!)
+                }
+            } else {
+                try! realm.write {
+                    timerToUpdate?.timerIntervals.last?.endingPoint = timer.timerIntervals.last!.endingPoint
+                }
+            }
+        }
+    }
         
 }
 

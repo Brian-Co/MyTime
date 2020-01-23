@@ -10,26 +10,31 @@ import UIKit
 
 class TimersTableViewCell: UITableViewCell {
 
+    typealias UpdateTimerBlock = ((TimerX) -> ())
+    typealias UpdateCircleViewBlock = (() -> ())
+    
     @IBOutlet weak var timerName: UILabel!
     @IBOutlet weak var timerColorView: UIView!
     @IBOutlet weak var timerTotalDuration: UILabel!
     @IBOutlet weak var timerDuration: UILabel!
     @IBOutlet weak var timerButton: UIButton!
     
-    private var dataSource: TimersCellDataSource!
+    var saveTimer: UpdateTimerBlock?
+    var updateCircleView: UpdateCircleViewBlock?
+    var timer: TimerX?
+    var totalDuration = 0
+    var elapsedTime = 0
+    var scheduledTimer = Timer()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        dataSource = APITimersCellDataSource()
-        initDataSource()
         timerColorView.layer.cornerRadius = 10
         timerButton.layer.cornerRadius = timerButton.frame.width / 2
     }
     
-    func initDataSource() {
-        
-        dataSource.updateTimer = { [weak self] time in self?.updateTimer(with: time) }
+    deinit {
+        scheduledTimer.invalidate()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -38,24 +43,42 @@ class TimersTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(timer: TimerX) {
+    func configure(timer: TimerX, updateTimerBlock: UpdateTimerBlock?, updateCircleViewBlock: UpdateCircleViewBlock?) {
         
-        dataSource.timer = timer
+        self.timer = timer
+        self.saveTimer = updateTimerBlock
+        self.updateCircleView = updateCircleViewBlock
         
         timerName.text = timer.name
         timerColorView.backgroundColor = TimerColor(rawValue: timer.color)?.create
-        timerDuration.text = ""
-        timerDuration.alpha = 0
-        timerButton.backgroundColor = .lightGray
         timerButton.setImage(UIImage(systemName: "timer"), for: .normal)
+        elapsedTime = 0
+        scheduleTimer()
+
+        if timer.isOn {
+            let startingPoint = self.timer?.timerIntervals.last!.startingPoint
+            let elapsedTime = Date().timeIntervalSince(startingPoint!)
+            self.elapsedTime = Int(elapsedTime)
+            timerDuration.text = self.elapsedTime.timeString()
+            timerButton.backgroundColor = timerColorView.backgroundColor
+            if timerDuration.alpha == 0 {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.timerDuration.alpha = 1
+                })
+            }
+        } else {
+            timerDuration.text = ""
+            timerDuration.alpha = 0
+            timerButton.backgroundColor = .lightGray
+        }
         
-        let totalDuration = dataSource.getTimerTotalDuration()
-        timerTotalDuration.text = totalDuration.timeString(format: 1)
+        totalDuration = getTimerTotalDuration()
+        timerTotalDuration.text = (totalDuration + elapsedTime).timeString(format: 1)
     }
     
     func setAddTimerCell() {
         
-        dataSource.timer = nil
+        self.timer = nil
         timerName.text = "Add Timer"
         timerColorView.backgroundColor = .systemBackground
         timerDuration.text = ""
@@ -64,27 +87,46 @@ class TimersTableViewCell: UITableViewCell {
         timerButton.setImage(UIImage(systemName: "plus"), for: .normal)
     }
     
-    func updateTimer(with time: Int) {
-        if time >= 0 {
-            timerDuration.text = time.timeString()
-            timerTotalDuration.text = (dataSource.timerTotalDuration + time).timeString(format: 1)
-            if timerDuration.alpha == 0 {
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.timerDuration.alpha = 1
-                })
+    func scheduleTimer() {
+        
+        scheduledTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
+            if self.timer?.isOn ?? false {
+                let startingPoint = self.timer?.timerIntervals.last!.startingPoint
+                self.elapsedTime = Int(Date().timeIntervalSince(startingPoint!))
+                self.updateTimer()
+            } else {
+                timer.invalidate()
             }
-            timerButton.backgroundColor = timerColorView.backgroundColor
-        } else {
-            timerDuration.text = ""
-            timerDuration.alpha = 0
-            timerButton.backgroundColor = .lightGray
-            timerTotalDuration.text = dataSource.timerTotalDuration.timeString(format: 1)
+        })
+    }
+    
+    func getTimerTotalDuration() -> Int {
+        
+        if !(timer?.timerIntervals.isEmpty ?? true) {
+            var totalDuration = 0
+            for timerInterval in timer!.timerIntervals {
+                if let endingPoint = timerInterval.endingPoint {
+                    let timerIntervalDuration = endingPoint.timeIntervalSince(timerInterval.startingPoint)
+                    totalDuration += Int(timerIntervalDuration)
+                }
+            }
+            self.totalDuration = totalDuration
+            return totalDuration
+        }
+        return 0
+    }
+    
+    func updateTimer() {
+        timerDuration.text = elapsedTime.timeString()
+        timerTotalDuration.text = (totalDuration + elapsedTime).timeString(format: 1)
+        if elapsedTime % 30 == 0 {
+            updateCircleView?()
         }
     }
     
     @IBAction func timerButtonPressed(_ sender: Any) {
-        if dataSource.timer != nil {
-            dataSource.timerButtonPressed()
+        if self.timer != nil {
+            timerButtonPressed()
         } else {
             let tableView = self.superview as! UITableView
             let lastSectionIndex = tableView.numberOfSections - 1
@@ -92,6 +134,36 @@ class TimersTableViewCell: UITableViewCell {
             let pathToLastRow = IndexPath(row: lastRowIndex, section: lastSectionIndex)
             print("lastRowIndex \(lastRowIndex)")
             tableView.selectRow(at: pathToLastRow, animated: true, scrollPosition: .none)
+        }
+    }
+    
+    func timerButtonPressed() {
+        
+        if timer!.isOn {
+            stopTimer()
+        } else {
+            startTimer()
+        }
+    }
+    
+    func startTimer() {
+        
+        let timerInterval = TimerInterval(startingPoint: Date(), endingPoint: nil)
+        timer?.timerIntervals.append(timerInterval)
+        saveTimer?(self.timer!)
+    }
+    
+    func stopTimer() {
+        
+        if elapsedTime > 60 {
+            var timerIntervalToAppend = timer!.timerIntervals.last!
+            timerIntervalToAppend.endingPoint = Date()
+            timer!.timerIntervals.removeLast()
+            timer!.timerIntervals.append(timerIntervalToAppend)
+            saveTimer?(self.timer!)
+        } else {
+            timer!.timerIntervals.removeLast()
+            saveTimer?(self.timer!)
         }
     }
     

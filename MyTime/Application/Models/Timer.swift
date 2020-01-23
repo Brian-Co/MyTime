@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TimerX {
+struct TimerX {
     
     var name: String
     var color: String
@@ -16,12 +16,5 @@ class TimerX {
     var timerIntervals: [TimerInterval]
     
     var isOn: Bool { return timerIntervals.last?.isOn == true }
-    
-    init(name: String, color: String, category: String, timerIntervals: [TimerInterval]) {
-        self.name = name
-        self.color = color
-        self.category = category
-        self.timerIntervals = timerIntervals
-    }
     
 }

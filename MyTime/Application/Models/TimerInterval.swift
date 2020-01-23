@@ -8,16 +8,11 @@
 
 import Foundation
 
-class TimerInterval {
+struct TimerInterval {
     
     var startingPoint: Date
     var endingPoint: Date?
     
     var isOn: Bool { return endingPoint == nil }
-    
-    init(startingPoint: Date, endingPoint: Date?) {
-        self.startingPoint = startingPoint
-        self.endingPoint = endingPoint
-    }
     
 }

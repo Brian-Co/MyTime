@@ -12,6 +12,7 @@ class TimersViewController: UIViewController {
     
     typealias DidSelectTimerBlock = ((_ timer: TimerX?) -> ())
     typealias DidSelectIntervalBlock = ((_ timer: TimerX?, _ timerInterval: TimerInterval) -> ())
+    typealias UpdateTimerBlock = ((TimerX) -> ())
     
     @IBOutlet weak var timersTableView: UITableView!
     @IBOutlet weak var dayCircleView: DayCircleView!
@@ -47,7 +48,7 @@ class TimersViewController: UIViewController {
         timersTableView.delegate = self
         timersTableView.dataSource = self
         
-        dayCircleView.configureDataSource(didSelectInterval: didSelectInterval)
+        dayCircleView.configure(didSelectInterval: didSelectInterval)
         
         initDataSource()
     }
@@ -62,7 +63,7 @@ class TimersViewController: UIViewController {
     func updateUI() {
         
         timersTableView.reloadData()
-        dayCircleView.updateDataSource(with: dataSource.content)
+        dayCircleView.update(with: dataSource.content)
     }
     
     func dataSourceStateChanged(_ state: DataSourceState) {
@@ -90,7 +91,11 @@ extension TimersViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TimersTableViewCell
         
         if indexPath.row != dataSource.content.count {
-            cell.configure(timer: dataSource.content[indexPath.row])
+            cell.configure(timer: dataSource.content[indexPath.row], updateTimerBlock: { [weak self] timer in
+                self?.dataSource.updateTimer(timer)
+                }, updateCircleViewBlock: { [weak self] in
+                self?.dayCircleView.updateActiveLayer()
+            })
         } else {
             cell.setAddTimerCell()
         }
