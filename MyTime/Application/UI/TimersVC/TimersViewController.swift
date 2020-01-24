@@ -12,7 +12,7 @@ class TimersViewController: UIViewController {
     
     typealias DidSelectTimerBlock = ((_ timer: TimerX?) -> ())
     typealias DidSelectIntervalBlock = ((_ timer: TimerX?, _ timerInterval: TimerInterval) -> ())
-    typealias UpdateTimerBlock = ((TimerX) -> ())
+    typealias DidSelectStatsBlock = (() -> ())
     
     @IBOutlet weak var timersTableView: UITableView!
     @IBOutlet weak var dayCircleView: DayCircleView!
@@ -20,6 +20,7 @@ class TimersViewController: UIViewController {
     private var dataSource: TimersDataSource!
     private var didSelectTimer: DidSelectTimerBlock?
     private var didSelectInterval: DidSelectIntervalBlock?
+    private var didSelectStats: DidSelectStatsBlock?
     
     var chosenDate = Date() {
         didSet {
@@ -33,12 +34,13 @@ class TimersViewController: UIViewController {
         self.dataSource = dataSource
     }
     
-    class func controller(dataSource: TimersDataSource, didSelectTimer: DidSelectTimerBlock?, didSelectInterval: DidSelectIntervalBlock?) -> UIViewController {
+    class func controller(dataSource: TimersDataSource, didSelectTimer: DidSelectTimerBlock?, didSelectInterval: DidSelectIntervalBlock?, didSelectStatsBlock: DidSelectStatsBlock?) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "TimersViewController") as! TimersViewController
         controller.dataSource = dataSource
         controller.didSelectTimer = didSelectTimer
         controller.didSelectInterval = didSelectInterval
+        controller.didSelectStats = didSelectStatsBlock
         return controller
     }
     
@@ -52,6 +54,9 @@ class TimersViewController: UIViewController {
         let previousDayButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(getPreviousDay))
         let nextDayButton = UIBarButtonItem(image: UIImage(systemName: "chevron.right"), style: .plain, target: self, action: #selector(getNextDay))
         self.navigationItem.leftBarButtonItems  = [previousDayButton, nextDayButton]
+        
+        let statsButton = UIBarButtonItem(image: UIImage(systemName: "chart.pie"), style: .plain, target: self, action: #selector(presentStatsVC))
+        self.navigationItem.rightBarButtonItem  = statsButton
         
         timersTableView.delegate = self
         timersTableView.dataSource = self
@@ -91,6 +96,10 @@ class TimersViewController: UIViewController {
     
     @objc func getNextDay() {
         chosenDate = Calendar.current.date(byAdding: .day, value: 1, to: chosenDate) ?? Date()
+    }
+    
+    @objc func presentStatsVC() {
+        didSelectStats?()
     }
     
 }

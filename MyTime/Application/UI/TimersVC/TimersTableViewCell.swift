@@ -119,10 +119,12 @@ class TimersTableViewCell: UITableViewCell {
     }
     
     func updateTimer() {
-        timerDuration.text = elapsedTime.timeString()
-        timerTotalDuration.text = (totalDuration + elapsedTime).timeString(format: 1)
-        if elapsedTime % 30 == 0 {
-            updateCircleView?()
+        if Calendar.current.isDate(chosenDate, inSameDayAs: Date()) {
+            timerDuration.text = elapsedTime.timeString()
+            timerTotalDuration.text = (totalDuration + elapsedTime).timeString(format: 1)
+            if elapsedTime % 30 == 0 {
+                updateCircleView?()
+            }
         }
     }
     

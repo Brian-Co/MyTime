@@ -22,6 +22,11 @@
 		D451930823CC75AE0074D08E /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451930723CC75AE0074D08E /* Int+Extensions.swift */; };
 		D451930A23CCBCB20074D08E /* EditTimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451930923CCBCB20074D08E /* EditTimerVC.swift */; };
 		D462FBD723D1B64700BC7138 /* DayCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D462FBD623D1B64700BC7138 /* DayCircleView.swift */; };
+		D468F75423DB4B41003BFA45 /* StatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D468F75323DB4B41003BFA45 /* StatsVC.swift */; };
+		D468F75623DB501B003BFA45 /* StatsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D468F75523DB501B003BFA45 /* StatsDataSource.swift */; };
+		D468F75923DB5114003BFA45 /* APIStatsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D468F75823DB5114003BFA45 /* APIStatsDataSource.swift */; };
+		D468F75F23DB564D003BFA45 /* StatsCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D468F75E23DB564D003BFA45 /* StatsCircleView.swift */; };
+		D468F76123DB5815003BFA45 /* StatsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D468F76023DB5815003BFA45 /* StatsTableViewCell.swift */; };
 		D49A904223CF2B6D005384D3 /* EditTimerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49A904123CF2B6D005384D3 /* EditTimerDataSource.swift */; };
 		D49A904623CF2C00005384D3 /* APIEditTimerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49A904523CF2C00005384D3 /* APIEditTimerDataSource.swift */; };
 		D4C733F723C0E39400A746B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C733F623C0E39400A746B5 /* AppDelegate.swift */; };
@@ -80,6 +85,11 @@
 		D451930723CC75AE0074D08E /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		D451930923CCBCB20074D08E /* EditTimerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimerVC.swift; sourceTree = "<group>"; };
 		D462FBD623D1B64700BC7138 /* DayCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCircleView.swift; sourceTree = "<group>"; };
+		D468F75323DB4B41003BFA45 /* StatsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsVC.swift; sourceTree = "<group>"; };
+		D468F75523DB501B003BFA45 /* StatsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDataSource.swift; sourceTree = "<group>"; };
+		D468F75823DB5114003BFA45 /* APIStatsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStatsDataSource.swift; sourceTree = "<group>"; };
+		D468F75E23DB564D003BFA45 /* StatsCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCircleView.swift; sourceTree = "<group>"; };
+		D468F76023DB5815003BFA45 /* StatsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTableViewCell.swift; sourceTree = "<group>"; };
 		D49A904123CF2B6D005384D3 /* EditTimerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimerDataSource.swift; sourceTree = "<group>"; };
 		D49A904523CF2C00005384D3 /* APIEditTimerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEditTimerDataSource.swift; sourceTree = "<group>"; };
 		D4C733F323C0E39400A746B5 /* MyTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +212,50 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		D468F75723DB50E3003BFA45 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				D468F75823DB5114003BFA45 /* APIStatsDataSource.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
+		D468F75A23DB5607003BFA45 /* TimersVC */ = {
+			isa = PBXGroup;
+			children = (
+				D4C733FA23C0E39400A746B5 /* TimersViewController.swift */,
+				D4D844B723C7A91700533701 /* TimersTableViewCell.swift */,
+				D462FBD623D1B64700BC7138 /* DayCircleView.swift */,
+			);
+			path = TimersVC;
+			sourceTree = "<group>";
+		};
+		D468F75B23DB561F003BFA45 /* EditTimerVC */ = {
+			isa = PBXGroup;
+			children = (
+				D451930923CCBCB20074D08E /* EditTimerVC.swift */,
+			);
+			path = EditTimerVC;
+			sourceTree = "<group>";
+		};
+		D468F75C23DB562C003BFA45 /* EditPopup */ = {
+			isa = PBXGroup;
+			children = (
+				D43EB7F423D6062D00C2CA86 /* EditPopup.swift */,
+			);
+			path = EditPopup;
+			sourceTree = "<group>";
+		};
+		D468F75D23DB5637003BFA45 /* StatsVC */ = {
+			isa = PBXGroup;
+			children = (
+				D468F75323DB4B41003BFA45 /* StatsVC.swift */,
+				D468F76023DB5815003BFA45 /* StatsTableViewCell.swift */,
+				D468F75E23DB564D003BFA45 /* StatsCircleView.swift */,
+			);
+			path = StatsVC;
+			sourceTree = "<group>";
+		};
 		D4C733EA23C0E39400A746B5 = {
 			isa = PBXGroup;
 			children = (
@@ -279,11 +333,10 @@
 		D4C7343523C3A42700A746B5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				D4C733FA23C0E39400A746B5 /* TimersViewController.swift */,
-				D4D844B723C7A91700533701 /* TimersTableViewCell.swift */,
-				D462FBD623D1B64700BC7138 /* DayCircleView.swift */,
-				D451930923CCBCB20074D08E /* EditTimerVC.swift */,
-				D43EB7F423D6062D00C2CA86 /* EditPopup.swift */,
+				D468F75A23DB5607003BFA45 /* TimersVC */,
+				D468F75B23DB561F003BFA45 /* EditTimerVC */,
+				D468F75C23DB562C003BFA45 /* EditPopup */,
+				D468F75D23DB5637003BFA45 /* StatsVC */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -336,6 +389,7 @@
 				D4C7344E23C5038200A746B5 /* TimersDataSource.swift */,
 				D49A904123CF2B6D005384D3 /* EditTimerDataSource.swift */,
 				D412391523D66123003C58F9 /* EditPopupDataSource.swift */,
+				D468F75523DB501B003BFA45 /* StatsDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -356,6 +410,7 @@
 				37EFDE3E23D9ADCD0028E214 /* Timer */,
 				37EFDE4023D9AE110028E214 /* EditTimer */,
 				D421238523DA1531009350F6 /* EditPopup */,
+				D468F75723DB50E3003BFA45 /* Stats */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -600,6 +655,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4C7344F23C5038200A746B5 /* TimersDataSource.swift in Sources */,
+				D468F76123DB5815003BFA45 /* StatsTableViewCell.swift in Sources */,
 				D4C733FB23C0E39400A746B5 /* TimersViewController.swift in Sources */,
 				D49A904623CF2C00005384D3 /* APIEditTimerDataSource.swift in Sources */,
 				D43EB7F723D60B3D00C2CA86 /* Date+Extensions.swift in Sources */,
@@ -610,14 +666,18 @@
 				D462FBD723D1B64700BC7138 /* DayCircleView.swift in Sources */,
 				D4C7344923C501A400A746B5 /* Timer.swift in Sources */,
 				D43EB7ED23D5DB5A00C2CA86 /* CGPoint+Extensions.swift in Sources */,
+				D468F75923DB5114003BFA45 /* APIStatsDataSource.swift in Sources */,
 				D4304F9F23C71F330096018E /* Coordinator.swift in Sources */,
 				D43EB7F523D6062D00C2CA86 /* EditPopup.swift in Sources */,
 				D4D844B823C7A91700533701 /* TimersTableViewCell.swift in Sources */,
 				D49A904223CF2B6D005384D3 /* EditTimerDataSource.swift in Sources */,
 				D4C7342B23C0E4AD00A746B5 /* TimerRealm.swift in Sources */,
+				D468F75423DB4B41003BFA45 /* StatsVC.swift in Sources */,
 				D4EC98BA23C899F8003EC3C0 /* TimerColor.swift in Sources */,
+				D468F75F23DB564D003BFA45 /* StatsCircleView.swift in Sources */,
 				D4C7344D23C502EB00A746B5 /* APITimersDataSource.swift in Sources */,
 				D451930A23CCBCB20074D08E /* EditTimerVC.swift in Sources */,
+				D468F75623DB501B003BFA45 /* StatsDataSource.swift in Sources */,
 				D412391823D6613A003C58F9 /* APIEditPopupDataSource.swift in Sources */,
 				D451930823CC75AE0074D08E /* Int+Extensions.swift in Sources */,
 				D4C733F923C0E39400A746B5 /* SceneDelegate.swift in Sources */,
