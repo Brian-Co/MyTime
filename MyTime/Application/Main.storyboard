@@ -528,19 +528,19 @@
                                 <rect key="frame" x="67" y="64" width="280" height="280"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="jpI-Fe-GWO" secondAttribute="height" multiplier="1:1" id="q3p-ca-rsb"/>
+                                    <constraint firstAttribute="height" constant="280" id="Kmb-Sh-JjB"/>
+                                    <constraint firstAttribute="width" constant="280" id="b3V-1W-XGs"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="G69-ml-Dux" firstAttribute="trailing" secondItem="jpI-Fe-GWO" secondAttribute="trailing" constant="67" id="ALK-LC-nsP"/>
-                            <constraint firstItem="G69-ml-Dux" firstAttribute="trailing" secondItem="vBy-cZ-Dmz" secondAttribute="trailing" id="HEx-6B-g3o"/>
-                            <constraint firstItem="vBy-cZ-Dmz" firstAttribute="leading" secondItem="G69-ml-Dux" secondAttribute="leading" id="W8e-WJ-FlF"/>
-                            <constraint firstItem="jpI-Fe-GWO" firstAttribute="leading" secondItem="G69-ml-Dux" secondAttribute="leading" constant="67" id="WfI-Qr-UR3"/>
-                            <constraint firstItem="vBy-cZ-Dmz" firstAttribute="top" secondItem="jpI-Fe-GWO" secondAttribute="bottom" constant="10" id="igd-ie-bPs"/>
-                            <constraint firstItem="vBy-cZ-Dmz" firstAttribute="bottom" secondItem="G69-ml-Dux" secondAttribute="bottom" constant="34" id="lVb-Dq-PbQ"/>
-                            <constraint firstItem="jpI-Fe-GWO" firstAttribute="top" secondItem="G69-ml-Dux" secondAttribute="top" constant="20" id="y74-uc-H4b"/>
+                            <constraint firstItem="G69-ml-Dux" firstAttribute="trailing" secondItem="vBy-cZ-Dmz" secondAttribute="trailing" id="7K2-iD-drf"/>
+                            <constraint firstItem="jpI-Fe-GWO" firstAttribute="centerX" secondItem="G69-ml-Dux" secondAttribute="centerX" id="Vrp-wp-5eo"/>
+                            <constraint firstItem="vBy-cZ-Dmz" firstAttribute="top" secondItem="jpI-Fe-GWO" secondAttribute="bottom" constant="10" id="YmX-v7-ttq"/>
+                            <constraint firstItem="vBy-cZ-Dmz" firstAttribute="bottom" secondItem="G69-ml-Dux" secondAttribute="bottom" constant="34" id="bMx-yb-0d9"/>
+                            <constraint firstItem="vBy-cZ-Dmz" firstAttribute="leading" secondItem="G69-ml-Dux" secondAttribute="leading" id="vR6-ZG-bdL"/>
+                            <constraint firstItem="jpI-Fe-GWO" firstAttribute="top" secondItem="G69-ml-Dux" secondAttribute="top" constant="20" id="zpS-GK-FCg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="G69-ml-Dux"/>
                     </view>

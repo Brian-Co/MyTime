@@ -18,7 +18,7 @@ class StatsCircleView: UIView {
     
     private lazy var backgroundLayer: CAShapeLayer = {
         let backgroundLayer = CAShapeLayer()
-        backgroundLayer.lineWidth = 50
+        backgroundLayer.lineWidth = 60
         backgroundLayer.strokeColor = UIColor.quaternarySystemFill.cgColor
         backgroundLayer.fillColor = UIColor.clear.cgColor
         backgroundLayer.frame = bounds
@@ -75,7 +75,7 @@ class StatsCircleView: UIView {
     func createStatLayer(_ startAngle: Double, _ endAngle: Double, _ color: String) {
         
         let timerIntervalLayer = CAShapeLayer()
-        timerIntervalLayer.lineWidth = 50
+        timerIntervalLayer.lineWidth = 60
         timerIntervalLayer.strokeColor = TimerColor(rawValue: color)?.create.cgColor
         timerIntervalLayer.fillColor = UIColor.clear.cgColor
         timerIntervalLayer.frame = bounds
