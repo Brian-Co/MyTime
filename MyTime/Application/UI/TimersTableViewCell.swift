@@ -25,6 +25,7 @@ class TimersTableViewCell: UITableViewCell {
     var totalDuration = 0
     var elapsedTime = 0
     var scheduledTimer = Timer()
+    var chosenDate = Date()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,9 +44,10 @@ class TimersTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(timer: TimerX, updateTimerBlock: UpdateTimerBlock?, updateCircleViewBlock: UpdateCircleViewBlock?) {
+    func configure(timer: TimerX, chosenDate: Date, updateTimerBlock: UpdateTimerBlock?, updateCircleViewBlock: UpdateCircleViewBlock?) {
         
         self.timer = timer
+        self.chosenDate = chosenDate
         self.saveTimer = updateTimerBlock
         self.updateCircleView = updateCircleViewBlock
         
@@ -55,7 +57,7 @@ class TimersTableViewCell: UITableViewCell {
         elapsedTime = 0
         scheduleTimer()
 
-        if timer.isOn {
+        if timer.isOn && Calendar.current.isDate(timer.timerIntervals.last!.startingPoint, inSameDayAs: chosenDate) {
             let startingPoint = self.timer?.timerIntervals.last!.startingPoint
             let elapsedTime = Date().timeIntervalSince(startingPoint!)
             self.elapsedTime = Int(elapsedTime)
@@ -105,7 +107,7 @@ class TimersTableViewCell: UITableViewCell {
         if !(timer?.timerIntervals.isEmpty ?? true) {
             var totalDuration = 0
             for timerInterval in timer!.timerIntervals {
-                if let endingPoint = timerInterval.endingPoint {
+                if let endingPoint = timerInterval.endingPoint, Calendar.current.isDate(timerInterval.startingPoint, inSameDayAs: chosenDate) {
                     let timerIntervalDuration = endingPoint.timeIntervalSince(timerInterval.startingPoint)
                     totalDuration += Int(timerIntervalDuration)
                 }

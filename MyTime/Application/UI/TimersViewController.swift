@@ -21,6 +21,13 @@ class TimersViewController: UIViewController {
     private var didSelectTimer: DidSelectTimerBlock?
     private var didSelectInterval: DidSelectIntervalBlock?
     
+    var chosenDate = Date() {
+        didSet {
+            updateUI()
+        }
+    }
+    let dateFormatter = DateFormatter()
+    
     convenience init(dataSource: TimersDataSource) {
         self.init()
         self.dataSource = dataSource
@@ -38,12 +45,13 @@ class TimersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let date = Date()
-        let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .full
         dateFormatter.timeStyle = .none
         dateFormatter.locale = Locale(identifier: "fr_FR")
-        self.navigationItem.title = dateFormatter.string(from: date)
+        
+        let previousDayButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(getPreviousDay))
+        let nextDayButton = UIBarButtonItem(image: UIImage(systemName: "chevron.right"), style: .plain, target: self, action: #selector(getNextDay))
+        self.navigationItem.leftBarButtonItems  = [previousDayButton, nextDayButton]
         
         timersTableView.delegate = self
         timersTableView.dataSource = self
@@ -62,8 +70,9 @@ class TimersViewController: UIViewController {
     
     func updateUI() {
         
+        self.navigationItem.title = dateFormatter.string(from: chosenDate)
         timersTableView.reloadData()
-        dayCircleView.update(with: dataSource.content)
+        dayCircleView.update(with: dataSource.content, chosenDate)
     }
     
     func dataSourceStateChanged(_ state: DataSourceState) {
@@ -74,6 +83,14 @@ class TimersViewController: UIViewController {
         default:
             break
         }
+    }
+    
+    @objc func getPreviousDay() {
+        chosenDate = Calendar.current.date(byAdding: .day, value: -1, to: chosenDate) ?? Date()
+    }
+    
+    @objc func getNextDay() {
+        chosenDate = Calendar.current.date(byAdding: .day, value: 1, to: chosenDate) ?? Date()
     }
     
 }
@@ -91,7 +108,7 @@ extension TimersViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TimersTableViewCell
         
         if indexPath.row != dataSource.content.count {
-            cell.configure(timer: dataSource.content[indexPath.row], updateTimerBlock: { [weak self] timer in
+            cell.configure(timer: dataSource.content[indexPath.row], chosenDate: chosenDate, updateTimerBlock: { [weak self] timer in
                 self?.dataSource.updateTimer(timer)
                 }, updateCircleViewBlock: { [weak self] in
                 self?.dayCircleView.updateActiveLayer()

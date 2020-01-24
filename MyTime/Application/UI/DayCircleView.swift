@@ -19,6 +19,7 @@ class DayCircleView: UIView {
             loadLayers()
         }
     }
+    var chosenDate = Date()
     var didSelectInterval: ((_ timer: TimerX?, _ timerInterval: TimerInterval) -> ())?
     
     private lazy var backgroundLayer: CAShapeLayer = {
@@ -65,7 +66,8 @@ class DayCircleView: UIView {
         self.didSelectInterval = didSelectInterval
     }
     
-    func update(with timers: [TimerX]) {
+    func update(with timers: [TimerX], _ chosenDate: Date) {
+        self.chosenDate = chosenDate
         self.timers = timers
     }
     
@@ -83,16 +85,18 @@ class DayCircleView: UIView {
         
         for timer in timers {
             for timerInterval in timer.timerIntervals {
-                let startAngle = timerInterval.startingPoint.minutesSinceMidnight() / 1440
-                var endAngle: Double = 0
-                var isOn = false
-                if let endingPoint = timerInterval.endingPoint {
-                    endAngle = endingPoint.minutesSinceMidnight() / 1440
-                } else {
-                    isOn = true
-                    endAngle = Date().minutesSinceMidnight() / 1440
+                if Calendar.current.isDate(timerInterval.startingPoint, inSameDayAs: chosenDate) {
+                    let startAngle = timerInterval.startingPoint.minutesSinceMidnight() / 1440
+                    var endAngle: Double = 0
+                    var isOn = false
+                    if let endingPoint = timerInterval.endingPoint {
+                        endAngle = endingPoint.minutesSinceMidnight() / 1440
+                    } else {
+                        isOn = true
+                        endAngle = Date().minutesSinceMidnight() / 1440
+                    }
+                    createTimerIntervalLayer(startAngle, endAngle, timer.color, isOn)
                 }
-                createTimerIntervalLayer(startAngle, endAngle, timer.color, isOn)
             }
         }
     }
@@ -243,7 +247,7 @@ class DayCircleView: UIView {
         let startingPointMinutes = angle * 1440
         let hours = Int(startingPointMinutes / 60)
         let minutes = Int(startingPointMinutes) % 60
-        let date = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: Date())!
+        let date = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: chosenDate)!
         
         let newInterval = TimerInterval(startingPoint: date, endingPoint: nil)
         didSelectInterval?(nil, newInterval)

@@ -70,6 +70,10 @@ class EditPopup: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        tableView.frame = popup.bounds
+    }
+    
     func initDataSource() {
         
         dataSource.dismissVC = { [weak self] in self?.dismissPopup() }
@@ -133,7 +137,6 @@ class EditPopup: UIViewController {
     
     func configureTableView() {
                 
-        tableView.frame = popup.bounds
         tableView.layer.cornerRadius = 10
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         popup.addSubview(tableView)
