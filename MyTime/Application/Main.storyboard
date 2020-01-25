@@ -454,7 +454,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vBy-cZ-Dmz">
-                                <rect key="frame" x="0.0" y="354" width="414" height="542"/>
+                                <rect key="frame" x="0.0" y="309" width="414" height="587"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="100" id="boO-DS-RAx" customClass="StatsTableViewCell" customModule="MyTime" customModuleProvider="target">
@@ -525,11 +525,11 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpI-Fe-GWO" customClass="StatsCircleView" customModule="MyTime" customModuleProvider="target">
-                                <rect key="frame" x="67" y="64" width="280" height="280"/>
+                                <rect key="frame" x="92" y="69" width="230" height="230"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="280" id="Kmb-Sh-JjB"/>
-                                    <constraint firstAttribute="width" constant="280" id="b3V-1W-XGs"/>
+                                    <constraint firstAttribute="width" constant="230" id="Foa-j7-GRM"/>
+                                    <constraint firstAttribute="height" constant="230" id="Qs3-PE-In0"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -540,7 +540,7 @@
                             <constraint firstItem="vBy-cZ-Dmz" firstAttribute="top" secondItem="jpI-Fe-GWO" secondAttribute="bottom" constant="10" id="YmX-v7-ttq"/>
                             <constraint firstItem="vBy-cZ-Dmz" firstAttribute="bottom" secondItem="G69-ml-Dux" secondAttribute="bottom" constant="34" id="bMx-yb-0d9"/>
                             <constraint firstItem="vBy-cZ-Dmz" firstAttribute="leading" secondItem="G69-ml-Dux" secondAttribute="leading" id="vR6-ZG-bdL"/>
-                            <constraint firstItem="jpI-Fe-GWO" firstAttribute="top" secondItem="G69-ml-Dux" secondAttribute="top" constant="20" id="zpS-GK-FCg"/>
+                            <constraint firstItem="jpI-Fe-GWO" firstAttribute="top" secondItem="G69-ml-Dux" secondAttribute="top" constant="25" id="zpS-GK-FCg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="G69-ml-Dux"/>
                     </view>

@@ -20,6 +20,7 @@ class APITimersDataSource: TimersDataSource {
     var observer: NotificationToken?
     
     func fetchData() {
+//        print(Realm.Configuration.defaultConfiguration.fileURL)
         
         observer = realm.objects(TimerRealm.self).observe({ changes in
             let timers = self.realm.objects(TimerRealm.self)

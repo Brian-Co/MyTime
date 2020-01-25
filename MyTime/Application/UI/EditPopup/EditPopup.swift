@@ -149,26 +149,36 @@ extension EditPopup: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.timers.count
+        return dataSource.timers.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        let timer = dataSource.timers[indexPath.row]
-        cell.textLabel?.text = timer.name
-        cell.textLabel?.textColor = .white
-        cell.backgroundColor = TimerColor(rawValue: timer.color)?.create
-        
+        if indexPath.row == 0 {
+            cell.textLabel?.text = "Choose timer"
+            cell.textLabel?.font = .boldSystemFont(ofSize: 17)
+            cell.textLabel?.textAlignment = .center
+            cell.backgroundColor = .secondarySystemBackground
+        } else {
+            let timer = dataSource.timers[indexPath.row - 1]
+            cell.textLabel?.text = timer.name
+            cell.textLabel?.textColor = .white
+            cell.backgroundColor = TimerColor(rawValue: timer.color)?.create
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        dataSource.timer = dataSource.timers[indexPath.row]
-        configureUI()
-        tableView.isHidden = true
+        if indexPath.row == 0 {
+            tableView.deselectRow(at: indexPath, animated: true)
+        } else {
+            dataSource.timer = dataSource.timers[indexPath.row - 1]
+            configureUI()
+            tableView.isHidden = true
+        }
     }
     
     

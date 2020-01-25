@@ -59,16 +59,18 @@ class StatsCircleView: UIView {
         for timer in timers {
             
             let timerTotalDuration = getTotalDuration(for: timer)
-            let timerPercentage = timerTotalDuration / timersTotalDuration
-            let startAngle = previousTimerEndAngle + 0.003
-            var endAngle: Double = 0
-            if previousTimerEndAngle + timerPercentage >= 1 && timerTotalDuration > 0 {
-                endAngle = 1
-            } else {
-                endAngle = startAngle + timerPercentage
-                previousTimerEndAngle = endAngle
+            if timerTotalDuration > 0 {
+                let timerPercentage = timerTotalDuration / timersTotalDuration
+                let startAngle = previousTimerEndAngle + 0.003
+                var endAngle: Double = 0
+                if previousTimerEndAngle + timerPercentage >= 1 {
+                    endAngle = 1
+                } else {
+                    endAngle = startAngle + timerPercentage
+                    previousTimerEndAngle = endAngle
+                }
+                createStatLayer(startAngle, endAngle, timer.color)
             }
-            createStatLayer(startAngle, endAngle, timer.color)
         }
     }
     

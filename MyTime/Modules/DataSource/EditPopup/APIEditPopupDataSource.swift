@@ -71,12 +71,9 @@ class APIEditPopupDataSource: EditPopupDataSource {
         let timerToUpdate = realm.objects(TimerRealm.self).filter("name = '\(timer!.name)'").first
         let timerIntervalRealm = TimerIntervalRealm(value: [timerInterval.startingPoint, timerInterval.endingPoint!])
         
-        for timer in timers {
-            if timer.isOn {
-                let timerOn = realm.objects(TimerRealm.self).filter("name = '\(timer.name)'").first
-                try! realm.write {
-                    timerOn?.timerIntervals.last?.endingPoint = Date()
-                }
+        if timer!.isOn {
+            try! realm.write {
+                timerToUpdate?.timerIntervals.last?.endingPoint = Date()
             }
         }
         
