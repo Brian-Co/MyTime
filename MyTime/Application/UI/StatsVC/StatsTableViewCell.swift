@@ -18,6 +18,7 @@ class StatsTableViewCell: UITableViewCell {
     
     var timers: [TimerX] = []
     var timer: TimerX!
+    var period: Period!
     var totalDuration = 0
     
     override func awakeFromNib() {
@@ -33,10 +34,11 @@ class StatsTableViewCell: UITableViewCell {
     }
 
     
-    func configure(with timer: TimerX, _ timers: [TimerX]) {
+    func configure(with timer: TimerX, _ timers: [TimerX], period: Period) {
         
         self.timer = timer
         self.timers = timers
+        self.period = period
         
         timerName.text = timer.name
         timerColorView.backgroundColor = TimerColor(rawValue: timer.color)?.create
@@ -54,11 +56,17 @@ class StatsTableViewCell: UITableViewCell {
         let totalDuration = timer.timerIntervals.reduce(0, { result, timerInterval in
             
             var totalDuration = result
-            if let endingPoint = timerInterval.endingPoint {
-                let timerIntervalDuration = endingPoint.timeIntervalSince(timerInterval.startingPoint)
-                totalDuration += Int(timerIntervalDuration)
+            
+            if !isTimerIntervalWithinPeriod(timerInterval) {
+                return totalDuration
+            } else {
+                
+                if let endingPoint = timerInterval.endingPoint {
+                    let timerIntervalDuration = endingPoint.timeIntervalSince(timerInterval.startingPoint)
+                    totalDuration += Int(timerIntervalDuration)
+                }
+                return totalDuration
             }
-            return totalDuration
         })
         
         return totalDuration
@@ -72,6 +80,38 @@ class StatsTableViewCell: UITableViewCell {
         }
         
         return totalDuration
+    }
+    
+    func isTimerIntervalWithinPeriod(_ timerInterval: TimerInterval) -> Bool {
+        
+        switch period {
+        case .today:
+            if Calendar.current.isDate(timerInterval.startingPoint, inSameDayAs: Date()) {
+                return true
+            }
+            return false
+        case .yesterday:
+            let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
+            if Calendar.current.isDate(timerInterval.startingPoint, inSameDayAs: yesterday) {
+                return true
+            }
+            return false
+        case .last7Days:
+            let last7Days = Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date()
+            if timerInterval.startingPoint.isBetween(last7Days, and: Date()) {
+                return true
+            }
+            return false
+        case .last30Days:
+            let last30Days = Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date()
+            if timerInterval.startingPoint.isBetween(last30Days, and: Date()) {
+                return true
+            }
+            return false
+        default:
+            return true
+        }
+        
     }
     
     
