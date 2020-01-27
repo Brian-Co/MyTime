@@ -51,17 +51,17 @@ class StatsTableViewCell: UITableViewCell {
     
     func getTotalDuration(for timer: TimerX) -> Int {
         
-        if !timer.timerIntervals.isEmpty {
-            var totalDuration = 0
-            for timerInterval in timer.timerIntervals {
-                if let endingPoint = timerInterval.endingPoint {
-                    let timerIntervalDuration = endingPoint.timeIntervalSince(timerInterval.startingPoint)
-                    totalDuration += Int(timerIntervalDuration)
-                }
+        let totalDuration = timer.timerIntervals.reduce(0, { result, timerInterval in
+            
+            var totalDuration = result
+            if let endingPoint = timerInterval.endingPoint {
+                let timerIntervalDuration = endingPoint.timeIntervalSince(timerInterval.startingPoint)
+                totalDuration += Int(timerIntervalDuration)
             }
             return totalDuration
-        }
-        return 0
+        })
+        
+        return totalDuration
     }
     
     func getAllTimersTotalDuration() -> Int {

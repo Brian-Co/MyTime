@@ -104,18 +104,17 @@ class TimersTableViewCell: UITableViewCell {
     
     func getTimerTotalDuration() -> Int {
         
-        if !(timer?.timerIntervals.isEmpty ?? true) {
-            var totalDuration = 0
-            for timerInterval in timer!.timerIntervals {
-                if let endingPoint = timerInterval.endingPoint, Calendar.current.isDate(timerInterval.startingPoint, inSameDayAs: chosenDate) {
-                    let timerIntervalDuration = endingPoint.timeIntervalSince(timerInterval.startingPoint)
-                    totalDuration += Int(timerIntervalDuration)
-                }
+        let totalDuration = timer?.timerIntervals.reduce(0, { result, timerInterval in
+            
+            var totalDuration = result
+            if let endingPoint = timerInterval.endingPoint, Calendar.current.isDate(timerInterval.startingPoint, inSameDayAs: chosenDate) {
+                let timerIntervalDuration = endingPoint.timeIntervalSince(timerInterval.startingPoint)
+                totalDuration! += Int(timerIntervalDuration)
             }
-            self.totalDuration = totalDuration
             return totalDuration
-        }
-        return 0
+        })
+        
+        return totalDuration ?? 0
     }
     
     func updateTimer() {

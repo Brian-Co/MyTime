@@ -105,17 +105,17 @@ class StatsCircleView: UIView {
     
     func getTotalDuration(for timer: TimerX) -> Double {
         
-        if !timer.timerIntervals.isEmpty {
-            var totalDuration: Double = 0
-            for timerInterval in timer.timerIntervals {
-                if let endingPoint = timerInterval.endingPoint {
-                    let timerIntervalDuration = endingPoint.timeIntervalSince(timerInterval.startingPoint)
-                    totalDuration += timerIntervalDuration
-                }
+        let totalDuration = timer.timerIntervals.reduce(Double(0), { result, timerInterval in
+            
+            var totalDuration = result
+            if let endingPoint = timerInterval.endingPoint {
+                let timerIntervalDuration = endingPoint.timeIntervalSince(timerInterval.startingPoint)
+                totalDuration += timerIntervalDuration
             }
             return totalDuration
-        }
-        return 0
+        })
+        
+        return totalDuration
     }
     
 }
