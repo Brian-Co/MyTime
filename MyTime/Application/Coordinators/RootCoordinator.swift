@@ -20,8 +20,8 @@ final class RootCoordinator: Coordinator {
     }
     
     func start() {
-        let timerNavigationCoordinator = TimersNavigationCoordinator(in: window, parent: self)
-        addChild(coordinator: timerNavigationCoordinator)
+        let mainTabBarCoordinator = MainTabBarCoordinator(in: window, parent: self)
+        addChild(coordinator: mainTabBarCoordinator)
     }
 
 }

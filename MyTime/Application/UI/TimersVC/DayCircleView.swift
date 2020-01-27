@@ -12,7 +12,7 @@ import UIKit
 
 class DayCircleView: UIView {
     
-    typealias DidSelectIntervalBlock = ((_ timer: TimerX?, _ timerInterval: TimerInterval) -> ())
+    typealias DidSelectIntervalBlock = ((_ timer: TimerX?, _ timerInterval: TimerInterval, _ sender: UIView) -> ())
         
     var timers: [TimerX] = [] {
         didSet {
@@ -20,7 +20,7 @@ class DayCircleView: UIView {
         }
     }
     var chosenDate = Date()
-    var didSelectInterval: ((_ timer: TimerX?, _ timerInterval: TimerInterval) -> ())?
+    var didSelectInterval: ((_ timer: TimerX?, _ timerInterval: TimerInterval, _ sender: UIView) -> ())?
     
     private lazy var backgroundLayer: CAShapeLayer = {
         let backgroundLayer = CAShapeLayer()
@@ -235,7 +235,7 @@ class DayCircleView: UIView {
                     let minutesEndingPoint = String(format: "%.6f", endingPoint.minutesSinceMidnight())
                     
                     if minutesStartingPoint == startingPointMinutes && minutesEndingPoint == endingPointMinutes {
-                        didSelectInterval?(timer, timerInterval)
+                        didSelectInterval?(timer, timerInterval, self)
                     }
                 }
             }
@@ -250,7 +250,7 @@ class DayCircleView: UIView {
         let date = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: chosenDate)!
         
         let newInterval = TimerInterval(startingPoint: date, endingPoint: nil)
-        didSelectInterval?(nil, newInterval)
+        didSelectInterval?(nil, newInterval, self)
     }
     
 }

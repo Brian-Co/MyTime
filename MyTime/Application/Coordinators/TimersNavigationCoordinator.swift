@@ -11,12 +11,12 @@ import  UIKit
 
 final class TimersNavigationCoordinator: Coordinator {
     
-    var parent: Coordinator?
+    weak var parent: Coordinator?
     var childCoordinators: [Coordinator] = []
     weak var window: UIWindow?
     weak var navigationController: UINavigationController?
     
-    init(in window: UIWindow, parent: Coordinator) {
+    init(in window: UIWindow?, parent: Coordinator) {
         self.window = window
         self.parent = parent
         start()
@@ -25,17 +25,12 @@ final class TimersNavigationCoordinator: Coordinator {
     func start() {
         let timersViewController = TimersViewController.controller(dataSource: APITimersDataSource(), didSelectTimer: { [weak self] selectedTimer in
             self?.didSelect(timer: selectedTimer)
-        }, didSelectInterval: { [weak self] timer, timerInterval in
-            self?.didSelectInterval(timer, timerInterval)
-            }, didSelectStatsBlock: { [weak self] in
-                self?.didSelectStats()
         })
         
         let navigationController = UINavigationController(rootViewController: timersViewController)
+        navigationController.tabBarItem = UITabBarItem(title: "MyTime", image: UIImage(systemName: "timer"), tag: 0)
         self.navigationController = navigationController
         
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
     }
     
     func didSelect(timer: TimerX?) {
@@ -47,19 +42,6 @@ final class TimersNavigationCoordinator: Coordinator {
     
     func editTimerVCDidDimsiss() {
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    func didSelectInterval(_ timer: TimerX?, _ timerInterval: TimerInterval) {
-        let editPopup = EditPopup.controller(dataSource: APIEditPopupDataSource(timer: timer, timerInterval: timerInterval))
-        editPopup.modalPresentationStyle = .overCurrentContext
-        editPopup.modalTransitionStyle = .crossDissolve
-        
-        self.navigationController?.present(editPopup, animated: true, completion: nil)
-    }
-    
-    func didSelectStats() {
-        let statsVC = StatsVC.controller(dataSource: APIStatsDataSource())
-        self.navigationController?.pushViewController(statsVC, animated: true)
     }
 
 }

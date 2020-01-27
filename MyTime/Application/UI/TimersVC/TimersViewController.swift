@@ -11,16 +11,12 @@ import UIKit
 class TimersViewController: UIViewController {
     
     typealias DidSelectTimerBlock = ((_ timer: TimerX?) -> ())
-    typealias DidSelectIntervalBlock = ((_ timer: TimerX?, _ timerInterval: TimerInterval) -> ())
-    typealias DidSelectStatsBlock = (() -> ())
     
     @IBOutlet weak var timersTableView: UITableView!
     @IBOutlet weak var dayCircleView: DayCircleView!
     
     private var dataSource: TimersDataSource!
     private var didSelectTimer: DidSelectTimerBlock?
-    private var didSelectInterval: DidSelectIntervalBlock?
-    private var didSelectStats: DidSelectStatsBlock?
     
     var chosenDate = Date() {
         didSet {
@@ -34,13 +30,11 @@ class TimersViewController: UIViewController {
         self.dataSource = dataSource
     }
     
-    class func controller(dataSource: TimersDataSource, didSelectTimer: DidSelectTimerBlock?, didSelectInterval: DidSelectIntervalBlock?, didSelectStatsBlock: DidSelectStatsBlock?) -> UIViewController {
+    class func controller(dataSource: TimersDataSource, didSelectTimer: DidSelectTimerBlock?) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "TimersViewController") as! TimersViewController
         controller.dataSource = dataSource
         controller.didSelectTimer = didSelectTimer
-        controller.didSelectInterval = didSelectInterval
-        controller.didSelectStats = didSelectStatsBlock
         return controller
     }
     
@@ -54,14 +48,13 @@ class TimersViewController: UIViewController {
         let previousDayButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(getPreviousDay))
         let nextDayButton = UIBarButtonItem(image: UIImage(systemName: "chevron.right"), style: .plain, target: self, action: #selector(getNextDay))
         self.navigationItem.leftBarButtonItems  = [previousDayButton, nextDayButton]
-        
-        let statsButton = UIBarButtonItem(image: UIImage(systemName: "chart.pie"), style: .plain, target: self, action: #selector(presentStatsVC))
-        self.navigationItem.rightBarButtonItem  = statsButton
+        self.navigationItem.leftBarButtonItems![1].isEnabled = false
         
         timersTableView.delegate = self
         timersTableView.dataSource = self
         
-        dayCircleView.configure(didSelectInterval: didSelectInterval)
+        dayCircleView.configure(didSelectInterval: { [weak self] timer, timerInterval, sender in
+            self?.didSelectInterval(timer, timerInterval, sender) })
         
         initDataSource()
     }
@@ -92,14 +85,20 @@ class TimersViewController: UIViewController {
     
     @objc func getPreviousDay() {
         chosenDate = Calendar.current.date(byAdding: .day, value: -1, to: chosenDate) ?? Date()
+        updateNextDayButton()
     }
     
     @objc func getNextDay() {
         chosenDate = Calendar.current.date(byAdding: .day, value: 1, to: chosenDate) ?? Date()
+        updateNextDayButton()
     }
     
-    @objc func presentStatsVC() {
-        didSelectStats?()
+    func updateNextDayButton() {
+        if Calendar.current.isDate(chosenDate, inSameDayAs: Date()) {
+            self.navigationItem.leftBarButtonItems![1].isEnabled = false
+        } else {
+            self.navigationItem.leftBarButtonItems![1].isEnabled = true
+        }
     }
     
 }
@@ -166,3 +165,22 @@ extension TimersViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+extension TimersViewController: UIPopoverPresentationControllerDelegate {
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    func didSelectInterval(_ timer: TimerX?, _ timerInterval: TimerInterval, _ sender: UIView) {
+        let editPopup = EditPopup.controller(dataSource: APIEditPopupDataSource(timer: timer, timerInterval: timerInterval))
+        editPopup.modalPresentationStyle = .popover
+        let popover = editPopup.popoverPresentationController
+        editPopup.preferredContentSize = CGSize(width: 200, height: 300)
+        popover?.delegate = self
+        popover?.sourceView = sender
+        popover?.sourceRect = sender.bounds
+        
+        self.present(editPopup, animated: true)
+    }
+    
+}

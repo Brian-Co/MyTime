@@ -27,6 +27,9 @@
 		D468F75923DB5114003BFA45 /* APIStatsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D468F75823DB5114003BFA45 /* APIStatsDataSource.swift */; };
 		D468F75F23DB564D003BFA45 /* StatsCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D468F75E23DB564D003BFA45 /* StatsCircleView.swift */; };
 		D468F76123DB5815003BFA45 /* StatsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D468F76023DB5815003BFA45 /* StatsTableViewCell.swift */; };
+		D47BBF0A23DF2D99001523B3 /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47BBF0923DF2D98001523B3 /* MainTabBarCoordinator.swift */; };
+		D47BBF0E23DF332F001523B3 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47BBF0D23DF332F001523B3 /* MainTabBarController.swift */; };
+		D47BBF1023DF39CE001523B3 /* StatsNavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47BBF0F23DF39CE001523B3 /* StatsNavigationCoordinator.swift */; };
 		D49A904223CF2B6D005384D3 /* EditTimerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49A904123CF2B6D005384D3 /* EditTimerDataSource.swift */; };
 		D49A904623CF2C00005384D3 /* APIEditTimerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49A904523CF2C00005384D3 /* APIEditTimerDataSource.swift */; };
 		D4C733F723C0E39400A746B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C733F623C0E39400A746B5 /* AppDelegate.swift */; };
@@ -90,6 +93,9 @@
 		D468F75823DB5114003BFA45 /* APIStatsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStatsDataSource.swift; sourceTree = "<group>"; };
 		D468F75E23DB564D003BFA45 /* StatsCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCircleView.swift; sourceTree = "<group>"; };
 		D468F76023DB5815003BFA45 /* StatsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTableViewCell.swift; sourceTree = "<group>"; };
+		D47BBF0923DF2D98001523B3 /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
+		D47BBF0D23DF332F001523B3 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		D47BBF0F23DF39CE001523B3 /* StatsNavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsNavigationCoordinator.swift; sourceTree = "<group>"; };
 		D49A904123CF2B6D005384D3 /* EditTimerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimerDataSource.swift; sourceTree = "<group>"; };
 		D49A904523CF2C00005384D3 /* APIEditTimerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEditTimerDataSource.swift; sourceTree = "<group>"; };
 		D4C733F323C0E39400A746B5 /* MyTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -333,6 +339,7 @@
 		D4C7343523C3A42700A746B5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D47BBF0D23DF332F001523B3 /* MainTabBarController.swift */,
 				D468F75A23DB5607003BFA45 /* TimersVC */,
 				D468F75B23DB561F003BFA45 /* EditTimerVC */,
 				D468F75C23DB562C003BFA45 /* EditPopup */,
@@ -360,7 +367,9 @@
 			children = (
 				D4304F9E23C71F330096018E /* Coordinator.swift */,
 				D4304F9C23C64B530096018E /* RootCoordinator.swift */,
+				D47BBF0923DF2D98001523B3 /* MainTabBarCoordinator.swift */,
 				D4304FA023C74A680096018E /* TimersNavigationCoordinator.swift */,
+				D47BBF0F23DF39CE001523B3 /* StatsNavigationCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -664,6 +673,8 @@
 				D4C733F723C0E39400A746B5 /* AppDelegate.swift in Sources */,
 				37EFDE4423D9AF290028E214 /* CodableForAppModel.swift in Sources */,
 				D462FBD723D1B64700BC7138 /* DayCircleView.swift in Sources */,
+				D47BBF0E23DF332F001523B3 /* MainTabBarController.swift in Sources */,
+				D47BBF0A23DF2D99001523B3 /* MainTabBarCoordinator.swift in Sources */,
 				D4C7344923C501A400A746B5 /* Timer.swift in Sources */,
 				D43EB7ED23D5DB5A00C2CA86 /* CGPoint+Extensions.swift in Sources */,
 				D468F75923DB5114003BFA45 /* APIStatsDataSource.swift in Sources */,
@@ -678,6 +689,7 @@
 				D4C7344D23C502EB00A746B5 /* APITimersDataSource.swift in Sources */,
 				D451930A23CCBCB20074D08E /* EditTimerVC.swift in Sources */,
 				D468F75623DB501B003BFA45 /* StatsDataSource.swift in Sources */,
+				D47BBF1023DF39CE001523B3 /* StatsNavigationCoordinator.swift in Sources */,
 				D412391823D6613A003C58F9 /* APIEditPopupDataSource.swift in Sources */,
 				D451930823CC75AE0074D08E /* Int+Extensions.swift in Sources */,
 				D4C733F923C0E39400A746B5 /* SceneDelegate.swift in Sources */,

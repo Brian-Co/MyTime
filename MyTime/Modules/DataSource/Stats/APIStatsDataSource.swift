@@ -16,13 +16,17 @@ class APIStatsDataSource: StatsDataSource {
     var content: [TimerX] = []
     var contentDidChange: (() -> ())?
     
+    var observer: NotificationToken?
+    
     func fetchData() {
         
         let realm = try! Realm()
-        let timers = realm.objects(TimerRealm.self)
-        self.content = timers.compactMap { $0.toAppModel() }
-        
-        contentDidChange?()
+        observer = realm.objects(TimerRealm.self).observe({ changes in
+            let timers = realm.objects(TimerRealm.self)
+            self.content = timers.compactMap { $0.toAppModel() }
+            
+            self.contentDidChange?()
+        })
     }
     
     
