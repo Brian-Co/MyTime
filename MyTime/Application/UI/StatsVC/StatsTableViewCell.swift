@@ -47,7 +47,11 @@ class StatsTableViewCell: UITableViewCell {
         timerTotalDuration.text = totalDuration.timeString(format: 1)
         
         let percentage = (Double(totalDuration) / Double(getAllTimersTotalDuration())) * 100
-        timerPercentage.text = "\(Int(percentage))%"
+        if percentage > 0 {
+            timerPercentage.text = "\(Int(percentage))%"
+        } else {
+            timerPercentage.text = "0%"
+        }
     }
     
     
