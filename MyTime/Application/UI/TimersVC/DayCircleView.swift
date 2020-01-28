@@ -157,7 +157,14 @@ class DayCircleView: UIView {
             var didSelectInterval = false
             for sublayer in layer.sublayers! {
                 if let startAngle = sublayer.value(forKey: "startAngle") as? CGFloat, let endAngle = sublayer.value(forKey: "endAngle") as? CGFloat {
-                    if (startAngle...endAngle).contains(pointAngle) {
+                    if startAngle > endAngle {
+                        if (startAngle...(2 * CGFloat.pi)).contains(pointAngle) || (0...endAngle).contains(pointAngle) {
+                            let startAnglePercent = startAngle / (2 * CGFloat.pi)
+                            let endAnglePercent = endAngle / (2 * CGFloat.pi)
+                            didSelectInterval = true
+                            findTimerFrom(Double(startAnglePercent), Double(endAnglePercent))
+                        }
+                    } else if (startAngle...endAngle).contains(pointAngle) {
                         let startAnglePercent = startAngle / (2 * CGFloat.pi)
                         let endAnglePercent = endAngle / (2 * CGFloat.pi)
                         didSelectInterval = true
