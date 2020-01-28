@@ -29,6 +29,7 @@ class StatsVC: UIViewController {
     private var dataSource: StatsDataSource!
 
     let navBarTitle =  UIButton(type: .custom)
+    var didSelectSettings: Block?
     
     var period = Period.last7Days {
         didSet {
@@ -36,10 +37,11 @@ class StatsVC: UIViewController {
         }
     }
     
-    class func controller(dataSource: StatsDataSource) -> UIViewController {
+    class func controller(dataSource: StatsDataSource, didSelectSettings: Block?) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "StatsVC") as! StatsVC
         controller.dataSource = dataSource
+        controller.didSelectSettings = didSelectSettings
         return controller
     }
     
@@ -55,6 +57,9 @@ class StatsVC: UIViewController {
         navBarTitle.addTarget(self, action: #selector(showActionSheet), for: .touchUpInside)
         navigationItem.titleView = navBarTitle
         
+        let settingsButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(presentSettings))
+        self.navigationItem.rightBarButtonItem  = settingsButton
+        
         initDataSource()
     }
     
@@ -68,6 +73,10 @@ class StatsVC: UIViewController {
         
         tableView.reloadData()
         statsCircleView.update(with: dataSource.content, period: period)
+    }
+    
+    @objc func presentSettings() {
+        didSelectSettings?()
     }
     
     @objc func showActionSheet() {

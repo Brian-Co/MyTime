@@ -24,7 +24,9 @@ final class StatsNavigationCoordinator: Coordinator {
     }
         
     func start() {
-        let statsVC = StatsVC.controller(dataSource: APIStatsDataSource())
+        let statsVC = StatsVC.controller(dataSource: APIStatsDataSource(), didSelectSettings: { [weak self] in
+            self?.didSelectSettings()
+        })
         
         let navigationController = UINavigationController(rootViewController: statsVC)
         navigationController.tabBarItem = UITabBarItem(title: "Stats", image: UIImage(systemName: "chart.pie"), tag: 1)
@@ -32,5 +34,15 @@ final class StatsNavigationCoordinator: Coordinator {
         
     }
     
+    func didSelectSettings() {
+        let settingsVC = SettingsVC.controller(dismiss: { [weak self] in
+            self?.popViewController()
+        })
+        self.navigationController?.pushViewController(settingsVC, animated: true)
+    }
+    
+    func popViewController() {
+        self.navigationController?.popViewController(animated: true)
+    }
     
 }
