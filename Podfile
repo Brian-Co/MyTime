@@ -7,6 +7,7 @@ target 'MyTime' do
 
   # Pods for MyTime
   pod 'RealmSwift'
+  pod 'FSCalendar'
 
   target 'MyTimeTests' do
     inherit! :search_paths

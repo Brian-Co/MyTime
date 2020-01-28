@@ -46,6 +46,7 @@
 		D4C7344B23C501B400A746B5 /* TimerInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7344A23C501B400A746B5 /* TimerInterval.swift */; };
 		D4C7344D23C502EB00A746B5 /* APITimersDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7344C23C502EB00A746B5 /* APITimersDataSource.swift */; };
 		D4C7344F23C5038200A746B5 /* TimersDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C7344E23C5038200A746B5 /* TimersDataSource.swift */; };
+		D4D09C3523E031E400B85D78 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D09C3423E031E400B85D78 /* CalendarVC.swift */; };
 		D4D844B423C79F4A00533701 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4D844B323C79F4A00533701 /* Main.storyboard */; };
 		D4D844B823C7A91700533701 /* TimersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D844B723C7A91700533701 /* TimersTableViewCell.swift */; };
 		D4EC98BA23C899F8003EC3C0 /* TimerColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC98B923C899F8003EC3C0 /* TimerColor.swift */; };
@@ -119,6 +120,7 @@
 		D4C7344A23C501B400A746B5 /* TimerInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerInterval.swift; sourceTree = "<group>"; };
 		D4C7344C23C502EB00A746B5 /* APITimersDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITimersDataSource.swift; sourceTree = "<group>"; };
 		D4C7344E23C5038200A746B5 /* TimersDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersDataSource.swift; sourceTree = "<group>"; };
+		D4D09C3423E031E400B85D78 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
 		D4D844B323C79F4A00533701 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D4D844B723C7A91700533701 /* TimersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersTableViewCell.swift; sourceTree = "<group>"; };
 		D4EC98B923C899F8003EC3C0 /* TimerColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerColor.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				D468F75A23DB5607003BFA45 /* TimersVC */,
 				D468F75B23DB561F003BFA45 /* EditTimerVC */,
 				D468F75C23DB562C003BFA45 /* EditPopup */,
+				D4D09C3623E031EC00B85D78 /* CalendarVC */,
 				D468F75D23DB5637003BFA45 /* StatsVC */,
 			);
 			path = UI;
@@ -422,6 +425,14 @@
 				D468F75723DB50E3003BFA45 /* Stats */,
 			);
 			path = DataSource;
+			sourceTree = "<group>";
+		};
+		D4D09C3623E031EC00B85D78 /* CalendarVC */ = {
+			isa = PBXGroup;
+			children = (
+				D4D09C3423E031E400B85D78 /* CalendarVC.swift */,
+			);
+			path = CalendarVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -665,6 +676,7 @@
 			files = (
 				D4C7344F23C5038200A746B5 /* TimersDataSource.swift in Sources */,
 				D468F76123DB5815003BFA45 /* StatsTableViewCell.swift in Sources */,
+				D4D09C3523E031E400B85D78 /* CalendarVC.swift in Sources */,
 				D4C733FB23C0E39400A746B5 /* TimersViewController.swift in Sources */,
 				D49A904623CF2C00005384D3 /* APIEditTimerDataSource.swift in Sources */,
 				D43EB7F723D60B3D00C2CA86 /* Date+Extensions.swift in Sources */,

@@ -50,6 +50,9 @@ class TimersViewController: UIViewController {
         self.navigationItem.leftBarButtonItems  = [previousDayButton, nextDayButton]
         self.navigationItem.leftBarButtonItems![1].isEnabled = false
         
+        let calendarButton = UIBarButtonItem(image: UIImage(systemName: "calendar"), style: .plain, target: self, action: #selector(presentCalendarVC))
+        self.navigationItem.rightBarButtonItems  = [calendarButton]
+        
         timersTableView.delegate = self
         timersTableView.dataSource = self
         
@@ -69,6 +72,7 @@ class TimersViewController: UIViewController {
     func updateUI() {
         
         self.navigationItem.title = dateFormatter.string(from: chosenDate)
+        updateNextDayButton()
         timersTableView.reloadData()
         dayCircleView.update(with: dataSource.content, chosenDate)
     }
@@ -83,14 +87,24 @@ class TimersViewController: UIViewController {
         }
     }
     
+    @objc func presentCalendarVC() {
+        let calendarVC = CalendarVC.controller(didSelectDate: { [weak self] date in
+            self?.didSelectDate(date)
+        })
+        let calendarNavigation = UINavigationController(rootViewController: calendarVC)
+        self.present(calendarNavigation, animated: true)
+    }
+    
+    func didSelectDate(_ date: Date) {
+        chosenDate = date
+    }
+    
     @objc func getPreviousDay() {
         chosenDate = Calendar.current.date(byAdding: .day, value: -1, to: chosenDate) ?? Date()
-        updateNextDayButton()
     }
     
     @objc func getNextDay() {
         chosenDate = Calendar.current.date(byAdding: .day, value: 1, to: chosenDate) ?? Date()
-        updateNextDayButton()
     }
     
     func updateNextDayButton() {
