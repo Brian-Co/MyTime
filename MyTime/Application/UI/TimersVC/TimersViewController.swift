@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias Block = (() -> ())
+
 class TimersViewController: UIViewController {
     
     typealias DidSelectTimerBlock = ((_ timer: TimerX?) -> ())
@@ -17,6 +19,7 @@ class TimersViewController: UIViewController {
     
     private var dataSource: TimersDataSource!
     private var didSelectTimer: DidSelectTimerBlock?
+    private var didSelectSettings: Block?
     
     var chosenDate = Date() {
         didSet {
@@ -30,11 +33,12 @@ class TimersViewController: UIViewController {
         self.dataSource = dataSource
     }
     
-    class func controller(dataSource: TimersDataSource, didSelectTimer: DidSelectTimerBlock?) -> UIViewController {
+    class func controller(dataSource: TimersDataSource, didSelectTimer: DidSelectTimerBlock?, didSelectSettings: Block?) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "TimersViewController") as! TimersViewController
         controller.dataSource = dataSource
         controller.didSelectTimer = didSelectTimer
+        controller.didSelectSettings = didSelectSettings
         return controller
     }
     
@@ -51,7 +55,8 @@ class TimersViewController: UIViewController {
         self.navigationItem.leftBarButtonItems![1].isEnabled = false
         
         let calendarButton = UIBarButtonItem(image: UIImage(systemName: "calendar"), style: .plain, target: self, action: #selector(presentCalendarVC))
-        self.navigationItem.rightBarButtonItems  = [calendarButton]
+        let settingsButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(presentSettings))
+        self.navigationItem.rightBarButtonItems  = [settingsButton, calendarButton]
         
         timersTableView.delegate = self
         timersTableView.dataSource = self
@@ -113,6 +118,10 @@ class TimersViewController: UIViewController {
         } else {
             self.navigationItem.leftBarButtonItems![1].isEnabled = true
         }
+    }
+    
+    @objc func presentSettings() {
+        didSelectSettings?()
     }
     
 }

@@ -18,6 +18,7 @@ class TimersTableViewCell: UITableViewCell {
     @IBOutlet weak var timerTotalDuration: UILabel!
     @IBOutlet weak var timerDuration: UILabel!
     @IBOutlet weak var timerButton: UIButton!
+    @IBOutlet weak var addTimerView: UIView!
     
     var saveTimer: UpdateTimerBlock?
     var updateCircleView: UpdateCircleViewBlock?
@@ -52,8 +53,10 @@ class TimersTableViewCell: UITableViewCell {
         self.updateCircleView = updateCircleViewBlock
         
         timerName.text = timer.name
+        timerColorView.isHidden = false
         timerColorView.backgroundColor = TimerColor(rawValue: timer.color)?.create
         timerButton.setImage(UIImage(systemName: "timer"), for: .normal)
+        addTimerView.isHidden = true
         elapsedTime = 0
         scheduleTimer()
 
@@ -82,11 +85,12 @@ class TimersTableViewCell: UITableViewCell {
         
         self.timer = nil
         timerName.text = "Add Timer"
-        timerColorView.backgroundColor = .systemBackground
+        timerColorView.isHidden = true
         timerDuration.text = ""
         timerTotalDuration.text = ""
         timerButton.backgroundColor = .green
         timerButton.setImage(UIImage(systemName: "plus"), for: .normal)
+        addTimerView.isHidden = false
     }
     
     func scheduleTimer() {

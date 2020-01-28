@@ -25,6 +25,8 @@ final class TimersNavigationCoordinator: Coordinator {
     func start() {
         let timersViewController = TimersViewController.controller(dataSource: APITimersDataSource(), didSelectTimer: { [weak self] selectedTimer in
             self?.didSelect(timer: selectedTimer)
+            }, didSelectSettings: { [weak self] in
+                self?.didSelectSettings()
         })
         
         let navigationController = UINavigationController(rootViewController: timersViewController)
@@ -35,13 +37,21 @@ final class TimersNavigationCoordinator: Coordinator {
     
     func didSelect(timer: TimerX?) {
         let editTimerVC = EditTimerVC.controller(dataSource: APIEditTimerDataSource(timer: timer), dismiss: { [weak self] in
-            self?.editTimerVCDidDimsiss()
+            self?.popViewController()
         })
         self.navigationController?.pushViewController(editTimerVC, animated: true)
     }
     
-    func editTimerVCDidDimsiss() {
+    func popViewController() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    func didSelectSettings() {
+        let settingsVC = SettingsVC.controller(dismiss: { [weak self] in
+            self?.popViewController()
+        })
+        self.navigationController?.pushViewController(settingsVC, animated: true)
+    }
+    
 
 }
