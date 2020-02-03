@@ -23,12 +23,14 @@ class TimersViewController: UIViewController {
     
     var chosenDate = Date() {
         didSet {
+            animateCircleView = true
             updateUI()
         }
     }
     let dateFormatter = DateFormatter()
     let navBarTitle = UILabel()
     var is12HourClock = Bool()
+    var animateCircleView = true
     
     convenience init(dataSource: TimersDataSource) {
         self.init()
@@ -84,7 +86,10 @@ class TimersViewController: UIViewController {
         } else {
             dateFormatter.dateFormat = "EEEE, MMMM d"
         }
-        updateUI()
+
+        if !animateCircleView {
+            updateUI()
+        }
     }
     
     func initDataSource() {
@@ -99,7 +104,8 @@ class TimersViewController: UIViewController {
         navBarTitle.text = dateFormatter.string(from: chosenDate)
         updateNextDayButton()
         timersTableView.reloadData()
-        dayCircleView.update(with: dataSource.content, chosenDate)
+        dayCircleView.update(with: dataSource.content, chosenDate, animated: animateCircleView)
+        animateCircleView = false
     }
     
     func dataSourceStateChanged(_ state: DataSourceState) {

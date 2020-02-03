@@ -20,6 +20,7 @@ class DayCircleView: UIView {
         }
     }
     var chosenDate = Date()
+    var animate = Bool()
     var is12HourClock = Bool()
     var didSelectInterval: ((_ timer: TimerX?, _ timerInterval: TimerInterval, _ sender: UIView) -> ())?
     
@@ -67,13 +68,14 @@ class DayCircleView: UIView {
         self.didSelectInterval = didSelectInterval
     }
     
-    func update(with timers: [TimerX], _ chosenDate: Date) {
+    func update(with timers: [TimerX], _ chosenDate: Date, animated: Bool) {
         self.chosenDate = chosenDate
+        self.animate = animated
         self.timers = timers
     }
     
     private func loadLayers() {
-        
+
         is12HourClock = UserDefaults.standard.bool(forKey: "is12HourClock")
         layer.sublayers = nil
         layer.addSublayer(backgroundLayer)
@@ -148,6 +150,10 @@ class DayCircleView: UIView {
         }
         
         layer.addSublayer(timerIntervalLayer)
+        if animate {
+            timerIntervalLayer.strokeEnd = 0
+            self.animate(timerIntervalLayer)
+        }
     }
     
     func updateActiveLayer(with timerInterval: TimerInterval? = nil, _ color: String = "orange") {
@@ -180,7 +186,9 @@ class DayCircleView: UIView {
                         let circularPath = UIBezierPath(arcCenter: centerPoint, radius: bounds.width / 2 - 20, startAngle: startAngle,
                                                         endAngle: endAngle, clockwise: true)
                         myLayer.strokeColor = TimerColor(rawValue: color)?.create.cgColor
+                        let oldPath = myLayer.path!
                         myLayer.path = circularPath.cgPath
+                        animatePath(myLayer, oldPath)
                     }
                 }
             }
@@ -227,6 +235,36 @@ class DayCircleView: UIView {
                 createTimerIntervalFrom(Double(angle))
             }
         }
+    }
+    
+    private func animate(_ layer: CAShapeLayer) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock({
+            layer.strokeEnd = 1
+        })
+        let foregroundAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        foregroundAnimation.fromValue = 0
+        foregroundAnimation.toValue = 1
+        foregroundAnimation.beginTime = CACurrentMediaTime() + 0.3
+        foregroundAnimation.duration = CFTimeInterval(0.5)
+        foregroundAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        foregroundAnimation.fillMode = CAMediaTimingFillMode.forwards
+        foregroundAnimation.isRemovedOnCompletion = false
+        
+        layer.add(foregroundAnimation, forKey: "foregroundAnimation")
+        CATransaction.commit()
+    }
+    
+    private func animatePath(_ layer: CAShapeLayer, _ oldPath: CGPath) {
+        let foregroundAnimation = CABasicAnimation(keyPath: "path")
+        foregroundAnimation.fromValue = oldPath
+        foregroundAnimation.toValue = layer.path
+        foregroundAnimation.duration = CFTimeInterval(0.2)
+        foregroundAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        foregroundAnimation.fillMode = CAMediaTimingFillMode.forwards
+        foregroundAnimation.isRemovedOnCompletion = false
+        
+        layer.add(foregroundAnimation, forKey: "foregroundAnimation")
     }
     
     private func addHoursTextLayers() {

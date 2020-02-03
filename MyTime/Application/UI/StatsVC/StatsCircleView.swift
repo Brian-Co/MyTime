@@ -91,6 +91,23 @@ class StatsCircleView: UIView {
         timerIntervalLayer.path = circularPath.cgPath
         
         layer.addSublayer(timerIntervalLayer)
+        animate(timerIntervalLayer)
+    }
+    
+    private func animate(_ layer: CAShapeLayer) {
+        let foregroundAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        foregroundAnimation.fromValue = 0
+        foregroundAnimation.toValue = 1
+        foregroundAnimation.duration = CFTimeInterval(0.8)
+        foregroundAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        foregroundAnimation.fillMode = CAMediaTimingFillMode.forwards
+        foregroundAnimation.isRemovedOnCompletion = false
+        
+        layer.add(foregroundAnimation, forKey: "foregroundAnimation")
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        loadLayers()
     }
     
     func getAllTimersTotalDuration() -> Double {
