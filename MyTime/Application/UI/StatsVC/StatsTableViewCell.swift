@@ -20,6 +20,8 @@ class StatsTableViewCell: UITableViewCell {
     var timer: TimerX!
     var period: Period!
     var totalDuration = 0
+    var firstDate: Date?
+    var lastDate: Date?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,11 +36,13 @@ class StatsTableViewCell: UITableViewCell {
     }
 
     
-    func configure(with timer: TimerX, _ timers: [TimerX], period: Period) {
+    func configure(with timer: TimerX, _ timers: [TimerX], period: Period, firstDate: Date?, lastDate: Date?) {
         
         self.timer = timer
         self.timers = timers
         self.period = period
+        self.firstDate = firstDate
+        self.lastDate = lastDate
         
         timerName.text = timer.name
         timerColorView.backgroundColor = TimerColor(rawValue: timer.color)?.create
@@ -94,12 +98,6 @@ class StatsTableViewCell: UITableViewCell {
                 return true
             }
             return false
-        case .yesterday:
-            let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
-            if Calendar.current.isDate(timerInterval.startingPoint, inSameDayAs: yesterday) {
-                return true
-            }
-            return false
         case .last7Days:
             let last7Days = Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date()
             if timerInterval.startingPoint.isBetween(last7Days, and: Date()) {
@@ -110,6 +108,17 @@ class StatsTableViewCell: UITableViewCell {
             let last30Days = Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date()
             if timerInterval.startingPoint.isBetween(last30Days, and: Date()) {
                 return true
+            }
+            return false
+        case .custom:
+            if lastDate != nil {
+                if timerInterval.startingPoint.isBetween(firstDate!, and: lastDate!) {
+                    return true
+                }
+            } else {
+                if Calendar.current.isDate(timerInterval.startingPoint, inSameDayAs: firstDate!) {
+                    return true
+                }
             }
             return false
         default:

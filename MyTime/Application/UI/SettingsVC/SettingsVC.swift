@@ -107,7 +107,9 @@ class SettingsVC: UITableViewController {
         
         let defaults = UserDefaults.standard
         let alert = UIAlertController(title: "Choose time interval", message: nil, preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            self.tableView.deselectRow(at: IndexPath(row: 1, section: 0), animated: true)
+        })
         let set5min = UIAlertAction(title: "5 min", style: .default, handler: { alert in
             defaults.set(5, forKey: "timeIntervalRounding")
             self.tableView.reloadData()

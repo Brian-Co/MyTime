@@ -14,6 +14,8 @@ class StatsCircleView: UIView {
     
     var timers: [TimerX] = []
     var period: Period!
+    var firstDate: Date?
+    var lastDate: Date?
     
     private lazy var backgroundLayer: CAShapeLayer = {
         let backgroundLayer = CAShapeLayer()
@@ -35,10 +37,12 @@ class StatsCircleView: UIView {
         super.init(coder: aDecoder)
     }
     
-    func update(with timers: [TimerX], period: Period) {
+    func update(with timers: [TimerX], period: Period, firstDate: Date?, lastDate: Date?) {
         
         self.timers = timers
         self.period = period
+        self.firstDate = firstDate
+        self.lastDate = lastDate
         loadLayers()
     }
     
@@ -148,12 +152,6 @@ class StatsCircleView: UIView {
                 return true
             }
             return false
-        case .yesterday:
-            let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
-            if Calendar.current.isDate(timerInterval.startingPoint, inSameDayAs: yesterday) {
-                return true
-            }
-            return false
         case .last7Days:
             let last7Days = Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date()
             if timerInterval.startingPoint.isBetween(last7Days, and: Date()) {
@@ -164,6 +162,17 @@ class StatsCircleView: UIView {
             let last30Days = Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date()
             if timerInterval.startingPoint.isBetween(last30Days, and: Date()) {
                 return true
+            }
+            return false
+        case .custom:
+            if lastDate != nil {
+                if timerInterval.startingPoint.isBetween(firstDate!, and: lastDate!) {
+                    return true
+                }
+            } else {
+                if Calendar.current.isDate(timerInterval.startingPoint, inSameDayAs: firstDate!) {
+                    return true
+                }
             }
             return false
         default:

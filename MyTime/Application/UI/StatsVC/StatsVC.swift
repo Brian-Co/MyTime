@@ -13,10 +13,10 @@ import UIKit
 enum Period {
     
     case today
-    case yesterday
     case last7Days
     case last30Days
     case allTime
+    case custom
     
 }
 
@@ -36,6 +36,8 @@ class StatsVC: UIViewController {
             updateUI()
         }
     }
+    var firstDate: Date?
+    var lastDate: Date?
     
     class func controller(dataSource: StatsDataSource, didSelectSettings: Block?) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -53,14 +55,16 @@ class StatsVC: UIViewController {
         tableView.layer.borderWidth = 1
         tableView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
         
-        navBarTitle.frame = CGRect(x: 0, y: 0, width: 130, height: 40)
+        navBarTitle.frame = CGRect(x: 0, y: 0, width: 250, height: 40)
         navBarTitle.setTitle("Last 7 days ▼", for: .normal)
         navBarTitle.setTitleColor(.systemBlue, for: .normal)
         navBarTitle.addTarget(self, action: #selector(showActionSheet), for: .touchUpInside)
         navigationItem.titleView = navBarTitle
         
+        let calendarButton = UIBarButtonItem(image: UIImage(systemName: "calendar"), style: .plain, target: self, action: #selector(presentCalendarStatsVC))
         let settingsButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(presentSettings))
         self.navigationItem.rightBarButtonItem  = settingsButton
+        self.navigationItem.leftBarButtonItem  = calendarButton
         
         initDataSource()
     }
@@ -74,11 +78,46 @@ class StatsVC: UIViewController {
     func updateUI() {
         
         tableView.reloadData()
-        statsCircleView.update(with: dataSource.content, period: period)
+        statsCircleView.update(with: dataSource.content, period: period, firstDate: firstDate, lastDate: lastDate)
     }
     
     @objc func presentSettings() {
         didSelectSettings?()
+    }
+    
+    @objc func presentCalendarStatsVC() {
+        instantiateCalendar()
+    }
+    
+    func instantiateCalendar() {
+        let calendarVC = CalendarStatsVC.controller(didSelectDates: { [weak self] firstDate, lastDate in
+            self?.didSelectDates(firstDate, lastDate)
+        })
+        let calendarNavigation = UINavigationController(rootViewController: calendarVC)
+        self.present(calendarNavigation, animated: true)
+    }
+    
+    func didSelectDates(_ firstDate: Date?, _ lastDate: Date?) {
+        
+        if let firstDate = firstDate {
+            
+            self.firstDate = firstDate
+            self.lastDate = lastDate
+            
+            let dateformatter = DateFormatter()
+            dateformatter.dateFormat = "MM/dd/yyyy"
+            var dateRange = dateformatter.string(from: firstDate)
+            if lastDate != nil {
+                self.lastDate = Calendar.current.date(byAdding: .day, value: 1, to: lastDate!)
+                dateRange += " - " + dateformatter.string(from: lastDate!)
+            }
+            self.navBarTitle.setTitle("\(dateRange) ▼", for: .normal)
+            
+            self.period = .custom
+        } else {
+            let period = self.period
+            self.period = period
+        }
     }
     
     @objc func showActionSheet() {
@@ -88,10 +127,6 @@ class StatsVC: UIViewController {
         let today = UIAlertAction(title: "Today", style: .default, handler: { alert in
             self.period = .today
             self.navBarTitle.setTitle("Today ▼", for: .normal)
-        })
-        let yesterday = UIAlertAction(title: "Yesterday", style: .default, handler: { alert in
-            self.period = .yesterday
-            self.navBarTitle.setTitle("Yesterday ▼", for: .normal)
         })
         let last7Days = UIAlertAction(title: "Last 7 days", style: .default, handler: { alert in
             self.period = .last7Days
@@ -105,12 +140,15 @@ class StatsVC: UIViewController {
             self.period = .allTime
             self.navBarTitle.setTitle("All time ▼", for: .normal)
         })
+        let custom = UIAlertAction(title: "Custom", style: .default, handler: { alert in
+            self.instantiateCalendar()
+        })
         alert.addAction(cancelAction)
         alert.addAction(today)
-        alert.addAction(yesterday)
         alert.addAction(last7Days)
         alert.addAction(last30Days)
         alert.addAction(allTime)
+        alert.addAction(custom)
         
         self.present(alert, animated: true, completion: nil)
     }
@@ -128,7 +166,7 @@ extension StatsVC: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StatsTableViewCell
         
-        cell.configure(with: dataSource.content[indexPath.row], dataSource.content, period: period)
+        cell.configure(with: dataSource.content[indexPath.row], dataSource.content, period: period, firstDate: firstDate, lastDate: lastDate)
         
         return cell
     }

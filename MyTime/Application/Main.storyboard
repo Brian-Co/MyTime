@@ -623,6 +623,39 @@
             </objects>
             <point key="canvasLocation" x="747.82608695652175" y="720.53571428571422"/>
         </scene>
+        <!--Calendar StatsVC-->
+        <scene sceneID="vbb-0G-tD8">
+            <objects>
+                <viewController storyboardIdentifier="CalendarStatsVC" id="KkE-HD-lxt" customClass="CalendarStatsVC" customModule="MyTime" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nAz-Vf-6F8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUs-bO-3t0" customClass="FSCalendar">
+                                <rect key="frame" x="0.0" y="86" width="414" height="358"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="pUs-bO-3t0" secondAttribute="height" multiplier="207:179" id="nWr-8j-xAJ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="pUs-bO-3t0" firstAttribute="top" secondItem="dAX-O3-eWf" secondAttribute="top" constant="42" id="L3F-mi-Dz8"/>
+                            <constraint firstItem="pUs-bO-3t0" firstAttribute="width" secondItem="nAz-Vf-6F8" secondAttribute="width" id="Z0k-qF-ci6"/>
+                            <constraint firstItem="pUs-bO-3t0" firstAttribute="leading" secondItem="dAX-O3-eWf" secondAttribute="leading" id="aJ4-HK-sbg"/>
+                            <constraint firstItem="dAX-O3-eWf" firstAttribute="trailing" secondItem="pUs-bO-3t0" secondAttribute="trailing" id="eNm-cG-X94"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dAX-O3-eWf"/>
+                    </view>
+                    <connections>
+                        <outlet property="calendar" destination="pUs-bO-3t0" id="Ktc-Bh-TIS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HQE-eb-L0V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1654" y="721"/>
+        </scene>
     </scenes>
     <resources>
         <image name="timer" catalog="system" width="64" height="60"/>
