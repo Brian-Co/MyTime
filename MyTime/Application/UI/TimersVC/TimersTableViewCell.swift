@@ -60,11 +60,13 @@ class TimersTableViewCell: UITableViewCell {
         elapsedTime = 0
         scheduleTimer()
 
-        if timer.isOn && Calendar.current.isDate(timer.timerIntervals.last!.startingPoint, inSameDayAs: chosenDate) {
+        if timer.isOn {
             let startingPoint = self.timer?.timerIntervals.last!.startingPoint
             let elapsedTime = Date().timeIntervalSince(startingPoint!)
-            self.elapsedTime = Int(elapsedTime)
-            timerDuration.text = self.elapsedTime.timeString()
+            timerDuration.text = Int(elapsedTime).timeString()
+            if Calendar.current.isDate(timer.timerIntervals.last!.startingPoint, inSameDayAs: chosenDate) {
+                self.elapsedTime = Int(elapsedTime)
+            }
             timerButton.backgroundColor = timerColorView.backgroundColor
             if timerDuration.alpha == 0 {
                 UIView.animate(withDuration: 0.3, animations: {
@@ -122,8 +124,8 @@ class TimersTableViewCell: UITableViewCell {
     }
     
     func updateTimer() {
+        timerDuration.text = elapsedTime.timeString()
         if Calendar.current.isDate(chosenDate, inSameDayAs: Date()) {
-            timerDuration.text = elapsedTime.timeString()
             timerTotalDuration.text = (totalDuration + elapsedTime).timeString(format: 1)
             if elapsedTime % 30 == 0 {
                 updateCircleView?()
@@ -134,13 +136,6 @@ class TimersTableViewCell: UITableViewCell {
     @IBAction func timerButtonPressed(_ sender: Any) {
         if self.timer != nil {
             timerButtonPressed()
-        } else {
-            let tableView = self.superview as! UITableView
-            let lastSectionIndex = tableView.numberOfSections - 1
-            let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
-            let pathToLastRow = IndexPath(row: lastRowIndex, section: lastSectionIndex)
-            print("lastRowIndex \(lastRowIndex)")
-            tableView.selectRow(at: pathToLastRow, animated: true, scrollPosition: .none)
         }
     }
     

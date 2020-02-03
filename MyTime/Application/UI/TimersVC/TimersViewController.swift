@@ -27,6 +27,8 @@ class TimersViewController: UIViewController {
         }
     }
     let dateFormatter = DateFormatter()
+    let navBarTitle = UILabel()
+    var is12HourClock = Bool()
     
     convenience init(dataSource: TimersDataSource) {
         self.init()
@@ -45,9 +47,15 @@ class TimersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dateFormatter.dateStyle = .full
-        dateFormatter.timeStyle = .none
-        dateFormatter.locale = Locale(identifier: "fr_FR")
+        dateFormatter.locale = Locale(identifier: "en_EN")
+        
+        navBarTitle.frame = CGRect(x: 0, y: 0, width: 200, height: 40)
+        navBarTitle.textColor = .label
+        navBarTitle.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        navBarTitle.backgroundColor = UIColor.clear
+        navBarTitle.adjustsFontSizeToFitWidth = true
+        navBarTitle.textAlignment = .center
+        self.navigationItem.titleView = navBarTitle
         
         let previousDayButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(getPreviousDay))
         let nextDayButton = UIBarButtonItem(image: UIImage(systemName: "chevron.right"), style: .plain, target: self, action: #selector(getNextDay))
@@ -60,11 +68,23 @@ class TimersViewController: UIViewController {
         
         timersTableView.delegate = self
         timersTableView.dataSource = self
+        timersTableView.layer.borderWidth = 1
+        timersTableView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
         
         dayCircleView.configure(didSelectInterval: { [weak self] timer, timerInterval, sender in
             self?.didSelectInterval(timer, timerInterval, sender) })
         
         initDataSource()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        is12HourClock = UserDefaults.standard.bool(forKey: "is12HourClock")
+        if is12HourClock {
+            dateFormatter.dateFormat = "EEEE, MMMM d a"
+        } else {
+            dateFormatter.dateFormat = "EEEE, MMMM d"
+        }
+        updateUI()
     }
     
     func initDataSource() {
@@ -76,7 +96,7 @@ class TimersViewController: UIViewController {
     
     func updateUI() {
         
-        self.navigationItem.title = dateFormatter.string(from: chosenDate)
+        navBarTitle.text = dateFormatter.string(from: chosenDate)
         updateNextDayButton()
         timersTableView.reloadData()
         dayCircleView.update(with: dataSource.content, chosenDate)
@@ -105,16 +125,37 @@ class TimersViewController: UIViewController {
     }
     
     @objc func getPreviousDay() {
-        chosenDate = Calendar.current.date(byAdding: .day, value: -1, to: chosenDate) ?? Date()
+        if is12HourClock {
+            chosenDate = Calendar.current.date(byAdding: .hour, value: -12, to: chosenDate) ?? Date()
+        } else {
+            chosenDate = Calendar.current.date(byAdding: .day, value: -1, to: chosenDate) ?? Date()
+        }
     }
     
     @objc func getNextDay() {
-        chosenDate = Calendar.current.date(byAdding: .day, value: 1, to: chosenDate) ?? Date()
+        if is12HourClock {
+            chosenDate = Calendar.current.date(byAdding: .hour, value: 12, to: chosenDate) ?? Date()
+        } else {
+            chosenDate = Calendar.current.date(byAdding: .day, value: 1, to: chosenDate) ?? Date()
+        }
     }
     
     func updateNextDayButton() {
-        if Calendar.current.isDate(chosenDate, inSameDayAs: Date()) {
-            self.navigationItem.leftBarButtonItems![1].isEnabled = false
+        
+        let calendar = Calendar.current
+        if calendar.isDate(chosenDate, inSameDayAs: Date()) {
+            
+            let dateHour = calendar.component(.hour, from: Date())
+            let choosenDateHour = calendar.component(.hour, from: chosenDate)
+            if dateHour < 12 {
+                self.navigationItem.leftBarButtonItems![1].isEnabled = false
+            } else {
+                if choosenDateHour < 12 && is12HourClock {
+                    self.navigationItem.leftBarButtonItems![1].isEnabled = true
+                } else {
+                    self.navigationItem.leftBarButtonItems![1].isEnabled = false
+                }
+            }
         } else {
             self.navigationItem.leftBarButtonItems![1].isEnabled = true
         }
@@ -195,7 +236,11 @@ extension TimersViewController: UIPopoverPresentationControllerDelegate {
     }
     
     func didSelectInterval(_ timer: TimerX?, _ timerInterval: TimerInterval, _ sender: UIView) {
-        let editPopup = EditPopup.controller(dataSource: APIEditPopupDataSource(timer: timer, timerInterval: timerInterval))
+        let editPopup = EditPopup.controller(dataSource: APIEditPopupDataSource(timer: timer, timerInterval: timerInterval), updateActiveLayer: { [weak self] timerInterval, color in
+            self?.dayCircleView.updateActiveLayer(with: timerInterval, color)
+            }, refreshCircleView: { [weak self] in
+                self?.updateUI()
+        })
         editPopup.modalPresentationStyle = .popover
         let popover = editPopup.popoverPresentationController
         editPopup.preferredContentSize = CGSize(width: 200, height: 300)

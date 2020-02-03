@@ -20,9 +20,10 @@ class DayCircleView: UIView {
         }
     }
     var chosenDate = Date()
+    var is12HourClock = Bool()
     var didSelectInterval: ((_ timer: TimerX?, _ timerInterval: TimerInterval, _ sender: UIView) -> ())?
     
-    private lazy var backgroundLayer: CAShapeLayer = {
+    private var backgroundLayer: CAShapeLayer {
         let backgroundLayer = CAShapeLayer()
         backgroundLayer.lineWidth = 50
         backgroundLayer.strokeColor = UIColor.quaternarySystemFill.cgColor
@@ -31,13 +32,13 @@ class DayCircleView: UIView {
         backgroundLayer.path = circularPath
         
         return backgroundLayer
-    }()
+    }
     
-    private var hoursLabels: CATextLayer {
-        let hours = CATextLayer()
-        hours.fontSize = 17
-        hours.alignmentMode = .center
-        hours.foregroundColor = UIColor.label.cgColor
+    private var hoursLabels: UILabel {
+        let hours = UILabel()
+        hours.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        hours.textAlignment = .center
+        hours.backgroundColor = UIColor.clear
         return hours
     }
     
@@ -73,6 +74,7 @@ class DayCircleView: UIView {
     
     private func loadLayers() {
         
+        is12HourClock = UserDefaults.standard.bool(forKey: "is12HourClock")
         layer.sublayers = nil
         layer.addSublayer(backgroundLayer)
         
@@ -83,17 +85,34 @@ class DayCircleView: UIView {
     
     private func createTimerIntervalsLayers() {
         
+        let calendar = Calendar.current
+        var circleMinutes: Double = 1440
+        
         for timer in timers {
             for timerInterval in timer.timerIntervals {
-                if Calendar.current.isDate(timerInterval.startingPoint, inSameDayAs: chosenDate) {
-                    let startAngle = timerInterval.startingPoint.minutesSinceMidnight() / 1440
+                if calendar.isDate(timerInterval.startingPoint, inSameDayAs: chosenDate) {
+                    if is12HourClock {
+                        circleMinutes = 720
+                        let choosenDateHour = calendar.component(.hour, from: chosenDate)
+                        let timerIntervalHour = calendar.component(.hour, from: timerInterval.startingPoint)
+                        if choosenDateHour >= 0 && choosenDateHour < 12 {
+                            if !(0..<12).contains(timerIntervalHour) {
+                                continue
+                            }
+                        } else {
+                            if timerIntervalHour < 12 {
+                                continue
+                            }
+                        }
+                    }
+                    let startAngle = timerInterval.startingPoint.minutesSinceMidnight() / circleMinutes
                     var endAngle: Double = 0
                     var isOn = false
                     if let endingPoint = timerInterval.endingPoint {
-                        endAngle = endingPoint.minutesSinceMidnight() / 1440
+                        endAngle = endingPoint.minutesSinceMidnight() / circleMinutes
                     } else {
                         isOn = true
-                        endAngle = Date().minutesSinceMidnight() / 1440
+                        endAngle = Date().minutesSinceMidnight() / circleMinutes
                     }
                     createTimerIntervalLayer(startAngle, endAngle, timer.color, isOn)
                 }
@@ -101,7 +120,7 @@ class DayCircleView: UIView {
         }
     }
     
-    private func createTimerIntervalLayer(_ startAngle: Double, _ endAngle: Double, _ color: String, _ isOn: Bool) {
+    private func createTimerIntervalLayer(_ startAngle: Double, _ endAngle: Double, _ color: String, _ isOn: Bool, _ isEdited: Bool = false) {
         
         let timerIntervalLayer = CAShapeLayer()
         timerIntervalLayer.lineWidth = 50
@@ -124,22 +143,45 @@ class DayCircleView: UIView {
         if isOn {
             timerIntervalLayer.setValue(true, forKey: "isOn")
         }
+        if isEdited {
+            timerIntervalLayer.setValue(true, forKey: "isEdited")
+        }
         
         layer.addSublayer(timerIntervalLayer)
     }
     
-    func updateActiveLayer() {
+    func updateActiveLayer(with timerInterval: TimerInterval? = nil, _ color: String = "orange") {
+        
+        var circleMinutes: Double = 1440
+        if is12HourClock {
+            circleMinutes = 720
+        }
         
         for sublayer in layer.sublayers! {
             if let myLayer = sublayer as? CAShapeLayer {
                 if myLayer.value(forKey: "isOn") != nil {
                     let centerPoint = CGPoint(x: frame.width/2 , y: frame.height/2)
                     let startAngle = myLayer.value(forKey: "startAngle") as! CGFloat - CGFloat.pi/2
-                    let newAngle = Date().minutesSinceMidnight() / 1440
+                    let newAngle = Date().minutesSinceMidnight() / circleMinutes
                     let endAngle = (2 * CGFloat.pi * CGFloat(newAngle)) - CGFloat.pi/2
                     let circularPath = UIBezierPath(arcCenter: centerPoint, radius: bounds.width / 2 - 20, startAngle: startAngle,
                                                     endAngle: endAngle, clockwise: true)
                     myLayer.path = circularPath.cgPath
+                } else if myLayer.value(forKey: "isEdited") != nil {
+                    if let timerInterval = timerInterval {
+                        let centerPoint = CGPoint(x: frame.width/2 , y: frame.height/2)
+                        let newStartAngle = timerInterval.startingPoint.minutesSinceMidnight() / circleMinutes
+                        let startAngle = (2 * CGFloat.pi * CGFloat(newStartAngle)) - CGFloat.pi/2
+                        var newEndAngle = timerInterval.endingPoint!.minutesSinceMidnight() / circleMinutes
+                        if newEndAngle == newStartAngle {
+                            newEndAngle = newEndAngle + 0.001
+                        }
+                        let endAngle = (2 * CGFloat.pi * CGFloat(newEndAngle)) - CGFloat.pi/2
+                        let circularPath = UIBezierPath(arcCenter: centerPoint, radius: bounds.width / 2 - 20, startAngle: startAngle,
+                                                        endAngle: endAngle, clockwise: true)
+                        myLayer.strokeColor = TimerColor(rawValue: color)?.create.cgColor
+                        myLayer.path = circularPath.cgPath
+                    }
                 }
             }
         }
@@ -156,18 +198,26 @@ class DayCircleView: UIView {
         if (lowerRadius...upperRadius).contains(pointRadius) {
             var didSelectInterval = false
             for sublayer in layer.sublayers! {
-                if let startAngle = sublayer.value(forKey: "startAngle") as? CGFloat, let endAngle = sublayer.value(forKey: "endAngle") as? CGFloat {
+                if var startAngle = sublayer.value(forKey: "startAngle") as? CGFloat, var endAngle = sublayer.value(forKey: "endAngle") as? CGFloat {
+                    if startAngle > (2 * CGFloat.pi) {
+                        startAngle = startAngle - (2 * CGFloat.pi)
+                    }
+                    if endAngle > (2 * CGFloat.pi) {
+                        endAngle = endAngle - (2 * CGFloat.pi)
+                    }
                     if startAngle > endAngle {
                         if (startAngle...(2 * CGFloat.pi)).contains(pointAngle) || (0...endAngle).contains(pointAngle) {
                             let startAnglePercent = startAngle / (2 * CGFloat.pi)
                             let endAnglePercent = endAngle / (2 * CGFloat.pi)
                             didSelectInterval = true
+                            sublayer.setValue(true, forKey: "isEdited")
                             findTimerFrom(Double(startAnglePercent), Double(endAnglePercent))
                         }
                     } else if (startAngle...endAngle).contains(pointAngle) {
                         let startAnglePercent = startAngle / (2 * CGFloat.pi)
                         let endAnglePercent = endAngle / (2 * CGFloat.pi)
                         didSelectInterval = true
+                        sublayer.setValue(true, forKey: "isEdited")
                         findTimerFrom(Double(startAnglePercent), Double(endAnglePercent))
                     }
                 }
@@ -181,25 +231,30 @@ class DayCircleView: UIView {
     
     private func addHoursTextLayers() {
         
+        var hours = ["24", "6", "12", "18"]
+        if is12HourClock {
+            hours = ["12", "3", "6", "9"]
+        }
+        
         let hours24 = hoursLabels
-        hours24.frame = CGRect(x: bounds.width / 2 - 10, y: 60, width: 20, height: 60)
-        hours24.string = "24"
-        layer.addSublayer(hours24)
+        hours24.frame = CGRect(x: bounds.width / 2 - 10, y: 40, width: 20, height: 60)
+        hours24.text = hours[0]
+        addSubview(hours24)
         
         let hours6 = hoursLabels
         hours6.frame = CGRect(x: bounds.width - 100, y: bounds.height / 2 - 10, width: 60, height: 20)
-        hours6.string = "6"
-        layer.addSublayer(hours6)
+        hours6.text = hours[1]
+        addSubview(hours6)
         
         let hours12 = hoursLabels
-        hours12.frame = CGRect(x: bounds.width / 2 - 10, y: bounds.height - 80, width: 20, height: 60)
-        hours12.string = "12"
-        layer.addSublayer(hours12)
+        hours12.frame = CGRect(x: bounds.width / 2 - 10, y: bounds.height - 100, width: 20, height: 60)
+        hours12.text = hours[2]
+        addSubview(hours12)
         
         let hours18 = hoursLabels
         hours18.frame = CGRect(x: 40, y: bounds.height / 2 - 10, width: 60, height: 20)
-        hours18.string = "18"
-        layer.addSublayer(hours18)
+        hours18.text = hours[3]
+        addSubview(hours18)
     }
     
     private func addHoursLines() {
@@ -231,15 +286,34 @@ class DayCircleView: UIView {
     // User did select timerInterval
     func findTimerFrom(_ startAngle: Double, _ endAngle: Double) {
         
-        let startingPointMinutes = String(format: "%.6f", startAngle * 1440)
-        let endingPointMinutes = String(format: "%.6f", endAngle * 1440)
+        var circleMinutes: Double = 1440
+        if is12HourClock {
+            circleMinutes = 720
+        }
+
+        let startingPointMinutes = String(format: "%.6f", startAngle * circleMinutes)
+        let endingPointMinutes = String(format: "%.6f", endAngle * circleMinutes)
         
         for timer in timers {
             for timerInterval in timer.timerIntervals {
                 if let endingPoint = timerInterval.endingPoint {
                     
-                    let minutesStartingPoint = String(format: "%.6f", timerInterval.startingPoint.minutesSinceMidnight())
-                    let minutesEndingPoint = String(format: "%.6f", endingPoint.minutesSinceMidnight())
+                    var isStartingPointAfternoon: Double = 0
+                    var isEndingPointAfternoon: Double = 0
+                    
+                    if is12HourClock {
+                        let startingPointHour = Calendar.current.component(.hour, from: timerInterval.startingPoint)
+                        if startingPointHour >= 12 {
+                            isStartingPointAfternoon = 720
+                        }
+                        let endingPointHour = Calendar.current.component(.hour, from: endingPoint)
+                        if endingPointHour >= 12 {
+                            isEndingPointAfternoon = 720
+                        }
+                    }
+                    
+                    let minutesStartingPoint = String(format: "%.6f", timerInterval.startingPoint.minutesSinceMidnight() - isStartingPointAfternoon)
+                    let minutesEndingPoint = String(format: "%.6f", endingPoint.minutesSinceMidnight() - isEndingPointAfternoon)
                     
                     if minutesStartingPoint == startingPointMinutes && minutesEndingPoint == endingPointMinutes {
                         didSelectInterval?(timer, timerInterval, self)
@@ -251,12 +325,25 @@ class DayCircleView: UIView {
     
     func createTimerIntervalFrom(_ angle: Double) {
         
-        let startingPointMinutes = angle * 1440
-        let hours = Int(startingPointMinutes / 60)
+        var circleMinutes: Double = 1440
+        if is12HourClock {
+            circleMinutes = 720
+        }
+        
+        let startingPointMinutes = angle * circleMinutes
+        var hours = Int(startingPointMinutes / 60)
         let minutes = Int(startingPointMinutes) % 60
+        
+        if is12HourClock && Calendar.current.component(.hour, from: chosenDate) >= 12 {
+            hours += 12
+        }
+        
         let date = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: chosenDate)!
         
         let newInterval = TimerInterval(startingPoint: date, endingPoint: nil)
+        
+        createTimerIntervalLayer(angle, angle, "orange", false, true)
+        
         didSelectInterval?(nil, newInterval, self)
     }
     

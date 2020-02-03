@@ -50,9 +50,11 @@ class StatsVC: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.layer.borderWidth = 1
+        tableView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
         
         navBarTitle.frame = CGRect(x: 0, y: 0, width: 130, height: 40)
-        navBarTitle.setTitle("Last 7 days", for: .normal)
+        navBarTitle.setTitle("Last 7 days ▼", for: .normal)
         navBarTitle.setTitleColor(.systemBlue, for: .normal)
         navBarTitle.addTarget(self, action: #selector(showActionSheet), for: .touchUpInside)
         navigationItem.titleView = navBarTitle
@@ -85,23 +87,23 @@ class StatsVC: UIViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let today = UIAlertAction(title: "Today", style: .default, handler: { alert in
             self.period = .today
-            self.navBarTitle.setTitle("Today", for: .normal)
+            self.navBarTitle.setTitle("Today ▼", for: .normal)
         })
         let yesterday = UIAlertAction(title: "Yesterday", style: .default, handler: { alert in
             self.period = .yesterday
-            self.navBarTitle.setTitle("Yesterday", for: .normal)
+            self.navBarTitle.setTitle("Yesterday ▼", for: .normal)
         })
         let last7Days = UIAlertAction(title: "Last 7 days", style: .default, handler: { alert in
             self.period = .last7Days
-            self.navBarTitle.setTitle("Last 7 days", for: .normal)
+            self.navBarTitle.setTitle("Last 7 days ▼", for: .normal)
         })
         let last30Days = UIAlertAction(title: "Last 30 days", style: .default, handler: { alert in
             self.period = .last30Days
-            self.navBarTitle.setTitle("Last 30 days", for: .normal)
+            self.navBarTitle.setTitle("Last 30 days ▼", for: .normal)
         })
         let allTime = UIAlertAction(title: "All time", style: .default, handler: { alert in
             self.period = .allTime
-            self.navBarTitle.setTitle("All time", for: .normal)
+            self.navBarTitle.setTitle("All time ▼", for: .normal)
         })
         alert.addAction(cancelAction)
         alert.addAction(today)

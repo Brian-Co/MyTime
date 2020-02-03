@@ -32,6 +32,10 @@ class CalendarVC: UIViewController {
         calendar.delegate = self
         calendar.dataSource = self
         
+        calendar.appearance.titleDefaultColor = .label
+        calendar.appearance.headerTitleColor = .systemBlue
+        calendar.appearance.weekdayTextColor = .systemBlue
+        
         self.navigationItem.title = "Choose date"
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
         self.navigationItem.rightBarButtonItem  = doneButton

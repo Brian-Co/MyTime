@@ -12,6 +12,8 @@ import UIKit
 
 class EditPopup: UIViewController {
     
+    typealias UpdateActiveLayerBlock = ((TimerInterval?, String) -> ())
+    
     @IBOutlet weak var timerName: UILabel!
     @IBOutlet weak var popup: UIView!
     @IBOutlet weak var backgroundView: UIView!
@@ -25,14 +27,19 @@ class EditPopup: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     
     private var dataSource: EditPopupDataSource!
+    private var updateActiveLayer: UpdateActiveLayerBlock?
+    private var refreshCircleView: Block?
     
     let dateFormatter = DateFormatter()
     let tableView = UITableView()
+    var dismissFromPopup = Bool()
     
-    class func controller(dataSource: EditPopupDataSource) -> UIViewController {
+    class func controller(dataSource: EditPopupDataSource, updateActiveLayer: UpdateActiveLayerBlock?, refreshCircleView: Block?) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "EditPopup") as! EditPopup
         controller.dataSource = dataSource
+        controller.updateActiveLayer = updateActiveLayer
+        controller.refreshCircleView = refreshCircleView
         return controller
     }
     
@@ -59,36 +66,76 @@ class EditPopup: UIViewController {
         
         self.definesPresentationContext = true
         
-        dateFormatter.dateFormat = "HH:mm"
+        let defaults = UserDefaults.standard
+        if defaults.bool(forKey: "is12HourClock") {
+            dateFormatter.dateFormat = "hh:mm a"
+        } else {
+            dateFormatter.dateFormat = "HH:mm"
+        }
+        
+        if defaults.integer(forKey: "timeIntervalRounding") == 0 {
+            defaults.set(5, forKey: "timeIntervalRounding")
+        }
+        
+        initDataSource()
         configureUI()
         updateUI()
-        initDataSource()
         
         if dataSource.timerInterval.endingPoint == nil {
-            deleteButton.isHidden = true
+            deleteButton.setTitle("Cancel", for: .normal)
             configureTableView()
         }
     }
     
     override func viewDidLayoutSubviews() {
+        popup.frame = CGRect(x: (self.view.frame.width / 2) - (popup.frame.width / 2), y: (self.view.frame.height / 2) - 55, width: popup.frame.width, height: popup.frame.height)
         tableView.frame = popup.bounds
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if !dismissFromPopup {
+            refreshCircleView?()
+        }
     }
     
     func initDataSource() {
         
         dataSource.dismissVC = { [weak self] in self?.dismissPopup() }
+        
+        if dataSource.timerInterval.endingPoint == nil {
+            roundStartingPoint()
+        }
+    }
+    
+    func roundStartingPoint() {
+        
+        let defaults = UserDefaults.standard
+        let timeIntervalRounding = defaults.integer(forKey: "timeIntervalRounding")
+        
+        let startingPoint = dataSource.timerInterval.startingPoint
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: startingPoint)
+        let minute = calendar.component(.minute, from: startingPoint)
+        let floorMinute = minute - (minute % timeIntervalRounding)
+        
+        dataSource.timerInterval.startingPoint = calendar.date(bySettingHour: hour, minute: floorMinute, second: 0, of: startingPoint)!
     }
     
     @objc func didTapBackground(_ sender: Any) {
-        dismissPopup()
+        self.dismiss(animated: true, completion: nil)
     }
     
     func dismissPopup() {
+        dismissFromPopup = true
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func deleteInterval(_ sender: Any) {
-        dataSource.deleteInterval()
+        if deleteButton.titleLabel?.text == "Cancel" {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            dataSource.deleteInterval()
+        }
     }
     
     @IBAction func saveInterval(_ sender: Any) {
@@ -115,6 +162,10 @@ class EditPopup: UIViewController {
         
         timerName.text = dataSource.timer?.name ?? "New Timer Interval"
         popupHeaderView.backgroundColor = TimerColor(rawValue: dataSource.timer?.color ?? "orange")?.create
+        
+        let timeIntervalRounding = UserDefaults.standard.integer(forKey: "timeIntervalRounding")
+        startingPointStepper.stepValue = Double(timeIntervalRounding)
+        endingPointStepper.stepValue = Double(timeIntervalRounding)
     }
     
     func updateUI() {
@@ -129,6 +180,7 @@ class EditPopup: UIViewController {
             self.endingPoint.text = dateFormatter.string(from: endingPointDate)
             let totalTime = endingPointDate.timeIntervalSince(startingPointDate)
             self.totalTime.text = Int(totalTime).timeString(format: 1)
+            self.updateActiveLayer?(TimerInterval(startingPoint: startingPointDate, endingPoint: endingPointDate), dataSource.timer?.color ?? "orange")
         } else {
             startingPointStepper.value = 0
             endingPointStepper.value = 0
@@ -177,7 +229,10 @@ extension EditPopup: UITableViewDelegate, UITableViewDataSource {
         } else {
             dataSource.timer = dataSource.timers[indexPath.row - 1]
             configureUI()
-            tableView.isHidden = true
+            updateUI()
+            UIView.animate(withDuration: 0.1, animations: {
+                tableView.alpha = 0
+            })
         }
     }
     
