@@ -79,6 +79,10 @@ class TimersViewController: UIViewController {
         initDataSource()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        timersTableView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         is12HourClock = UserDefaults.standard.bool(forKey: "is12HourClock")
         if is12HourClock {

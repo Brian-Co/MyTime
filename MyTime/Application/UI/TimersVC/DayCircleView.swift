@@ -166,33 +166,41 @@ class DayCircleView: UIView {
         for sublayer in layer.sublayers! {
             if let myLayer = sublayer as? CAShapeLayer {
                 if myLayer.value(forKey: "isOn") != nil {
-                    let centerPoint = CGPoint(x: frame.width/2 , y: frame.height/2)
-                    let startAngle = myLayer.value(forKey: "startAngle") as! CGFloat - CGFloat.pi/2
-                    let newAngle = Date().minutesSinceMidnight() / circleMinutes
-                    let endAngle = (2 * CGFloat.pi * CGFloat(newAngle)) - CGFloat.pi/2
-                    let circularPath = UIBezierPath(arcCenter: centerPoint, radius: bounds.width / 2 - 20, startAngle: startAngle,
-                                                    endAngle: endAngle, clockwise: true)
-                    myLayer.path = circularPath.cgPath
+                    updateRunningIntervalLayer(myLayer, circleMinutes)
                 } else if myLayer.value(forKey: "isEdited") != nil {
                     if let timerInterval = timerInterval {
-                        let centerPoint = CGPoint(x: frame.width/2 , y: frame.height/2)
-                        let newStartAngle = timerInterval.startingPoint.minutesSinceMidnight() / circleMinutes
-                        let startAngle = (2 * CGFloat.pi * CGFloat(newStartAngle)) - CGFloat.pi/2
-                        var newEndAngle = timerInterval.endingPoint!.minutesSinceMidnight() / circleMinutes
-                        if newEndAngle == newStartAngle {
-                            newEndAngle = newEndAngle + 0.001
-                        }
-                        let endAngle = (2 * CGFloat.pi * CGFloat(newEndAngle)) - CGFloat.pi/2
-                        let circularPath = UIBezierPath(arcCenter: centerPoint, radius: bounds.width / 2 - 20, startAngle: startAngle,
-                                                        endAngle: endAngle, clockwise: true)
-                        myLayer.strokeColor = TimerColor(rawValue: color)?.create.cgColor
-                        let oldPath = myLayer.path!
-                        myLayer.path = circularPath.cgPath
-                        animatePath(myLayer, oldPath)
+                        updateExistingIntervalLayer(myLayer, timerInterval, color, circleMinutes)
                     }
                 }
             }
         }
+    }
+    
+    func updateRunningIntervalLayer(_ runningLayer: CAShapeLayer, _ circleMinutes: Double) {
+        let centerPoint = CGPoint(x: frame.width/2 , y: frame.height/2)
+        let startAngle = runningLayer.value(forKey: "startAngle") as! CGFloat - CGFloat.pi/2
+        let newAngle = Date().minutesSinceMidnight() / circleMinutes
+        let endAngle = (2 * CGFloat.pi * CGFloat(newAngle)) - CGFloat.pi/2
+        let circularPath = UIBezierPath(arcCenter: centerPoint, radius: bounds.width / 2 - 20, startAngle: startAngle,
+                                        endAngle: endAngle, clockwise: true)
+        runningLayer.path = circularPath.cgPath
+    }
+    
+    func updateExistingIntervalLayer(_ existingLayer: CAShapeLayer, _ timerInterval: TimerInterval, _ color: String, _ circleMinutes: Double) {
+        let centerPoint = CGPoint(x: frame.width/2 , y: frame.height/2)
+        let newStartAngle = timerInterval.startingPoint.minutesSinceMidnight() / circleMinutes
+        let startAngle = (2 * CGFloat.pi * CGFloat(newStartAngle)) - CGFloat.pi/2
+        var newEndAngle = timerInterval.endingPoint!.minutesSinceMidnight() / circleMinutes
+        if newEndAngle == newStartAngle {
+            newEndAngle = newEndAngle + 0.001
+        }
+        let endAngle = (2 * CGFloat.pi * CGFloat(newEndAngle)) - CGFloat.pi/2
+        let circularPath = UIBezierPath(arcCenter: centerPoint, radius: bounds.width / 2 - 20, startAngle: startAngle,
+                                        endAngle: endAngle, clockwise: true)
+        existingLayer.strokeColor = TimerColor(rawValue: color)?.create.cgColor
+        let oldPath = existingLayer.path!
+        existingLayer.path = circularPath.cgPath
+        animatePath(existingLayer, oldPath)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -236,36 +244,77 @@ class DayCircleView: UIView {
             }
         }
     }
-    
-    private func animate(_ layer: CAShapeLayer) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock({
-            layer.strokeEnd = 1
-        })
-        let foregroundAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        foregroundAnimation.fromValue = 0
-        foregroundAnimation.toValue = 1
-        foregroundAnimation.beginTime = CACurrentMediaTime() + 0.3
-        foregroundAnimation.duration = CFTimeInterval(0.5)
-        foregroundAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        foregroundAnimation.fillMode = CAMediaTimingFillMode.forwards
-        foregroundAnimation.isRemovedOnCompletion = false
         
-        layer.add(foregroundAnimation, forKey: "foregroundAnimation")
-        CATransaction.commit()
+    /// User did select a timerIntervalLayer. This methods looks for the TimerInterval instance that matches the selected timerIntervalLayer, and tells the delegate when it succeeds.
+    func findTimerFrom(_ startAngle: Double, _ endAngle: Double) {
+        
+        var circleMinutes: Double = 1440
+        if is12HourClock {
+            circleMinutes = 720
+        }
+
+        let startingPointMinutes = String(format: "%.6f", startAngle * circleMinutes)
+        let endingPointMinutes = String(format: "%.6f", endAngle * circleMinutes)
+        
+        for timer in timers {
+            for timerInterval in timer.timerIntervals {
+                if let endingPoint = timerInterval.endingPoint {
+                    
+                    var isStartingPointAfternoon: Double = 0
+                    var isEndingPointAfternoon: Double = 0
+                    
+                    if is12HourClock {
+                        let startingPointHour = Calendar.current.component(.hour, from: timerInterval.startingPoint)
+                        if startingPointHour >= 12 {
+                            isStartingPointAfternoon = 720
+                        }
+                        let endingPointHour = Calendar.current.component(.hour, from: endingPoint)
+                        if endingPointHour >= 12 {
+                            isEndingPointAfternoon = 720
+                        }
+                    }
+                    
+                    let minutesStartingPoint = String(format: "%.6f", timerInterval.startingPoint.minutesSinceMidnight() - isStartingPointAfternoon)
+                    let minutesEndingPoint = String(format: "%.6f", endingPoint.minutesSinceMidnight() - isEndingPointAfternoon)
+                    
+                    if minutesStartingPoint == startingPointMinutes && minutesEndingPoint == endingPointMinutes {
+                        didSelectInterval?(timer, timerInterval, self)
+                    }
+                }
+            }
+        }
     }
     
-    private func animatePath(_ layer: CAShapeLayer, _ oldPath: CGPath) {
-        let foregroundAnimation = CABasicAnimation(keyPath: "path")
-        foregroundAnimation.fromValue = oldPath
-        foregroundAnimation.toValue = layer.path
-        foregroundAnimation.duration = CFTimeInterval(0.2)
-        foregroundAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        foregroundAnimation.fillMode = CAMediaTimingFillMode.forwards
-        foregroundAnimation.isRemovedOnCompletion = false
+    ///User did select an empty space on the circle. This method creates a timerIntervalLayer and a new TimerInterval instance based on where the user tapped, and sends it to the delegate.
+    func createTimerIntervalFrom(_ angle: Double) {
         
-        layer.add(foregroundAnimation, forKey: "foregroundAnimation")
+        var circleMinutes: Double = 1440
+        if is12HourClock {
+            circleMinutes = 720
+        }
+        
+        let startingPointMinutes = angle * circleMinutes
+        var hours = Int(startingPointMinutes / 60)
+        let minutes = Int(startingPointMinutes) % 60
+        
+        if is12HourClock && Calendar.current.component(.hour, from: chosenDate) >= 12 {
+            hours += 12
+        }
+        
+        let date = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: chosenDate)!
+        
+        let newInterval = TimerInterval(startingPoint: date, endingPoint: nil)
+        
+        createTimerIntervalLayer(angle, angle, "orange", false, true)
+        
+        didSelectInterval?(nil, newInterval, self)
     }
+    
+}
+
+
+///UI methods to configure the view
+extension DayCircleView {
     
     private func addHoursTextLayers() {
         
@@ -321,68 +370,40 @@ class DayCircleView: UIView {
         }
     }
     
-    // User did select timerInterval
-    func findTimerFrom(_ startAngle: Double, _ endAngle: Double) {
-        
-        var circleMinutes: Double = 1440
-        if is12HourClock {
-            circleMinutes = 720
-        }
+    
+}
 
-        let startingPointMinutes = String(format: "%.6f", startAngle * circleMinutes)
-        let endingPointMinutes = String(format: "%.6f", endAngle * circleMinutes)
+///Layers animations
+extension DayCircleView {
+    
+    private func animate(_ layer: CAShapeLayer) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock({
+            layer.strokeEnd = 1
+        })
+        let foregroundAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        foregroundAnimation.fromValue = 0
+        foregroundAnimation.toValue = 1
+        foregroundAnimation.beginTime = CACurrentMediaTime() + 0.3
+        foregroundAnimation.duration = CFTimeInterval(0.5)
+        foregroundAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        foregroundAnimation.fillMode = CAMediaTimingFillMode.forwards
+        foregroundAnimation.isRemovedOnCompletion = false
         
-        for timer in timers {
-            for timerInterval in timer.timerIntervals {
-                if let endingPoint = timerInterval.endingPoint {
-                    
-                    var isStartingPointAfternoon: Double = 0
-                    var isEndingPointAfternoon: Double = 0
-                    
-                    if is12HourClock {
-                        let startingPointHour = Calendar.current.component(.hour, from: timerInterval.startingPoint)
-                        if startingPointHour >= 12 {
-                            isStartingPointAfternoon = 720
-                        }
-                        let endingPointHour = Calendar.current.component(.hour, from: endingPoint)
-                        if endingPointHour >= 12 {
-                            isEndingPointAfternoon = 720
-                        }
-                    }
-                    
-                    let minutesStartingPoint = String(format: "%.6f", timerInterval.startingPoint.minutesSinceMidnight() - isStartingPointAfternoon)
-                    let minutesEndingPoint = String(format: "%.6f", endingPoint.minutesSinceMidnight() - isEndingPointAfternoon)
-                    
-                    if minutesStartingPoint == startingPointMinutes && minutesEndingPoint == endingPointMinutes {
-                        didSelectInterval?(timer, timerInterval, self)
-                    }
-                }
-            }
-        }
+        layer.add(foregroundAnimation, forKey: "foregroundAnimation")
+        CATransaction.commit()
     }
     
-    func createTimerIntervalFrom(_ angle: Double) {
+    private func animatePath(_ layer: CAShapeLayer, _ oldPath: CGPath) {
+        let foregroundAnimation = CABasicAnimation(keyPath: "path")
+        foregroundAnimation.fromValue = oldPath
+        foregroundAnimation.toValue = layer.path
+        foregroundAnimation.duration = CFTimeInterval(0.2)
+        foregroundAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        foregroundAnimation.fillMode = CAMediaTimingFillMode.forwards
+        foregroundAnimation.isRemovedOnCompletion = false
         
-        var circleMinutes: Double = 1440
-        if is12HourClock {
-            circleMinutes = 720
-        }
-        
-        let startingPointMinutes = angle * circleMinutes
-        var hours = Int(startingPointMinutes / 60)
-        let minutes = Int(startingPointMinutes) % 60
-        
-        if is12HourClock && Calendar.current.component(.hour, from: chosenDate) >= 12 {
-            hours += 12
-        }
-        
-        let date = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: chosenDate)!
-        
-        let newInterval = TimerInterval(startingPoint: date, endingPoint: nil)
-        
-        createTimerIntervalLayer(angle, angle, "orange", false, true)
-        
-        didSelectInterval?(nil, newInterval, self)
+        layer.add(foregroundAnimation, forKey: "foregroundAnimation")
     }
     
 }

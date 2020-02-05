@@ -48,12 +48,7 @@ class SettingsVC: UITableViewController {
         if indexPath.row == 0 {
             cell = return12HourClockCell(cell)
         } else if indexPath.row == 1 {
-            cell.textLabel?.text = "Round time interval"
-            let cellImage = UIImage(systemName: "slider.horizontal.3")
-            cell.imageView?.image = cellImage
-            let timeIntervalRounding = UserDefaults.standard.integer(forKey: "timeIntervalRounding")
-            roundIntervalCellLabel.text = "\(timeIntervalRounding) min  ❯"
-            cell.accessoryView = roundIntervalCellLabel
+            cell = returnRoundTimeIntervalCell(cell)
         } else {
             cell.textLabel?.text = "About"
             let cellImage = UIImage(systemName: "info.circle")
@@ -93,6 +88,20 @@ class SettingsVC: UITableViewController {
         
         cell.textLabel?.text = "12-hour clock"
         cell.accessoryView = cellSwitch
+        
+        return cell
+    }
+    
+    func returnRoundTimeIntervalCell(_ cell: UITableViewCell) -> UITableViewCell {
+        
+        cell.textLabel?.text = "Round time interval"
+        
+        let cellImage = UIImage(systemName: "slider.horizontal.3")
+        cell.imageView?.image = cellImage
+        
+        let timeIntervalRounding = UserDefaults.standard.integer(forKey: "timeIntervalRounding")
+        roundIntervalCellLabel.text = "\(timeIntervalRounding) min  ❯"
+        cell.accessoryView = roundIntervalCellLabel
         
         return cell
     }

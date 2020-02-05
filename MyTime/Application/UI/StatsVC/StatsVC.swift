@@ -69,6 +69,10 @@ class StatsVC: UIViewController {
         initDataSource()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        tableView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
+    }
+    
     func initDataSource() {
         
         dataSource.contentDidChange = { [weak self] in self?.updateUI() }
