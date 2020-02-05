@@ -11,8 +11,16 @@ import RealmSwift
 
 final class TimerIntervalRealm: Object {
     
+    @objc dynamic var id: String = NSUUID().uuidString
     @objc dynamic var startingPoint: Date = Date()
     @objc dynamic var endingPoint: Date? = nil
+    @objc dynamic var isDeleted: Bool = false
+    
+    @objc dynamic var timer: TimerRealm?
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
     
 }
 
@@ -26,6 +34,7 @@ extension TimerIntervalRealm: CodableForAppModel {
     }
     
     func toAppModel() -> TimerInterval? {
+        if isDeleted { return nil }
         return TimerInterval(startingPoint: startingPoint, endingPoint: endingPoint)
     }
     

@@ -11,10 +11,17 @@ import RealmSwift
 
 final class TimerRealm: Object {
     
+    @objc dynamic var id: String = NSUUID().uuidString
     @objc dynamic var name: String = ""
     @objc dynamic var color: String = ""
     @objc dynamic var category: String = ""
-    let timerIntervals: List<TimerIntervalRealm> = List<TimerIntervalRealm>()
+    @objc dynamic var isDeleted: Bool = false
+    
+    let timerIntervals: LinkingObjects<TimerIntervalRealm> = LinkingObjects(fromType: TimerIntervalRealm.self, property: "timer")
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
     
 }
 
@@ -25,11 +32,11 @@ extension TimerRealm: CodableForAppModel {
         timer.name = appModel.name
         timer.color = appModel.color
         timer.category = appModel.category
-        timer.timerIntervals.append(objectsIn: appModel.timerIntervals.compactMap({ TimerIntervalRealm.from(appModel: $0) }))
         return timer
     }
     
     func toAppModel() -> TimerX? {
+        if isDeleted { return nil }
         return TimerX(name: name, color: color, category: category, timerIntervals: [TimerInterval](timerIntervals.compactMap({ $0.toAppModel() })))
     }
     

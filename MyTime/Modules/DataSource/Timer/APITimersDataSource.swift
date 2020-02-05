@@ -17,12 +17,16 @@ class APITimersDataSource: TimersDataSource {
     var stateDidChange: ((DataSourceState) -> ())?
     
     let realm = try! Realm()
-    var observer: NotificationToken?
+    var timerObserver: NotificationToken?
+    var timerIntervalObserver: NotificationToken?
+    
+    ///To avoid contentDidChange method to be fired twice in a row at launch
+    var firstTime = true
     
     func fetchData() {
 //        print(Realm.Configuration.defaultConfiguration.fileURL)
         
-        observer = realm.objects(TimerRealm.self).observe({ changes in
+        timerObserver = realm.objects(TimerRealm.self).observe({ changes in
             let timers = self.realm.objects(TimerRealm.self)
             
             if timers.count > 0 {
@@ -31,7 +35,7 @@ class APITimersDataSource: TimersDataSource {
             } else {
                 
                 let timer = TimerRealm()
-                timer.name = "First Timer"
+                timer.name = "First Project"
                 timer.color = "orange"
                 
                 try! self.realm.write {
@@ -42,34 +46,49 @@ class APITimersDataSource: TimersDataSource {
                 self.content.append(timerX)
             }
             
-            self.contentDidChange?()
+            if !self.firstTime {
+                self.contentDidChange?()
+            }
         })
+        
+        timerIntervalObserver = realm.objects(TimerIntervalRealm.self).observe({ changes in
+            
+            let timers = self.realm.objects(TimerRealm.self)
+            self.content = timers.compactMap { $0.toAppModel() }
+            self.contentDidChange?()
+            self.firstTime = false
+        })
+        
     }
     
     func deleteTimer(_ timerName: String) {
         
-        guard let timerToDelete = realm.objects(TimerRealm.self).filter("name = '\(timerName)'").first else { return }
+        guard let timerToDelete = realm.objects(TimerRealm.self).filter("name = '\(timerName)' AND isDeleted = false").first else { return }
         
         try! realm.write {
-            realm.delete(timerToDelete)
+            timerToDelete.isDeleted = true
         }
     }
     
     func updateTimer(_ timer: TimerX) {
         
-        let timerToUpdate = realm.objects(TimerRealm.self).filter("name = '\(timer.name)'").first
+        let timerToUpdate = realm.objects(TimerRealm.self).filter("name = '\(timer.name)' AND isDeleted = false").first
         
         if timer.isOn {
-            let timerIntervalRealm = TimerIntervalRealm(value: [timer.timerIntervals.last!.startingPoint, timer.timerIntervals.last!.endingPoint])
+            let timerIntervalRealm = TimerIntervalRealm()
+            timerIntervalRealm.startingPoint = timer.timerIntervals.last!.startingPoint
+            timerIntervalRealm.endingPoint = timer.timerIntervals.last!.endingPoint
+            timerIntervalRealm.timer = timerToUpdate
             
             try! realm.write {
-                timerToUpdate?.timerIntervals.append(timerIntervalRealm)
+                realm.add(timerIntervalRealm)
             }
         } else {
             if timerToUpdate?.timerIntervals.last?.startingPoint != timer.timerIntervals.last?.startingPoint {
+                //Delete timerInterval that's less than 30sec long
                 let timerIntervalToDelete = timerToUpdate?.timerIntervals.last
                 try! realm.write {
-                    realm.delete(timerIntervalToDelete!)
+                    timerIntervalToDelete?.isDeleted = true
                 }
             } else {
                 try! realm.write {

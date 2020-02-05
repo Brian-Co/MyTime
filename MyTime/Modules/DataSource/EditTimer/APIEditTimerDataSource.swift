@@ -55,7 +55,7 @@ class APIEditTimerDataSource: EditTimerDataSource {
     func timerNameExists() -> Bool {
         
         if timer.name != timerName {
-            if realm.objects(TimerRealm.self).filter("name = '\(timer.name)'").first != nil {
+            if realm.objects(TimerRealm.self).filter("name = '\(timer.name)' AND isDeleted = false").first != nil {
                 showAlert?("Timer already exists", "You must enter a different timer name")
                 return true
             }
@@ -67,7 +67,7 @@ class APIEditTimerDataSource: EditTimerDataSource {
         
         if let timer = timerName {
             
-            guard let timerToEdit = realm.objects(TimerRealm.self).filter("name = '\(timer)'").first else { return }
+            guard let timerToEdit = realm.objects(TimerRealm.self).filter("name = '\(timer)' AND isDeleted = false").first else { return }
             
             try! realm.write {
                 timerToEdit.name = self.timer.name
@@ -87,10 +87,10 @@ class APIEditTimerDataSource: EditTimerDataSource {
     
     func delete() {
         
-        guard let timerToDelete = realm.objects(TimerRealm.self).filter("name = '\(timer.name)'").first else { return }
+        guard let timerToDelete = realm.objects(TimerRealm.self).filter("name = '\(timer.name)' AND isDeleted = false").first else { return }
         
         try! realm.write {
-            realm.delete(timerToDelete)
+            timerToDelete.isDeleted = true
         }
         
         dismissVC?()
