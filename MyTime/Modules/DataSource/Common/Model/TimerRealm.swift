@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import IceCream
 
 final class TimerRealm: Object {
     
@@ -37,7 +38,17 @@ extension TimerRealm: CodableForAppModel {
     
     func toAppModel() -> TimerX? {
         if isDeleted { return nil }
+        let realm = try! Realm()
+        let timerIntervals = realm.objects(TimerIntervalRealm.self).filter{ $0.timerID == self.id }
         return TimerX(name: name, color: color, category: category, timerIntervals: [TimerInterval](timerIntervals.compactMap({ $0.toAppModel() })))
     }
+    
+}
+
+extension TimerRealm: CKRecordConvertible {
+    
+}
+
+extension TimerRealm: CKRecordRecoverable {
     
 }

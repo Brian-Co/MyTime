@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import IceCream
 
 final class TimerIntervalRealm: Object {
     
@@ -17,6 +18,7 @@ final class TimerIntervalRealm: Object {
     @objc dynamic var isDeleted: Bool = false
     
     @objc dynamic var timer: TimerRealm?
+    @objc dynamic var timerID: String = ""
     
     override class func primaryKey() -> String? {
         return "id"
@@ -39,3 +41,12 @@ extension TimerIntervalRealm: CodableForAppModel {
     }
     
 }
+
+extension TimerIntervalRealm: CKRecordConvertible {
+    
+}
+
+extension TimerIntervalRealm: CKRecordRecoverable {
+    
+}
+

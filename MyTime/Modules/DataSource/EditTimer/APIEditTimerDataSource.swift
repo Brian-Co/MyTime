@@ -88,9 +88,16 @@ class APIEditTimerDataSource: EditTimerDataSource {
     func delete() {
         
         guard let timerToDelete = realm.objects(TimerRealm.self).filter("name = '\(timer.name)' AND isDeleted = false").first else { return }
+        let timerIntervalsToDelete = realm.objects(TimerIntervalRealm.self).filter{ $0.timerID == timerToDelete.id }
         
         try! realm.write {
             timerToDelete.isDeleted = true
+        }
+        
+        for timerInterval in timerIntervalsToDelete {
+            try! realm.write {
+                timerInterval.isDeleted = true
+            }
         }
         
         dismissVC?()

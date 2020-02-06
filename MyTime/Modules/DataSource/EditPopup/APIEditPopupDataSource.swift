@@ -69,14 +69,17 @@ class APIEditPopupDataSource: EditPopupDataSource {
     func createInterval() {
         
         let timerToUpdate = realm.objects(TimerRealm.self).filter("name = '\(timer!.name)' AND isDeleted = false").first
+        let timerIntervalToUpdate = realm.objects(TimerIntervalRealm.self).filter{ $0.timerID == timerToUpdate?.id }.last
+        
         let timerIntervalRealm = TimerIntervalRealm()
         timerIntervalRealm.startingPoint = timerInterval.startingPoint
         timerIntervalRealm.endingPoint = timerInterval.endingPoint!
         timerIntervalRealm.timer = timerToUpdate
+        timerIntervalRealm.timerID = timerToUpdate?.id ?? ""
         
         if timer!.isOn {
             try! realm.write {
-                timerToUpdate?.timerIntervals.last?.endingPoint = Date()
+                timerIntervalToUpdate?.endingPoint = Date()
             }
         }
         

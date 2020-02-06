@@ -7,17 +7,40 @@
 //
 
 import UIKit
+import CloudKit
+import IceCream
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    
+    var syncEngine: SyncEngine?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         UserDefaults.standard.setValue(false, forKey:"_UIConstraintBasedLayoutLogUnsatisfiable")
         
+        syncEngine = SyncEngine(objects: [
+                SyncObject<TimerRealm>(),
+                SyncObject<TimerIntervalRealm>()
+            ], databaseScope: .private)
+        application.registerForRemoteNotifications()
+        
         return true
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        if let dict = userInfo as? [String: NSObject], let notification = CKNotification(fromRemoteNotificationDictionary: dict), let subscriptionID = notification.subscriptionID, IceCreamSubscription.allIDs.contains(subscriptionID) {
+            NotificationCenter.default.post(name: Notifications.cloudKitDataDidChangeRemotely.name, object: nil, userInfo: userInfo)
+            completionHandler(.newData)
+        }
+        
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        
+        // How about fetching changes here?
+        
     }
 
     // MARK: UISceneSession Lifecycle
