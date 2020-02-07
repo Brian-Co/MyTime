@@ -24,7 +24,7 @@ class APIEditPopupDataSource: EditPopupDataSource {
         self.timer = timer
         self.timerInterval = timerInterval
         self.originalTimerInterval = TimerInterval(startingPoint: timerInterval.startingPoint, endingPoint: timerInterval.endingPoint)
-        let timers = self.realm.objects(TimerRealm.self)
+        let timers = self.realm.objects(TimerRealm.self).sorted{ $0.index < $1.index }
         self.timers = timers.compactMap { $0.toAppModel() }
     }
     

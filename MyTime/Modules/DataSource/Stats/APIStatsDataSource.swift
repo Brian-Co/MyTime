@@ -23,14 +23,14 @@ class APIStatsDataSource: StatsDataSource {
         
         let realm = try! Realm()
         timerObserver = realm.objects(TimerRealm.self).observe({ changes in
-            let timers = realm.objects(TimerRealm.self)
+            let timers = realm.objects(TimerRealm.self).sorted{ $0.index < $1.index }
             self.content = timers.compactMap { $0.toAppModel() }
             
             self.contentDidChange?()
         })
         
         timerIntervalObserver = realm.objects(TimerIntervalRealm.self).observe({ changes in
-            let timers = realm.objects(TimerRealm.self)
+            let timers = realm.objects(TimerRealm.self).sorted{ $0.index < $1.index }
             self.content = timers.compactMap { $0.toAppModel() }
             
             self.contentDidChange?()

@@ -76,6 +76,14 @@ class APIEditTimerDataSource: EditTimerDataSource {
         } else {
             
             let timer = TimerRealm()
+            let index = realm.objects(TimerRealm.self).reduce(0, { result, timer in
+                var index = result
+                if timer.index >= index {
+                    index = timer.index + 1
+                }
+                return index
+            })
+            timer.index = index
             timer.name = self.timer.name
             timer.color = self.timer.color
             

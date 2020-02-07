@@ -13,6 +13,7 @@ import IceCream
 final class TimerRealm: Object {
     
     @objc dynamic var id: String = NSUUID().uuidString
+    @objc dynamic var index: Int = 0
     @objc dynamic var name: String = ""
     @objc dynamic var color: String = ""
     @objc dynamic var category: String = ""

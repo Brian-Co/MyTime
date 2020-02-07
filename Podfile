@@ -1,14 +1,20 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'MyTime' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
+# Comment the next line if you don't want to use dynamic frameworks
+use_frameworks!
 
-  # Pods for MyTime
+def shared_pods
   pod 'RealmSwift'
-  pod 'FSCalendar'
   pod 'IceCream'
+end
+
+target 'MyTime' do
+  platform :ios, '13.0'
+  
+  # Pods for MyTime
+  shared_pods
+  pod 'FSCalendar'
 
   target 'MyTimeTests' do
     inherit! :search_paths
@@ -19,4 +25,9 @@ target 'MyTime' do
     # Pods for testing
   end
 
+end
+
+target 'MyTimeWatchApp Extension' do
+  platform :watchos, '6.0'
+  shared_pods
 end

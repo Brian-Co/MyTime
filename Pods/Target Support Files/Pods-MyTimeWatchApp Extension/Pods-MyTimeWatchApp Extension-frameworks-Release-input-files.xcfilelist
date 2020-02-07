@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-MyTimeWatchApp Extension/Pods-MyTimeWatchApp Extension-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Realm-watchOS/Realm.framework
+${BUILT_PRODUCTS_DIR}/RealmSwift-watchOS/RealmSwift.framework

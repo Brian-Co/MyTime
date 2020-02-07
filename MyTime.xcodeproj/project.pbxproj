@@ -7,15 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B9E1BD47DE2D126B034CC5E /* Pods_MyTime_MyTimeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5A36DDCB489EA06E907862 /* Pods_MyTime_MyTimeUITests.framework */; };
+		0B887E94B34ECA3B267A4654 /* Pods_MyTime_MyTimeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B7C7D1DB8D235BA16232EA /* Pods_MyTime_MyTimeUITests.framework */; };
 		37EFDE4423D9AF290028E214 /* CodableForAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFDE4223D9AEE50028E214 /* CodableForAppModel.swift */; };
-		451CB9CFE7E4E49BBE74A0E6 /* Pods_MyTimeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1D645C2513CA67E4F4606C /* Pods_MyTimeTests.framework */; };
-		AD11025F0BA4B010F74BB8DD /* Pods_MyTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1282D6B1379E7C012411C2EC /* Pods_MyTime.framework */; };
+		674901480691F609E6418561 /* Pods_MyTimeWatchApp_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A963CDB4A7007543EF3585A /* Pods_MyTimeWatchApp_Extension.framework */; };
 		D412391623D66123003C58F9 /* EditPopupDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D412391523D66123003C58F9 /* EditPopupDataSource.swift */; };
 		D412391823D6613A003C58F9 /* APIEditPopupDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D412391723D6613A003C58F9 /* APIEditPopupDataSource.swift */; };
 		D4304F9D23C64B530096018E /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4304F9C23C64B530096018E /* RootCoordinator.swift */; };
 		D4304F9F23C71F330096018E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4304F9E23C71F330096018E /* Coordinator.swift */; };
 		D4304FA123C74A680096018E /* TimersNavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4304FA023C74A680096018E /* TimersNavigationCoordinator.swift */; };
+		D435058B23EC241B004DF898 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D435058923EC241B004DF898 /* Interface.storyboard */; };
+		D435058D23EC241D004DF898 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D435058C23EC241D004DF898 /* Assets.xcassets */; };
+		D435059423EC241D004DF898 /* MyTimeWatchApp Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D435059323EC241D004DF898 /* MyTimeWatchApp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D435059923EC241D004DF898 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D435059823EC241D004DF898 /* ContentView.swift */; };
+		D435059B23EC241D004DF898 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D435059A23EC241D004DF898 /* HostingController.swift */; };
+		D435059D23EC241D004DF898 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D435059C23EC241D004DF898 /* ExtensionDelegate.swift */; };
+		D435059F23EC241D004DF898 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D435059E23EC241D004DF898 /* NotificationController.swift */; };
+		D43505A123EC241D004DF898 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43505A023EC241D004DF898 /* NotificationView.swift */; };
+		D43505A323EC241D004DF898 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43505A223EC241D004DF898 /* ComplicationController.swift */; };
+		D43505A523EC241D004DF898 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D43505A423EC241D004DF898 /* Assets.xcassets */; };
+		D43505A823EC241D004DF898 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D43505A723EC241D004DF898 /* Preview Assets.xcassets */; };
+		D43505AD23EC241D004DF898 /* MyTimeWatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D435058723EC241B004DF898 /* MyTimeWatchApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D43505B823EC2B36004DF898 /* CodableForAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFDE4223D9AEE50028E214 /* CodableForAppModel.swift */; };
+		D43505BE23EC2D4D004DF898 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43505BD23EC2D4D004DF898 /* CloudKit.framework */; };
+		D43505C023EC3152004DF898 /* APIWatchAppDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43505BF23EC3152004DF898 /* APIWatchAppDataSource.swift */; };
+		D43505C423EC36CE004DF898 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43505C323EC36CE004DF898 /* Collection+Extensions.swift */; };
+		D43505CC23EC5472004DF898 /* TimerWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43505CB23EC5472004DF898 /* TimerWatch.swift */; };
+		D43505CE23EC54DF004DF898 /* TimerIntervalWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43505CD23EC54DF004DF898 /* TimerIntervalWatch.swift */; };
+		D43505D223EC5712004DF898 /* RealmTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43505D123EC5712004DF898 /* RealmTimer.swift */; };
+		D43505D423EC588E004DF898 /* RealmTimerInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43505D323EC588E004DF898 /* RealmTimerInterval.swift */; };
+		D43505D523EC6622004DF898 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D451930723CC75AE0074D08E /* Int+Extensions.swift */; };
+		D43505D723EC791E004DF898 /* TimerColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43505D623EC791E004DF898 /* TimerColor.swift */; };
 		D4396C6C23E88AB3009C8BB2 /* CalendarStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4396C6B23E88AB3009C8BB2 /* CalendarStatsVC.swift */; };
 		D43EB7ED23D5DB5A00C2CA86 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43EB7EC23D5DB5A00C2CA86 /* CGPoint+Extensions.swift */; };
 		D43EB7F523D6062D00C2CA86 /* EditPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43EB7F423D6062D00C2CA86 /* EditPopup.swift */; };
@@ -52,9 +73,25 @@
 		D4D844B423C79F4A00533701 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4D844B323C79F4A00533701 /* Main.storyboard */; };
 		D4D844B823C7A91700533701 /* TimersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D844B723C7A91700533701 /* TimersTableViewCell.swift */; };
 		D4EC98BA23C899F8003EC3C0 /* TimerColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EC98B923C899F8003EC3C0 /* TimerColor.swift */; };
+		D8756685AB44A3D2D994355A /* Pods_MyTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6C5DBB0B3FFCC2AD9A4A57 /* Pods_MyTime.framework */; };
+		E5E440C7A94430C700276B76 /* Pods_MyTimeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBD73CE4CEE03D93E9FEE71 /* Pods_MyTimeTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D435059523EC241D004DF898 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4C733EB23C0E39400A746B5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D435059223EC241D004DF898;
+			remoteInfo = "MyTimeWatchApp Extension";
+		};
+		D43505AB23EC241D004DF898 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4C733EB23C0E39400A746B5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D435058623EC241B004DF898;
+			remoteInfo = MyTimeWatchApp;
+		};
 		D4C7340D23C0E39800A746B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D4C733EB23C0E39400A746B5 /* Project object */;
@@ -71,20 +108,71 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D43505AE23EC241D004DF898 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				D43505AD23EC241D004DF898 /* MyTimeWatchApp.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D43505B123EC241D004DF898 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D435059423EC241D004DF898 /* MyTimeWatchApp Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		0F1D645C2513CA67E4F4606C /* Pods_MyTimeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTimeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1282D6B1379E7C012411C2EC /* Pods_MyTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1E2E68E676E915669AD943B4 /* Pods-MyTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime.debug.xcconfig"; path = "Target Support Files/Pods-MyTime/Pods-MyTime.debug.xcconfig"; sourceTree = "<group>"; };
+		0DC0E2FE8039489A1E91B3F4 /* Pods-MyTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime.release.xcconfig"; path = "Target Support Files/Pods-MyTime/Pods-MyTime.release.xcconfig"; sourceTree = "<group>"; };
+		0E49A4090A8485F1765104D7 /* Pods-MyTimeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTimeTests.release.xcconfig"; path = "Target Support Files/Pods-MyTimeTests/Pods-MyTimeTests.release.xcconfig"; sourceTree = "<group>"; };
+		2DBD73CE4CEE03D93E9FEE71 /* Pods_MyTimeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTimeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EFDE4223D9AEE50028E214 /* CodableForAppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableForAppModel.swift; sourceTree = "<group>"; };
-		5465FEB96FED5D120A6E5B3F /* Pods-MyTimeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTimeTests.debug.xcconfig"; path = "Target Support Files/Pods-MyTimeTests/Pods-MyTimeTests.debug.xcconfig"; sourceTree = "<group>"; };
-		6A5A36DDCB489EA06E907862 /* Pods_MyTime_MyTimeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTime_MyTimeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		967CA6C20BA817C7C58F48FC /* Pods-MyTime-MyTimeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime-MyTimeUITests.release.xcconfig"; path = "Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests.release.xcconfig"; sourceTree = "<group>"; };
-		9B743D9D1856CE176B991D0B /* Pods-MyTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime.release.xcconfig"; path = "Target Support Files/Pods-MyTime/Pods-MyTime.release.xcconfig"; sourceTree = "<group>"; };
+		3D0925108170ACF759DC8AC1 /* Pods-MyTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime.debug.xcconfig"; path = "Target Support Files/Pods-MyTime/Pods-MyTime.debug.xcconfig"; sourceTree = "<group>"; };
+		3DD24464E19A4860A023D902 /* Pods-MyTimeWatchApp Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTimeWatchApp Extension.debug.xcconfig"; path = "Target Support Files/Pods-MyTimeWatchApp Extension/Pods-MyTimeWatchApp Extension.debug.xcconfig"; sourceTree = "<group>"; };
+		5A963CDB4A7007543EF3585A /* Pods_MyTimeWatchApp_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTimeWatchApp_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		676D7BAF70A2EFA1F95E8694 /* Pods-MyTime-MyTimeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime-MyTimeUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B2999E01D1A675FF6596A717 /* Pods-MyTimeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTimeTests.debug.xcconfig"; path = "Target Support Files/Pods-MyTimeTests/Pods-MyTimeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B4B7C7D1DB8D235BA16232EA /* Pods_MyTime_MyTimeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTime_MyTimeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D412391523D66123003C58F9 /* EditPopupDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopupDataSource.swift; sourceTree = "<group>"; };
 		D412391723D6613A003C58F9 /* APIEditPopupDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEditPopupDataSource.swift; sourceTree = "<group>"; };
 		D4304F9C23C64B530096018E /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 		D4304F9E23C71F330096018E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		D4304FA023C74A680096018E /* TimersNavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersNavigationCoordinator.swift; sourceTree = "<group>"; };
+		D435058723EC241B004DF898 /* MyTimeWatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTimeWatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D435058A23EC241B004DF898 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		D435058C23EC241D004DF898 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D435058E23EC241D004DF898 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D435059323EC241D004DF898 /* MyTimeWatchApp Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MyTimeWatchApp Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D435059823EC241D004DF898 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D435059A23EC241D004DF898 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
+		D435059C23EC241D004DF898 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		D435059E23EC241D004DF898 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		D43505A023EC241D004DF898 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		D43505A223EC241D004DF898 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		D43505A423EC241D004DF898 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D43505A723EC241D004DF898 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D43505A923EC241D004DF898 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D43505AA23EC241D004DF898 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		D43505BC23EC2D47004DF898 /* MyTimeWatchApp Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MyTimeWatchApp Extension.entitlements"; sourceTree = "<group>"; };
+		D43505BD23EC2D4D004DF898 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.1.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
+		D43505BF23EC3152004DF898 /* APIWatchAppDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWatchAppDataSource.swift; sourceTree = "<group>"; };
+		D43505C323EC36CE004DF898 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
+		D43505CB23EC5472004DF898 /* TimerWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWatch.swift; sourceTree = "<group>"; };
+		D43505CD23EC54DF004DF898 /* TimerIntervalWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerIntervalWatch.swift; sourceTree = "<group>"; };
+		D43505D123EC5712004DF898 /* RealmTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTimer.swift; sourceTree = "<group>"; };
+		D43505D323EC588E004DF898 /* RealmTimerInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTimerInterval.swift; sourceTree = "<group>"; };
+		D43505D623EC791E004DF898 /* TimerColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerColor.swift; sourceTree = "<group>"; };
 		D4396C6B23E88AB3009C8BB2 /* CalendarStatsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarStatsVC.swift; sourceTree = "<group>"; };
 		D43EB7EC23D5DB5A00C2CA86 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		D43EB7F423D6062D00C2CA86 /* EditPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPopup.swift; sourceTree = "<group>"; };
@@ -128,17 +216,34 @@
 		D4D844B323C79F4A00533701 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D4D844B723C7A91700533701 /* TimersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersTableViewCell.swift; sourceTree = "<group>"; };
 		D4EC98B923C899F8003EC3C0 /* TimerColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerColor.swift; sourceTree = "<group>"; };
-		F009DFF110FD296FE02E941C /* Pods-MyTimeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTimeTests.release.xcconfig"; path = "Target Support Files/Pods-MyTimeTests/Pods-MyTimeTests.release.xcconfig"; sourceTree = "<group>"; };
-		FBFF517F14F51EB73055CD68 /* Pods-MyTime-MyTimeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime-MyTimeUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D83FE07A88FB28AA9C2C5483 /* Pods-MyTime-MyTimeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTime-MyTimeUITests.release.xcconfig"; path = "Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		DEF9B33DFA0CCAACED05A396 /* Pods-MyTimeWatchApp Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTimeWatchApp Extension.release.xcconfig"; path = "Target Support Files/Pods-MyTimeWatchApp Extension/Pods-MyTimeWatchApp Extension.release.xcconfig"; sourceTree = "<group>"; };
+		EB6C5DBB0B3FFCC2AD9A4A57 /* Pods_MyTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B4741AB1DA6E6A842D0227CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D435059023EC241D004DF898 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				674901480691F609E6418561 /* Pods_MyTimeWatchApp_Extension.framework in Frameworks */,
+				D43505BE23EC2D4D004DF898 /* CloudKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D4C733F023C0E39400A746B5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D4C7343123C0FD0F00A746B5 /* CloudKit.framework in Frameworks */,
-				AD11025F0BA4B010F74BB8DD /* Pods_MyTime.framework in Frameworks */,
+				D8756685AB44A3D2D994355A /* Pods_MyTime.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +251,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				451CB9CFE7E4E49BBE74A0E6 /* Pods_MyTimeTests.framework in Frameworks */,
+				E5E440C7A94430C700276B76 /* Pods_MyTimeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +259,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B9E1BD47DE2D126B034CC5E /* Pods_MyTime_MyTimeUITests.framework in Frameworks */,
+				0B887E94B34ECA3B267A4654 /* Pods_MyTime_MyTimeUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,12 +301,14 @@
 		C75C5E3D69442251E2A8E35E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1E2E68E676E915669AD943B4 /* Pods-MyTime.debug.xcconfig */,
-				9B743D9D1856CE176B991D0B /* Pods-MyTime.release.xcconfig */,
-				FBFF517F14F51EB73055CD68 /* Pods-MyTime-MyTimeUITests.debug.xcconfig */,
-				967CA6C20BA817C7C58F48FC /* Pods-MyTime-MyTimeUITests.release.xcconfig */,
-				5465FEB96FED5D120A6E5B3F /* Pods-MyTimeTests.debug.xcconfig */,
-				F009DFF110FD296FE02E941C /* Pods-MyTimeTests.release.xcconfig */,
+				3D0925108170ACF759DC8AC1 /* Pods-MyTime.debug.xcconfig */,
+				0DC0E2FE8039489A1E91B3F4 /* Pods-MyTime.release.xcconfig */,
+				676D7BAF70A2EFA1F95E8694 /* Pods-MyTime-MyTimeUITests.debug.xcconfig */,
+				D83FE07A88FB28AA9C2C5483 /* Pods-MyTime-MyTimeUITests.release.xcconfig */,
+				B2999E01D1A675FF6596A717 /* Pods-MyTimeTests.debug.xcconfig */,
+				0E49A4090A8485F1765104D7 /* Pods-MyTimeTests.release.xcconfig */,
+				3DD24464E19A4860A023D902 /* Pods-MyTimeWatchApp Extension.debug.xcconfig */,
+				DEF9B33DFA0CCAACED05A396 /* Pods-MyTimeWatchApp Extension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -212,6 +319,129 @@
 				D412391723D6613A003C58F9 /* APIEditPopupDataSource.swift */,
 			);
 			path = EditPopup;
+			sourceTree = "<group>";
+		};
+		D435058823EC241B004DF898 /* MyTimeWatchApp */ = {
+			isa = PBXGroup;
+			children = (
+				D435058923EC241B004DF898 /* Interface.storyboard */,
+				D435058C23EC241D004DF898 /* Assets.xcassets */,
+				D435058E23EC241D004DF898 /* Info.plist */,
+			);
+			path = MyTimeWatchApp;
+			sourceTree = "<group>";
+		};
+		D435059723EC241D004DF898 /* MyTimeWatchApp Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D43505BC23EC2D47004DF898 /* MyTimeWatchApp Extension.entitlements */,
+				D435059C23EC241D004DF898 /* ExtensionDelegate.swift */,
+				D43505C823EC5156004DF898 /* Application */,
+				D43505C523EC511F004DF898 /* Modules */,
+				D43505C123EC34F2004DF898 /* NotificationUI */,
+				D43505C223EC3506004DF898 /* ComplicationUI */,
+				D43505A423EC241D004DF898 /* Assets.xcassets */,
+				D43505A923EC241D004DF898 /* Info.plist */,
+				D43505AA23EC241D004DF898 /* PushNotificationPayload.apns */,
+				D43505A623EC241D004DF898 /* Preview Content */,
+			);
+			path = "MyTimeWatchApp Extension";
+			sourceTree = "<group>";
+		};
+		D43505A623EC241D004DF898 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D43505A723EC241D004DF898 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D43505C123EC34F2004DF898 /* NotificationUI */ = {
+			isa = PBXGroup;
+			children = (
+				D435059E23EC241D004DF898 /* NotificationController.swift */,
+				D43505A023EC241D004DF898 /* NotificationView.swift */,
+			);
+			path = NotificationUI;
+			sourceTree = "<group>";
+		};
+		D43505C223EC3506004DF898 /* ComplicationUI */ = {
+			isa = PBXGroup;
+			children = (
+				D43505A223EC241D004DF898 /* ComplicationController.swift */,
+			);
+			path = ComplicationUI;
+			sourceTree = "<group>";
+		};
+		D43505C523EC511F004DF898 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				D43505C623EC5126004DF898 /* Extensions */,
+				D43505C723EC5135004DF898 /* DataSource */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		D43505C623EC5126004DF898 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D43505C323EC36CE004DF898 /* Collection+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D43505C723EC5135004DF898 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				D43505CF23EC56D4004DF898 /* Model */,
+				D43505D023EC56DB004DF898 /* WatchApp */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		D43505C823EC5156004DF898 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				D43505CA23EC53BE004DF898 /* Model */,
+				D43505C923EC5162004DF898 /* Views */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		D43505C923EC5162004DF898 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D435059A23EC241D004DF898 /* HostingController.swift */,
+				D435059823EC241D004DF898 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D43505CA23EC53BE004DF898 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D43505CB23EC5472004DF898 /* TimerWatch.swift */,
+				D43505CD23EC54DF004DF898 /* TimerIntervalWatch.swift */,
+				D43505D623EC791E004DF898 /* TimerColor.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D43505CF23EC56D4004DF898 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D43505D123EC5712004DF898 /* RealmTimer.swift */,
+				D43505D323EC588E004DF898 /* RealmTimerInterval.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D43505D023EC56DB004DF898 /* WatchApp */ = {
+			isa = PBXGroup;
+			children = (
+				D43505BF23EC3152004DF898 /* APIWatchAppDataSource.swift */,
+			);
+			path = WatchApp;
 			sourceTree = "<group>";
 		};
 		D451930623CC75990074D08E /* Extensions */ = {
@@ -282,6 +512,8 @@
 				D4C733F523C0E39400A746B5 /* MyTime */,
 				D4C7340F23C0E39800A746B5 /* MyTimeTests */,
 				D4C7341A23C0E39800A746B5 /* MyTimeUITests */,
+				D435058823EC241B004DF898 /* MyTimeWatchApp */,
+				D435059723EC241D004DF898 /* MyTimeWatchApp Extension */,
 				D4C733F423C0E39400A746B5 /* Products */,
 				D4C7342F23C0FD0F00A746B5 /* Frameworks */,
 				C75C5E3D69442251E2A8E35E /* Pods */,
@@ -294,6 +526,8 @@
 				D4C733F323C0E39400A746B5 /* MyTime.app */,
 				D4C7340C23C0E39800A746B5 /* MyTimeTests.xctest */,
 				D4C7341723C0E39800A746B5 /* MyTimeUITests.xctest */,
+				D435058723EC241B004DF898 /* MyTimeWatchApp.app */,
+				D435059323EC241D004DF898 /* MyTimeWatchApp Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -342,10 +576,12 @@
 		D4C7342F23C0FD0F00A746B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D43505BD23EC2D4D004DF898 /* CloudKit.framework */,
 				D4C7343023C0FD0F00A746B5 /* CloudKit.framework */,
-				1282D6B1379E7C012411C2EC /* Pods_MyTime.framework */,
-				6A5A36DDCB489EA06E907862 /* Pods_MyTime_MyTimeUITests.framework */,
-				0F1D645C2513CA67E4F4606C /* Pods_MyTimeTests.framework */,
+				EB6C5DBB0B3FFCC2AD9A4A57 /* Pods_MyTime.framework */,
+				B4B7C7D1DB8D235BA16232EA /* Pods_MyTime_MyTimeUITests.framework */,
+				2DBD73CE4CEE03D93E9FEE71 /* Pods_MyTimeTests.framework */,
+				5A963CDB4A7007543EF3585A /* Pods_MyTimeWatchApp_Extension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -452,19 +688,58 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D4C733F223C0E39400A746B5 /* MyTime */ = {
+		D435058623EC241B004DF898 /* MyTimeWatchApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D4C7342023C0E39800A746B5 /* Build configuration list for PBXNativeTarget "MyTime" */;
+			buildConfigurationList = D43505B523EC241D004DF898 /* Build configuration list for PBXNativeTarget "MyTimeWatchApp" */;
 			buildPhases = (
-				D928A501E45D8B5D98F3F20A /* [CP] Check Pods Manifest.lock */,
-				D4C733EF23C0E39400A746B5 /* Sources */,
-				D4C733F023C0E39400A746B5 /* Frameworks */,
-				D4C733F123C0E39400A746B5 /* Resources */,
-				034CC98CAD562F5ACA4B5CB6 /* [CP] Embed Pods Frameworks */,
+				D435058523EC241B004DF898 /* Resources */,
+				D43505B123EC241D004DF898 /* Embed App Extensions */,
+				B4741AB1DA6E6A842D0227CE /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D435059623EC241D004DF898 /* PBXTargetDependency */,
+			);
+			name = MyTimeWatchApp;
+			productName = MyTimeWatchApp;
+			productReference = D435058723EC241B004DF898 /* MyTimeWatchApp.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		D435059223EC241D004DF898 /* MyTimeWatchApp Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D43505B423EC241D004DF898 /* Build configuration list for PBXNativeTarget "MyTimeWatchApp Extension" */;
+			buildPhases = (
+				BF4D9C8C3F481BDB9AE1C0D1 /* [CP] Check Pods Manifest.lock */,
+				D435058F23EC241D004DF898 /* Sources */,
+				D435059023EC241D004DF898 /* Frameworks */,
+				D435059123EC241D004DF898 /* Resources */,
+				5A4CAA71062E9FC995C290F1 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MyTimeWatchApp Extension";
+			productName = "MyTimeWatchApp Extension";
+			productReference = D435059323EC241D004DF898 /* MyTimeWatchApp Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		D4C733F223C0E39400A746B5 /* MyTime */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4C7342023C0E39800A746B5 /* Build configuration list for PBXNativeTarget "MyTime" */;
+			buildPhases = (
+				4D752C9AEA2023DEC7221A21 /* [CP] Check Pods Manifest.lock */,
+				D4C733EF23C0E39400A746B5 /* Sources */,
+				D4C733F023C0E39400A746B5 /* Frameworks */,
+				D4C733F123C0E39400A746B5 /* Resources */,
+				D43505AE23EC241D004DF898 /* Embed Watch Content */,
+				0242646512DEB0DB0DAE9D57 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D43505AC23EC241D004DF898 /* PBXTargetDependency */,
 			);
 			name = MyTime;
 			productName = MyTime;
@@ -475,7 +750,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4C7342323C0E39800A746B5 /* Build configuration list for PBXNativeTarget "MyTimeTests" */;
 			buildPhases = (
-				2A1789CC6771FA79032A0578 /* [CP] Check Pods Manifest.lock */,
+				5DA6607DF55501A173BFA597 /* [CP] Check Pods Manifest.lock */,
 				D4C7340823C0E39800A746B5 /* Sources */,
 				D4C7340923C0E39800A746B5 /* Frameworks */,
 				D4C7340A23C0E39800A746B5 /* Resources */,
@@ -494,11 +769,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4C7342623C0E39800A746B5 /* Build configuration list for PBXNativeTarget "MyTimeUITests" */;
 			buildPhases = (
-				2ECDF070B287F564E24F8742 /* [CP] Check Pods Manifest.lock */,
+				E4D0C1F6A80F9D7880531CF1 /* [CP] Check Pods Manifest.lock */,
 				D4C7341323C0E39800A746B5 /* Sources */,
 				D4C7341423C0E39800A746B5 /* Frameworks */,
 				D4C7341523C0E39800A746B5 /* Resources */,
-				0B0928C606C3F481DCEA95AC /* [CP] Embed Pods Frameworks */,
+				519DFA5A64A49D2CF5A5969B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -520,6 +795,12 @@
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = FairTrip;
 				TargetAttributes = {
+					D435058623EC241B004DF898 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					D435059223EC241D004DF898 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
 					D4C733F223C0E39400A746B5 = {
 						CreatedOnToolsVersion = 11.3;
 					};
@@ -549,11 +830,31 @@
 				D4C733F223C0E39400A746B5 /* MyTime */,
 				D4C7340B23C0E39800A746B5 /* MyTimeTests */,
 				D4C7341623C0E39800A746B5 /* MyTimeUITests */,
+				D435058623EC241B004DF898 /* MyTimeWatchApp */,
+				D435059223EC241D004DF898 /* MyTimeWatchApp Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D435058523EC241B004DF898 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D435058D23EC241D004DF898 /* Assets.xcassets in Resources */,
+				D435058B23EC241B004DF898 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D435059123EC241D004DF898 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D43505A823EC241D004DF898 /* Preview Assets.xcassets in Resources */,
+				D43505A523EC241D004DF898 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D4C733F123C0E39400A746B5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -581,7 +882,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		034CC98CAD562F5ACA4B5CB6 /* [CP] Embed Pods Frameworks */ = {
+		0242646512DEB0DB0DAE9D57 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -598,68 +899,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyTime/Pods-MyTime-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0B0928C606C3F481DCEA95AC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2A1789CC6771FA79032A0578 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MyTimeTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2ECDF070B287F564E24F8742 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MyTime-MyTimeUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D928A501E45D8B5D98F3F20A /* [CP] Check Pods Manifest.lock */ = {
+		4D752C9AEA2023DEC7221A21 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -681,9 +921,131 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		519DFA5A64A49D2CF5A5969B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5A4CAA71062E9FC995C290F1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyTimeWatchApp Extension/Pods-MyTimeWatchApp Extension-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyTimeWatchApp Extension/Pods-MyTimeWatchApp Extension-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyTimeWatchApp Extension/Pods-MyTimeWatchApp Extension-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5DA6607DF55501A173BFA597 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyTimeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF4D9C8C3F481BDB9AE1C0D1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyTimeWatchApp Extension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E4D0C1F6A80F9D7880531CF1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyTime-MyTimeUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D435058F23EC241D004DF898 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D435059B23EC241D004DF898 /* HostingController.swift in Sources */,
+				D435059923EC241D004DF898 /* ContentView.swift in Sources */,
+				D435059F23EC241D004DF898 /* NotificationController.swift in Sources */,
+				D43505B823EC2B36004DF898 /* CodableForAppModel.swift in Sources */,
+				D43505CC23EC5472004DF898 /* TimerWatch.swift in Sources */,
+				D43505D423EC588E004DF898 /* RealmTimerInterval.swift in Sources */,
+				D435059D23EC241D004DF898 /* ExtensionDelegate.swift in Sources */,
+				D43505C423EC36CE004DF898 /* Collection+Extensions.swift in Sources */,
+				D43505A123EC241D004DF898 /* NotificationView.swift in Sources */,
+				D43505A323EC241D004DF898 /* ComplicationController.swift in Sources */,
+				D43505D223EC5712004DF898 /* RealmTimer.swift in Sources */,
+				D43505D523EC6622004DF898 /* Int+Extensions.swift in Sources */,
+				D43505CE23EC54DF004DF898 /* TimerIntervalWatch.swift in Sources */,
+				D43505C023EC3152004DF898 /* APIWatchAppDataSource.swift in Sources */,
+				D43505D723EC791E004DF898 /* TimerColor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D4C733EF23C0E39400A746B5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -746,6 +1108,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D435059623EC241D004DF898 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D435059223EC241D004DF898 /* MyTimeWatchApp Extension */;
+			targetProxy = D435059523EC241D004DF898 /* PBXContainerItemProxy */;
+		};
+		D43505AC23EC241D004DF898 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D435058623EC241B004DF898 /* MyTimeWatchApp */;
+			targetProxy = D43505AB23EC241D004DF898 /* PBXContainerItemProxy */;
+		};
 		D4C7340E23C0E39800A746B5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D4C733F223C0E39400A746B5 /* MyTime */;
@@ -759,6 +1131,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		D435058923EC241B004DF898 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D435058A23EC241B004DF898 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		D4C7340423C0E39800A746B5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -770,6 +1150,96 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D43505AF23EC241D004DF898 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G92J9Q6485;
+				IBSC_MODULE = MyTimeWatchApp_Extension;
+				INFOPLIST_FILE = MyTimeWatchApp/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = FairTrip.MyTime.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		D43505B023EC241D004DF898 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G92J9Q6485;
+				IBSC_MODULE = MyTimeWatchApp_Extension;
+				INFOPLIST_FILE = MyTimeWatchApp/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = FairTrip.MyTime.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
+		D43505B223EC241D004DF898 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DD24464E19A4860A023D902 /* Pods-MyTimeWatchApp Extension.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "MyTimeWatchApp Extension/MyTimeWatchApp Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"MyTimeWatchApp Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = G92J9Q6485;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "MyTimeWatchApp Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = FairTrip.MyTime.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		D43505B323EC241D004DF898 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DEF9B33DFA0CCAACED05A396 /* Pods-MyTimeWatchApp Extension.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "MyTimeWatchApp Extension/MyTimeWatchApp Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"MyTimeWatchApp Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = G92J9Q6485;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "MyTimeWatchApp Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = FairTrip.MyTime.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
 		D4C7341E23C0E39800A746B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -886,7 +1356,7 @@
 		};
 		D4C7342123C0E39800A746B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1E2E68E676E915669AD943B4 /* Pods-MyTime.debug.xcconfig */;
+			baseConfigurationReference = 3D0925108170ACF759DC8AC1 /* Pods-MyTime.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MyTime/MyTime.entitlements;
@@ -907,7 +1377,7 @@
 		};
 		D4C7342223C0E39800A746B5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9B743D9D1856CE176B991D0B /* Pods-MyTime.release.xcconfig */;
+			baseConfigurationReference = 0DC0E2FE8039489A1E91B3F4 /* Pods-MyTime.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MyTime/MyTime.entitlements;
@@ -928,7 +1398,7 @@
 		};
 		D4C7342423C0E39800A746B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5465FEB96FED5D120A6E5B3F /* Pods-MyTimeTests.debug.xcconfig */;
+			baseConfigurationReference = B2999E01D1A675FF6596A717 /* Pods-MyTimeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -951,7 +1421,7 @@
 		};
 		D4C7342523C0E39800A746B5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F009DFF110FD296FE02E941C /* Pods-MyTimeTests.release.xcconfig */;
+			baseConfigurationReference = 0E49A4090A8485F1765104D7 /* Pods-MyTimeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -974,7 +1444,7 @@
 		};
 		D4C7342723C0E39800A746B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FBFF517F14F51EB73055CD68 /* Pods-MyTime-MyTimeUITests.debug.xcconfig */;
+			baseConfigurationReference = 676D7BAF70A2EFA1F95E8694 /* Pods-MyTime-MyTimeUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -995,7 +1465,7 @@
 		};
 		D4C7342823C0E39800A746B5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 967CA6C20BA817C7C58F48FC /* Pods-MyTime-MyTimeUITests.release.xcconfig */;
+			baseConfigurationReference = D83FE07A88FB28AA9C2C5483 /* Pods-MyTime-MyTimeUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1017,6 +1487,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D43505B423EC241D004DF898 /* Build configuration list for PBXNativeTarget "MyTimeWatchApp Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D43505B223EC241D004DF898 /* Debug */,
+				D43505B323EC241D004DF898 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D43505B523EC241D004DF898 /* Build configuration list for PBXNativeTarget "MyTimeWatchApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D43505AF23EC241D004DF898 /* Debug */,
+				D43505B023EC241D004DF898 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D4C733EE23C0E39400A746B5 /* Build configuration list for PBXProject "MyTime" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -1,4 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-MyTime-MyTimeUITests/Pods-MyTime-MyTimeUITests-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework
-${BUILT_PRODUCTS_DIR}/Realm/Realm.framework
-${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework
+${BUILT_PRODUCTS_DIR}/Realm-iOS/Realm.framework
+${BUILT_PRODUCTS_DIR}/RealmSwift-iOS/RealmSwift.framework

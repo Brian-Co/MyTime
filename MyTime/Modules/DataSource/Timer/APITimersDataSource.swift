@@ -27,7 +27,7 @@ class APITimersDataSource: TimersDataSource {
 //        print(Realm.Configuration.defaultConfiguration.fileURL)
         
         timerObserver = realm.objects(TimerRealm.self).observe({ changes in
-            let timers = self.realm.objects(TimerRealm.self)
+            let timers = self.realm.objects(TimerRealm.self).sorted{ $0.index < $1.index }
             
 //            if timers.count > 0 {
                 
@@ -53,7 +53,7 @@ class APITimersDataSource: TimersDataSource {
         
         timerIntervalObserver = realm.objects(TimerIntervalRealm.self).observe({ changes in
             
-            let timers = self.realm.objects(TimerRealm.self)
+            let timers = self.realm.objects(TimerRealm.self).sorted{ $0.index < $1.index }
             self.content = timers.compactMap { $0.toAppModel() }
             self.contentDidChange?()
             self.firstTime = false
