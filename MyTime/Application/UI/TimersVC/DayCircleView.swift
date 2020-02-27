@@ -35,6 +35,20 @@ class DayCircleView: UIView {
         return backgroundLayer
     }
     
+    private var shadowLayer: UIView {
+        let shadowLayer = UIView()
+        shadowLayer.backgroundColor = .systemBackground
+        shadowLayer.frame = bounds
+        shadowLayer.layer.cornerRadius = bounds.width / 2
+        
+        shadowLayer.layer.shadowColor = UIColor.systemGray.cgColor
+        shadowLayer.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        shadowLayer.layer.shadowRadius = 10
+        shadowLayer.layer.shadowOpacity = 0.5
+        
+        return shadowLayer
+    }
+    
     private var hoursLabels: UILabel {
         let hours = UILabel()
         hours.font = UIFont.systemFont(ofSize: 15, weight: .medium)
@@ -78,11 +92,16 @@ class DayCircleView: UIView {
 
         is12HourClock = UserDefaults.standard.bool(forKey: "is12HourClock")
         layer.sublayers = nil
+//        addSubview(shadowLayer)
         layer.addSublayer(backgroundLayer)
         
         addHoursTextLayers()
         addHoursLines()
         createTimerIntervalsLayers()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        loadLayers()
     }
     
     private func createTimerIntervalsLayers() {

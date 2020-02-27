@@ -106,6 +106,20 @@ class APITimersDataSource: TimersDataSource {
             }
         }
     }
+    
+    func updateTimerIndexes() {
+        
+        let timers = realm.objects(TimerRealm.self).filter("isDeleted = false")
+        let initialContent = content
+        for timer in timers {
+            let updatedTimer = initialContent.filter{ $0.name == timer.name }
+            guard let t = updatedTimer.first else { continue }
+            try! realm.write {
+                timer.index = t.index
+            }
+        }
+        
+    }
         
 }
 

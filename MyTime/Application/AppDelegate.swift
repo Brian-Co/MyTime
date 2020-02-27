@@ -9,6 +9,7 @@
 import UIKit
 import CloudKit
 import IceCream
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         UserDefaults.standard.setValue(false, forKey:"_UIConstraintBasedLayoutLogUnsatisfiable")
+        
+        let appGroupUrl = FileManager
+        .default
+        .containerURL(forSecurityApplicationGroupIdentifier: "group.FairTrip.MyTime")!
+        .appendingPathComponent("default.realm")
+        let config = Realm.Configuration(fileURL: appGroupUrl,
+        objectTypes: [TimerRealm.self, TimerIntervalRealm.self])
+        
+        Realm.Configuration.defaultConfiguration = config
         
         syncEngine = SyncEngine(objects: [
                 SyncObject<TimerRealm>(),

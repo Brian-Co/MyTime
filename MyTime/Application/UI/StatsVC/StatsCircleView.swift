@@ -32,6 +32,14 @@ class StatsCircleView: UIView {
         return backgroundLayer
     }()
     
+    private var durationLabel: UILabel {
+        let label = UILabel()
+        label.frame = CGRect(x: bounds.width / 2 - 30, y: bounds.height / 2 - 30, width: 60, height: 60)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        label.textAlignment = .center
+        label.backgroundColor = UIColor.clear
+        return label
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -59,6 +67,10 @@ class StatsCircleView: UIView {
         
         let timersTotalDuration = getAllTimersTotalDuration()
         var previousTimerEndAngle: Double = 0
+        
+        let durationLabel = self.durationLabel
+        durationLabel.text = Int(timersTotalDuration).timeString(format: 1)
+        addSubview(durationLabel)
         
         for timer in timers {
             

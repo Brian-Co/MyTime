@@ -24,7 +24,9 @@ class APIEditTimerDataSource: EditTimerDataSource {
             self.timer = timer
             self.timerName = timer.name
         } else {
-            self.timer = TimerX(name: "", color: "orange", category: "", timerIntervals: [])
+            let timers = realm.objects(TimerRealm.self).filter("isDeleted = false").sorted{ $0.index < $1.index }
+            let newIndex = (timers.last?.index ?? -1) + 1
+            self.timer = TimerX(index: newIndex, name: "", color: "orange", category: "", timerIntervals: [])
         }
     }
     

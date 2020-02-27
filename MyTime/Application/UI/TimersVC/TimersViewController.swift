@@ -32,6 +32,11 @@ class TimersViewController: UIViewController {
     var is12HourClock = Bool()
     var animateCircleView = true
     
+    var previousDayButton = UIBarButtonItem()
+    var nextDayButton = UIBarButtonItem()
+    var calendarButton = UIBarButtonItem()
+    var settingsButton = UIBarButtonItem()
+    
     convenience init(dataSource: TimersDataSource) {
         self.init()
         self.dataSource = dataSource
@@ -59,19 +64,23 @@ class TimersViewController: UIViewController {
         navBarTitle.textAlignment = .center
         self.navigationItem.titleView = navBarTitle
         
-        let previousDayButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(getPreviousDay))
-        let nextDayButton = UIBarButtonItem(image: UIImage(systemName: "chevron.right"), style: .plain, target: self, action: #selector(getNextDay))
+        previousDayButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(getPreviousDay))
+        nextDayButton = UIBarButtonItem(image: UIImage(systemName: "chevron.right"), style: .plain, target: self, action: #selector(getNextDay))
         self.navigationItem.leftBarButtonItems  = [previousDayButton, nextDayButton]
         self.navigationItem.leftBarButtonItems![1].isEnabled = false
         
-        let calendarButton = UIBarButtonItem(image: UIImage(systemName: "calendar"), style: .plain, target: self, action: #selector(presentCalendarVC))
-        let settingsButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(presentSettings))
+        calendarButton = UIBarButtonItem(image: UIImage(systemName: "calendar"), style: .plain, target: self, action: #selector(presentCalendarVC))
+        settingsButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(presentSettings))
         self.navigationItem.rightBarButtonItems  = [settingsButton, calendarButton]
         
         timersTableView.delegate = self
         timersTableView.dataSource = self
-        timersTableView.layer.borderWidth = 1
-        timersTableView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
+//        timersTableView.layer.borderWidth = 1
+//        timersTableView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
+        timersTableView.separatorColor = UIColor.clear
+        
+        let editTableViewGesture = UILongPressGestureRecognizer(target: self, action: #selector(editTableView))
+        timersTableView.addGestureRecognizer(editTableViewGesture)
         
         dayCircleView.configure(didSelectInterval: { [weak self] timer, timerInterval, sender in
             self?.didSelectInterval(timer, timerInterval, sender) })
@@ -105,8 +114,10 @@ class TimersViewController: UIViewController {
     
     func updateUI() {
         
+        if !timersTableView.isEditing {
+            updateNextDayButton()
+        }
         navBarTitle.text = dateFormatter.string(from: chosenDate)
-        updateNextDayButton()
         timersTableView.reloadData()
         dayCircleView.update(with: dataSource.content, chosenDate, animated: animateCircleView)
         animateCircleView = false
@@ -175,6 +186,35 @@ class TimersViewController: UIViewController {
         didSelectSettings?()
     }
     
+    @objc func editTableView() {
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveTableViewIndexes))
+        self.navigationItem.leftBarButtonItems = []
+        self.navigationItem.rightBarButtonItems = [doneButton]
+        timersTableView.isEditing = true
+    }
+    
+    @objc func saveTableViewIndexes() {
+        
+        resetIndexes()
+        timersTableView.isEditing = false
+        configureNavigationItems()
+        dataSource.updateTimerIndexes()
+    }
+    
+    func resetIndexes() {
+        
+        for timer in dataSource.content {
+            let newIndex = dataSource.content.firstIndex{ $0.name == timer.name }
+            guard let index = newIndex else { continue }
+            dataSource.content[index].index = index
+        }
+    }
+    
+    func configureNavigationItems() {
+        self.navigationItem.leftBarButtonItems  = [previousDayButton, nextDayButton]
+        self.navigationItem.rightBarButtonItems  = [settingsButton, calendarButton]
+    }
+    
 }
 
 
@@ -236,7 +276,30 @@ extension TimersViewController: UITableViewDelegate, UITableViewDataSource {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
     
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row != dataSource.content.count {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        if destinationIndexPath.row != dataSource.content.count && sourceIndexPath.row != dataSource.content.count {
+            let movedTimer = dataSource.content[sourceIndexPath.row]
+            dataSource.content.remove(at: sourceIndexPath.row)
+            dataSource.content.insert(movedTimer, at: destinationIndexPath.row)
+        }
+    }
+        
 }
 
 extension TimersViewController: UIPopoverPresentationControllerDelegate {
@@ -252,12 +315,13 @@ extension TimersViewController: UIPopoverPresentationControllerDelegate {
                 self?.updateUI()
         })
         editPopup.modalPresentationStyle = .popover
+        /*
         let popover = editPopup.popoverPresentationController
         editPopup.preferredContentSize = CGSize(width: 200, height: 300)
         popover?.delegate = self
         popover?.sourceView = sender
         popover?.sourceRect = sender.bounds
-        
+        */
         self.present(editPopup, animated: true)
     }
     

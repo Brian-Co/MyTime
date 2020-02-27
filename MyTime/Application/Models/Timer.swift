@@ -10,6 +10,7 @@ import Foundation
 
 struct TimerX {
     
+    var index: Int
     var name: String
     var color: String
     var category: String

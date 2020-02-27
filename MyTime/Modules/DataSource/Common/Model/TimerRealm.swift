@@ -41,7 +41,11 @@ extension TimerRealm: CodableForAppModel {
         if isDeleted { return nil }
         let realm = try! Realm()
         let timerIntervals = realm.objects(TimerIntervalRealm.self).filter{ $0.timerID == self.id }
-        return TimerX(name: name, color: color, category: category, timerIntervals: [TimerInterval](timerIntervals.compactMap({ $0.toAppModel() })))
+        let timerIntervalsSorted = timerIntervals.sorted {
+            guard $0.endingPoint != nil else { return false }
+            return $0.startingPoint < $1.startingPoint
+        }
+        return TimerX(index: index, name: name, color: color, category: category, timerIntervals: [TimerInterval](timerIntervalsSorted.compactMap({ $0.toAppModel() })))
     }
     
 }
