@@ -52,8 +52,7 @@ class StatsVC: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.layer.borderWidth = 1
-        tableView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
+        tableView.separatorColor = UIColor.clear
         
         navBarTitle.frame = CGRect(x: 0, y: 0, width: 250, height: 40)
         navBarTitle.setTitle("Last 7 days ▼", for: .normal)

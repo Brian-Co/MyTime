@@ -1,0 +1,6 @@
+framework module Pods_MyTime_Today_Extension {
+  umbrella header "Pods-MyTime Today Extension-umbrella.h"
+
+  export *
+  module * { export * }
+}

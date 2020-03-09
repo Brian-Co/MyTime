@@ -31,3 +31,8 @@ target 'MyTimeWatchApp Extension' do
   platform :watchos, '6.0'
   shared_pods
 end
+
+target 'MyTime Today Extension' do
+  platform :ios, '13.0'
+  shared_pods
+end

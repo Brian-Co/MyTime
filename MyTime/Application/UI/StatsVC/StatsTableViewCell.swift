@@ -11,6 +11,7 @@ import UIKit
 class StatsTableViewCell: UITableViewCell {
 
     
+    @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var timerName: UILabel!
     @IBOutlet weak var timerColorView: UIView!
     @IBOutlet weak var timerTotalDuration: UILabel!
@@ -26,7 +27,25 @@ class StatsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        configureCellColor()
         timerColorView.layer.cornerRadius = 10
+        cardView.layer.cornerRadius = 20.0
+        cardView.layer.shadowColor = UIColor.gray.cgColor
+        cardView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        cardView.layer.shadowRadius = 3
+        cardView.layer.shadowOpacity = 0.2
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        configureCellColor()
+    }
+
+    func configureCellColor() {
+        if traitCollection.userInterfaceStyle != .dark {
+            cardView.backgroundColor = .systemBackground
+        } else {
+            cardView.backgroundColor = .secondarySystemBackground
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -13,7 +13,6 @@ class APIWatchAppDataSource: ObservableObject {
     
     @Published var content: [TimerX] = []
     
-    let realm = try! Realm()
     var timerObserver: NotificationToken?
     var timerIntervalObserver: NotificationToken?
     var runningTimers: [Timer] = []
@@ -31,8 +30,9 @@ class APIWatchAppDataSource: ObservableObject {
     
     func fetchData() {
 
+        let realm = try! Realm()
         timerObserver = realm.objects(TimerRealm.self).observe({ changes in
-            let timers = self.realm.objects(TimerRealm.self).sorted{ $0.index < $1.index }
+            let timers = realm.objects(TimerRealm.self).sorted{ $0.index < $1.index }
             
 //            if timers.count > 0 {
                 self.content = timers.compactMap { $0.toAppModel() }
@@ -53,11 +53,11 @@ class APIWatchAppDataSource: ObservableObject {
         
         timerIntervalObserver = realm.objects(TimerIntervalRealm.self).observe({ changes in
             
-            let timers = self.realm.objects(TimerRealm.self).sorted{ $0.index < $1.index }
+            let timers = realm.objects(TimerRealm.self).sorted{ $0.index < $1.index }
             self.content = timers.compactMap { $0.toAppModel() }
             self.scheduleTimer()
             
-            let intervals = self.realm.objects(TimerIntervalRealm.self).filter({ !$0.isDeleted })
+            let intervals = realm.objects(TimerIntervalRealm.self).filter({ !$0.isDeleted })
             print("update \(intervals.count)")
         })
         
@@ -124,6 +124,7 @@ class APIWatchAppDataSource: ObservableObject {
     
     func updateTimer(_ timer: TimerX) {
         
+        let realm = try! Realm()
         let timerToUpdate = realm.objects(TimerRealm.self).filter("name = '\(timer.name)' AND isDeleted = false").first
         let timerIntervalToUpdate = realm.objects(TimerIntervalRealm.self).filter{ $0.timerID == timerToUpdate?.id }.last
         
@@ -152,6 +153,20 @@ class APIWatchAppDataSource: ObservableObject {
         }
     }
     
+    func addTimer() {
+        
+        let realm = try! Realm()
+        let timers = realm.objects(TimerRealm.self).sorted{ $0.index < $1.index }
+        
+        let newTimer = TimerRealm()
+        newTimer.index = (timers.last?.index ?? -1) + 1
+        newTimer.name = "Timer " + String(newTimer.index + 1)
+        newTimer.color = TimerColor.allCases.randomElement()!.rawValue
+        
+        try! realm.write {
+            realm.add(newTimer)
+        }
+    }
     
     
 }

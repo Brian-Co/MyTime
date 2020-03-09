@@ -32,6 +32,7 @@ class TimersTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        configureCellColor()
         timerColorView.layer.cornerRadius = 10
         timerButton.layer.cornerRadius = timerButton.frame.width / 2
         cardView.layer.cornerRadius = 20.0
@@ -44,7 +45,19 @@ class TimersTableViewCell: UITableViewCell {
     deinit {
         scheduledTimer.invalidate()
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        configureCellColor()
+    }
 
+    func configureCellColor() {
+        if traitCollection.userInterfaceStyle != .dark {
+            cardView.backgroundColor = .systemBackground
+        } else {
+            cardView.backgroundColor = .secondarySystemBackground
+        }
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

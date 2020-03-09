@@ -62,6 +62,10 @@ class StatsCircleView: UIView {
         createStatsLayers()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        loadLayers()
+    }
+    
     
     func createStatsLayers() {
         

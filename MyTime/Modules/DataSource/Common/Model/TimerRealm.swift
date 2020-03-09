@@ -40,12 +40,30 @@ extension TimerRealm: CodableForAppModel {
     func toAppModel() -> TimerX? {
         if isDeleted { return nil }
         let realm = try! Realm()
-        let timerIntervals = realm.objects(TimerIntervalRealm.self).filter{ $0.timerID == self.id }
-        let timerIntervalsSorted = timerIntervals.sorted {
-            guard $0.endingPoint != nil else { return false }
-            return $0.startingPoint < $1.startingPoint
+        var timerIntervals = realm.objects(TimerIntervalRealm.self).filter("timerID = '\(self.id)' AND isDeleted = false")
+            .sorted {
+                guard $0.endingPoint != nil else { return false }
+                return $0.startingPoint < $1.startingPoint
         }
-        return TimerX(index: index, name: name, color: color, category: category, timerIntervals: [TimerInterval](timerIntervalsSorted.compactMap({ $0.toAppModel() })))
+        checkRunningIntervals(&timerIntervals)
+        return TimerX(index: index, name: name, color: color, category: category, timerIntervals: [TimerInterval](timerIntervals.compactMap { $0.toAppModel() } ))
+    }
+    
+    ///Safety check for multiple running timerIntervals in case of CloudKit or IceCream bug
+    func checkRunningIntervals(_ intervals: inout [TimerIntervalRealm]) {
+        
+        var intervalsOn = intervals.filter { $0.endingPoint == nil }
+        if intervalsOn.count > 1 {
+            intervalsOn = intervalsOn.sorted { $0.startingPoint > $1.startingPoint }
+            intervals = intervals.filter { $0.endingPoint != nil }
+            intervals.append(intervalsOn.first!)
+            for interval in intervalsOn[1...intervalsOn.count - 1] {
+                let realm = try! Realm()
+                try! realm.write {
+                    interval.isDeleted = true
+                }
+            }
+        }
     }
     
 }

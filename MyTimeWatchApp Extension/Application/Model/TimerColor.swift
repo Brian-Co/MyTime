@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-enum TimerColor: String {
+enum TimerColor: String, CaseIterable {
     case orange
     case teal
     case purple

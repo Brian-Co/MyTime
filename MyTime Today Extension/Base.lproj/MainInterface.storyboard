@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Today View Controller-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" customModule="MYTIME" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" contentMode="top" horizontalHuggingPriority="251" text="Hello My World" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-lo-r42">
+                                <rect key="frame" x="95" y="87" width="178" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="162" id="vMg-bV-61Y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXD-Lo-cUk">
+                                <rect key="frame" x="344" y="72" width="50" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="AAZ-0F-gFr"/>
+                                    <constraint firstAttribute="width" constant="50" id="ukz-8y-XNv"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="timer" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="timerButtonPressed:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="nk6-GE-QQo"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5B-hU-cpc">
+                                <rect key="frame" x="273" y="89" width="61" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="61" id="tCg-SM-NdU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VJZ-Vl-2hz">
+                                <rect key="frame" x="20" y="67" width="60" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRd-GA-FIa">
+                                        <rect key="frame" x="2" y="22" width="56" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="XRd-GA-FIa" secondAttribute="trailing" constant="2" id="DU3-BH-dpC"/>
+                                    <constraint firstAttribute="height" constant="60" id="Mvg-jR-laQ"/>
+                                    <constraint firstItem="XRd-GA-FIa" firstAttribute="leading" secondItem="VJZ-Vl-2hz" secondAttribute="leading" constant="2" id="PpN-pK-Gwy"/>
+                                    <constraint firstItem="XRd-GA-FIa" firstAttribute="top" secondItem="VJZ-Vl-2hz" secondAttribute="top" constant="22" id="fDU-GJ-U3C"/>
+                                    <constraint firstAttribute="bottom" secondItem="XRd-GA-FIa" secondAttribute="bottom" constant="21" id="vKz-M3-VxJ"/>
+                                    <constraint firstAttribute="width" constant="60" id="zb0-kD-vt6"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="VJZ-Vl-2hz" secondAttribute="trailing" constant="15" id="Lau-FB-qxf"/>
+                            <constraint firstItem="GcN-lo-r42" firstAttribute="centerY" secondItem="VJZ-Vl-2hz" secondAttribute="centerY" id="M5d-L3-ruE"/>
+                            <constraint firstItem="ssy-KU-ocm" firstAttribute="trailing" secondItem="WXD-Lo-cUk" secondAttribute="trailing" constant="20" id="RUI-kT-g0A"/>
+                            <constraint firstItem="VJZ-Vl-2hz" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" constant="20" id="SEg-Mi-6Kb"/>
+                            <constraint firstItem="D5B-hU-cpc" firstAttribute="leading" secondItem="GcN-lo-r42" secondAttribute="trailing" id="ZGl-zG-g7F"/>
+                            <constraint firstItem="D5B-hU-cpc" firstAttribute="centerY" secondItem="GcN-lo-r42" secondAttribute="centerY" id="ak6-Bz-uMm"/>
+                            <constraint firstItem="VJZ-Vl-2hz" firstAttribute="centerY" secondItem="ssy-KU-ocm" secondAttribute="centerY" id="mO7-i4-Nqe"/>
+                            <constraint firstItem="WXD-Lo-cUk" firstAttribute="leading" secondItem="D5B-hU-cpc" secondAttribute="trailing" constant="10" id="nWP-x2-G9T"/>
+                            <constraint firstItem="WXD-Lo-cUk" firstAttribute="centerY" secondItem="ssy-KU-ocm" secondAttribute="centerY" id="oBE-Lm-A0V"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="150"/>
+                    <connections>
+                        <outlet property="timerButton" destination="WXD-Lo-cUk" id="6Hj-5b-8a1"/>
+                        <outlet property="timerColorView" destination="VJZ-Vl-2hz" id="D0K-ut-xbS"/>
+                        <outlet property="timerDuration" destination="D5B-hU-cpc" id="NvD-0B-E3H"/>
+                        <outlet property="timerName" destination="GcN-lo-r42" id="Rjz-Wz-PIO"/>
+                        <outlet property="timerTotalDuration" destination="XRd-GA-FIa" id="Fnn-l2-sJo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="125.89285714285714"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="timer" catalog="system" width="64" height="60"/>
+    </resources>
+</document>

@@ -75,8 +75,6 @@ class TimersViewController: UIViewController {
         
         timersTableView.delegate = self
         timersTableView.dataSource = self
-//        timersTableView.layer.borderWidth = 1
-//        timersTableView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
         timersTableView.separatorColor = UIColor.clear
         
         let editTableViewGesture = UILongPressGestureRecognizer(target: self, action: #selector(editTableView))
