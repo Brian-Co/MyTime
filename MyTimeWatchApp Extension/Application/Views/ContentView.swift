@@ -19,21 +19,21 @@ struct ContentView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(width: 5, height: 25, alignment: .center)
                         .foregroundColor(TimerColor(rawValue: timer.color)?.create)
-                    VStack {
+                    VStack(alignment: .leading) {
                         Text("\(timer.name)")
                             .font(.system(size: 15))
-                            .minimumScaleFactor(0.5)
+                            .minimumScaleFactor(0.8)
                             .lineLimit(1)
-                            .frame(width: 60, height: 15, alignment: .leading)
                         
                         Text(timer.totalDurationString)
                         .font(.system(size: 9))
-                        .frame(width: 60, height: 15, alignment: .leading)
                     }
+                    
+                    Spacer()
                     
                     Text(timer.elapsedTimeString)
                         .font(.system(size: 9))
-                        .frame(width: 45, height: 30, alignment: .center)
+                    .minimumScaleFactor(0.8)
                     
                     Button(action: {
                         self.dataSource.timerButtonPressed(timer)
@@ -56,9 +56,8 @@ struct ContentView: View {
                 
                 Text("Add Timer")
                     .font(.system(size: 15))
-                    .minimumScaleFactor(0.5)
+                    .minimumScaleFactor(0.8)
                     .lineLimit(1)
-                    .frame(width: 60, height: 15, alignment: .leading)
                     .padding(.trailing)
                
                 Spacer()
